@@ -35,10 +35,10 @@ import (
 
 const (
 	// Setting BearLibTerminal window.
-	WindowSizeX = 50
-	WindowSizeY = 25
-	MapSizeX    = 30
-	MapSizeY    = 20
+	WindowSizeX = 30
+	WindowSizeY = 30
+	MapSizeX    = 25
+	MapSizeY    = 25
 	UIPosX      = MapSizeX
 	UIPosY      = 0
 	UISizeX     = WindowSizeX - MapSizeX
@@ -49,7 +49,7 @@ const (
 	LogPosY     = MapSizeY
 	GameTitle   = "Wild Mage Gets Into Trouble"
 	GameVersion = "7DRL 2022"
-	FontName    = "UbuntuMono-R.ttf"
+	FontName    = "UbuntuMono-Regular.ttf"
 	FontSize    = 18
 )
 

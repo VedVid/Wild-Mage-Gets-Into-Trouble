@@ -85,36 +85,11 @@ func NewGame(b *Board, c *Creatures, o *Objects) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	enemy, err := NewCreature(MapSizeX-2, MapSizeY-2, "patherRanged.json")
+	*c = Creatures{player}
+	*b, _, err = LoadJsonMap("smallInn.json")
 	if err != nil {
 		fmt.Println(err)
 	}
-	w1, err := NewObject(0, 0, "weapon1.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	w2, err := NewObject(0, 0, "weapon2.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	wm, err := NewObject(0, 0, "melee.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	var enemyEq = EquipmentComponent{Objects{w1, w2, wm}, Objects{}}
-	enemy.EquipmentComponent = enemyEq
-	*c = Creatures{player, enemy}
-	obj, err := NewObject(24, 15, "heal.json")
-	*o = Objects{obj}
-	if err != nil {
-		fmt.Println(err)
-	}
-	var c2 = Creatures{}
-	*b, c2, err = LoadJsonMap("smallInn.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	*c = append(*c, c2...)
 }
 
 func StartGame(b *Board, c *Creatures, o *Objects) {
