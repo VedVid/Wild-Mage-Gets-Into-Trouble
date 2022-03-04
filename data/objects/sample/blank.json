@@ -1,0 +1,19 @@
+{
+    "Layer":INTEGER,
+    "X":INTEGER,
+    "Y":INTEGER,
+    "Name":STRING,
+    "Chars":[LIST, OF, ONE-CHARACTER, STRINGS],
+    "Colors":[LIST, OF, STRINGS],
+    "ColorDark":STRING,
+    "Delay":INTEGER,
+    "CurrentFrame":INTEGER,
+    "AlwaysVisible":BOOLEAN,
+    "Blocked":BOOLEAN,
+    "BlocksSight":BOOLEAN,
+    "Pickable":BOOLEAN,
+    "Equippable":BOOLEAN,
+    "Consumable":BOOLEAN,
+    "Slot":INTEGER,
+    "Use":INTEGER
+}
