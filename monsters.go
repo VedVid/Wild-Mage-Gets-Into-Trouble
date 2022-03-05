@@ -141,6 +141,12 @@ func (c *Creature) Move(tx, ty int, b Board) bool {
 	   check if next move won't put Creature off the screen, then updates
 	   Creature coords. */
 	turnSpent := false
+	if b[c.X][c.Y].Unstable > 0 {
+		if GlobalData.TurnsSpent % 2 == 0 {
+			turnSpent = true
+			return turnSpent
+		}
+	}
 	newX, newY := c.X+tx, c.Y+ty
 	if newX >= 0 &&
 		newX <= MapSizeX-1 &&
