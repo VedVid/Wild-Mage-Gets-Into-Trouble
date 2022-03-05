@@ -30,6 +30,37 @@ import (
 	"math/rand"
 )
 
+const(
+	FireDurationMin = 16
+	FireDurationMax = 20
+	FireNotFlammableDurationMin = 3
+	FireNotFlammableDurationMax = 6
+
+	BarrenDurationMin = 40
+	BarrenDurationMax = 60
+
+	FloodedDurationMin = 30
+	FloodedDurationMax = 40
+
+	DampDurationMin = 25
+	DampDurationMax = 35
+)
+
+var (
+	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
+	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
+	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
+
+	FloodedChars = []string{"≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈",
+							"≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈",
+							"≈", "≈", "≈", "~", "~", "~", "~", "~", "~", "~",
+							"~", "~", "~", "~", "~", "~", "~", "~", "~", "~"}
+	FloodedColors = []string{"blue", "blue", "blue", "blue", "blue", "dark blue", "dark blue", "dark blue", "dark blue", "dark blue",
+							"blue", "blue", "blue", "blue", "blue", "lighter blue", "lighter blue", "lighter blue", "blue", "blue",
+							"lighter blue", "blue", "blue", "darker blue", "light blue", "blue", "blue", "light blue", "light blue", "light blue",
+							"blue", "blue", "blue", "blue", "dark blue", "light blue", "light blue", "lighter blue", "lighter blue", "blue"}
+)
+
 func (t *Tile) MakeFire() {
 	if t.Flammable == true && t.Barren == 0 && t.Fire == 0 {
 		t.Fire = RandRange(FireDurationMin, FireDurationMax)
