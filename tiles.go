@@ -47,7 +47,7 @@ func (t *Tile) MakeFire() {
 		t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
 		t.Delay = 1
 		t.Colors = []string{}
-		for i := 0; i <= t.Fire; i++ {
+		for i := 0; i < len(FireNotFlammableChars); i++ {
 			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
 		}
 	}
