@@ -232,9 +232,13 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 	for {
 		area := [][]int{}
 		for _, v := range cursor {
-			area = append(area, []int{targetX+v[0], targetY+v[1]})
+			ax := targetX + v[0]
+			ay := targetY + v[1]
+			if ax >= 0 && ay >= 0 && ax < MapSizeX && ay < MapSizeY {
+				area = append(area, []int{targetX+v[0], targetY+v[1]})
+			}
 		}
-		fmt.Println(area)
+		PrintCursor(area, b, *o, cs)
 		key := ReadInput()
 		if key == blt.TK_ESCAPE {
 			break
@@ -311,6 +315,24 @@ func MoveCursor(x, y *int, dx, dy int) {
 		newY = *y
 	}
 	*x, *y = newX, newY
+}
+
+func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
+	blt.Clear()
+	RenderAll(b, o, c)
+	blt.Layer(LookLayer)
+	for _, v := range area {
+		col := "light blue"
+		if GlobalData.CurrentSchool == SchoolFire {
+			col = "light red"
+		} else if GlobalData.CurrentSchool == SchoolAir {
+			col = "#FCFCFC"
+		} else if GlobalData.CurrentSchool == SchoolEarth {
+			col = "dark orange"
+		}
+		blt.Print(v[0], v[1], "[color="+col+"]X")
+	}
+	blt.Refresh()
 }
 
 func (c *Creature) FindTargets(length int, b Board, cs Creatures, o Objects) Creatures {
