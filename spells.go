@@ -27,16 +27,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package main
 
 import (
+	"fmt"
 	"math/rand"
 )
 
 const(
 	FireDurationMin = 16
 	FireDurationMax = 20
+	FireDurationNotFlammableDiv = 3
 )
 
 var (
 	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
+	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
 	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
 )
 
@@ -45,20 +48,33 @@ func FireArea(area [][]int, b Board) {
 		x := v[0]
 		y := v[1]
 		t := b[x][y]
-		if t.Flammable == true && t.Barren == 0 {
+		if t.Barren == 0 {
 			t.FireTile()
 		}
 	}
 }
 
 func (t *Tile) FireTile() {
-	t.Fire = RandRange(FireDurationMin, FireDurationMax)
-	t.Chars = []string{}
-	t.Colors = []string{}
-	for i := 0; i < t.Fire; i++ {
-		t.Chars = append(t.Chars, FireChars[i])
-		t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
-		t.CurrentFrame = len(FireChars) - t.Fire
-		t.Delay = 1
+	if t.Flammable == true {
+		t.Fire = RandRange(FireDurationMin, FireDurationMax)
+		t.Chars = []string{}
+		t.Colors = []string{}
+		for i := 0; i < t.Fire; i++ {
+			t.Chars = append(t.Chars, FireChars[i])
+			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			t.CurrentFrame = len(FireChars) - t.Fire
+			t.Delay = 1
+		}
+	}
+	if t.Flammable == false {
+		t.Fire = RandRange(FireDurationMin, FireDurationMax) / FireDurationNotFlammableDiv
+		t.Chars = []string{}
+		t.Colors = []string{}
+		for i := 0; i < t.Fire; i++ {
+			t.Chars = append(t.Chars, FireNotFlammableChars[i])
+			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
+			t.Delay = 1
+		}
 	}
 }
