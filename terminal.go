@@ -49,7 +49,7 @@ const (
 	LogPosY     = MapSizeY
 	GameTitle   = "Wild Mage Gets Into Trouble"
 	GameVersion = "7DRL 2022"
-	FontName    = "UbuntuMono-Regular.ttf"
+	FontName    = "Deferral-Square.ttf"
 	FontSize    = 18
 )
 
