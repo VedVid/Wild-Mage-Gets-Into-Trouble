@@ -194,6 +194,59 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_ESCAPE {
 			break
 		}
+		if key == blt.TK_1 {
+			GlobalData.CurrentSchool = SchoolWater
+			continue
+		} else if key == blt.TK_2 {
+			GlobalData.CurrentSchool = SchoolFire
+			continue
+		} else if key == blt.TK_3 {
+			GlobalData.CurrentSchool = SchoolAir
+			continue
+		} else if key == blt.TK_4 {
+			GlobalData.CurrentSchool = SchoolEarth
+			continue
+		} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
+			if GlobalData.CurrentSchool == SchoolWater {
+				GlobalData.CurrentSchool = SchoolEarth
+			} else {
+				GlobalData.CurrentSchool--
+			}
+			continue
+		} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
+			if GlobalData.CurrentSchool == SchoolEarth {
+				GlobalData.CurrentSchool = SchoolWater
+			} else {
+				GlobalData.CurrentSchool++
+			}
+			continue
+		} else if key == blt.TK_Q {
+			GlobalData.CurrentSize = SizeSmall
+			continue
+		} else if key == blt.TK_W {
+			GlobalData.CurrentSize = SizeMedium
+			continue
+		} else if key == blt.TK_E {
+			GlobalData.CurrentSize = SizeBig
+			continue
+		} else if key == blt.TK_R {
+			GlobalData.CurrentSize = SizeHuge
+			continue
+		} else if key == blt.TK_KP_MINUS {
+			if GlobalData.CurrentSize == SizeSmall {
+				GlobalData.CurrentSize = SizeHuge
+			} else {
+				GlobalData.CurrentSize--
+			}
+			continue
+		} else if key == blt.TK_KP_PLUS {
+			if GlobalData.CurrentSize == SizeHuge {
+				GlobalData.CurrentSize = SizeSmall
+			} else {
+				GlobalData.CurrentSize++
+			}
+			continue
+		}
 		/*if key == blt.TK_F {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 {
