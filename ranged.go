@@ -200,8 +200,6 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_F {
 			if GlobalData.CurrentSchool == SchoolFire {
 				FireArea(area, b)
-			} else if GlobalData.CurrentSchool == SchoolWater {
-				WaterArea(area, b)
 			}
 			continue
 		}

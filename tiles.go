@@ -30,28 +30,6 @@ import (
 	"math/rand"
 )
 
-const(
-	FireDurationMin = 16
-	FireDurationMax = 20
-	FireDurationNotFlammableDiv = 3
-
-	BarrenDurationMin = 40
-	BarrenDurationMax = 60
-
-	FloodedDurationMin = 40
-	FloodedDurationMax = 50
-	FloodedDelay = 4
-)
-
-var (
-	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
-	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
-	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
-
-	FloodedChars = []string{"≈", "≈", "≈", "≈", "≈", "≈", "≈", "~", "~", "~", ".", "."}
-	FloodedColors = []string{"blue", "blue", "blue", "blue", "blue", "light blue", "light blue", "dark blue", "dark blue", "lighter blue", "lighter blue"}
-)
-
 func (t *Tile) MakeFire() {
 	if t.Flammable == true && t.Barren == 0 && t.Fire == 0 {
 		t.Fire = RandRange(FireDurationMin, FireDurationMax)
@@ -90,20 +68,6 @@ func TryFireAnotherTile(t *Tile, b Board) {
 			if rand.Intn(100) <= chances {
 				b[x][y].MakeFire()
 			}
-		}
-	}
-}
-
-func (t *Tile) MakeWater() {
-	if t.Fire == 0 {
-		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
-		t.Chars = []string{}
-		t.Colors = []string{}
-		for i := 0; i < t.Flooded/FloodedDelay; i++ {
-			t.Chars = append(t.Chars, FloodedChars[i])
-			t.Colors = append(t.Colors, FloodedColors[rand.Intn(len(FloodedColors))])
-			t.CurrentFrame = len(FloodedChars) - (t.Flooded/FloodedDelay)
-			t.Delay = FloodedDelay
 		}
 	}
 }
