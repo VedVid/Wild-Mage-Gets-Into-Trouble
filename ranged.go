@@ -232,14 +232,14 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		} else if key == blt.TK_R {
 			GlobalData.CurrentSize = SizeHuge
 			continue
-		} else if key == blt.TK_KP_MINUS {
+		} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS {
 			if GlobalData.CurrentSize == SizeSmall {
 				GlobalData.CurrentSize = SizeHuge
 			} else {
 				GlobalData.CurrentSize--
 			}
 			continue
-		} else if key == blt.TK_KP_PLUS {
+		} else if key == blt.TK_KP_PLUS || key == blt.TK_EQUALS {
 			if GlobalData.CurrentSize == SizeHuge {
 				GlobalData.CurrentSize = SizeSmall
 			} else {
