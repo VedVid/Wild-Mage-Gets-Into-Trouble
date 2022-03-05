@@ -165,56 +165,6 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 	    * in other cases, game will try to move cursor; invalid input
 	      is ignored */
 	turnSpent := false
-	cursor := [][]int{  // CurrentSize = SizeSmall
-		[]int{0, -1},
-		[]int{-1, 0}, []int{0, 0}, []int{1, 0},
-		[]int{0, 1},
-	}
-	if GlobalData.CurrentSize == SizeMedium {
-		cursor = nil
-		cursor = [][]int{
-			[]int{0, -2},
-			[]int{-1, -1}, []int{0, -1}, []int{1, -1},
-			[]int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0},
-			[]int{-1, 1}, []int{0, 1}, []int{1, 1},
-			[]int{0, 2},
-		}
-	} else if GlobalData.CurrentSize == SizeBig {
-		cursor = nil
-		cursor = [][]int{
-			[]int{-2, -4}, []int{-1, -4}, []int{0, -4}, []int{1, -4}, []int{2, -4},
-			[]int{-3, -3}, []int{-2, -3}, []int{-1, -3}, []int{0, -3}, []int{1, -3}, []int{2, -3}, []int{3, -3},
-			[]int{-4, -2}, []int{-3, -2}, []int{-2, -2}, []int{-1, -2}, []int{0, -2}, []int{1, -2}, []int{2, -2}, []int{3, -2}, []int{4, -2},
-			[]int{-4, -1}, []int{-3, -1}, []int{-2, -1}, []int{-1, -1}, []int{0, -1}, []int{1, -1}, []int{2, -1}, []int{3, -1}, []int{4, -1},
-			[]int{-4, 0}, []int{-3, 0}, []int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0}, []int{3, 0}, []int{4, 0},
-			[]int{-4, 1}, []int{-3, 1}, []int{-2, 1}, []int{-1, 1}, []int{0, 1}, []int{1, 1}, []int{2, 1}, []int{3, 1}, []int{4, 1},
-			[]int{-4, 2}, []int{-3, 2}, []int{-2, 2}, []int{-1, 2}, []int{0, 2}, []int{1, 2}, []int{2, 2}, []int{3, 2}, []int{4, 2},
-			[]int{-3, 3}, []int{-2, 3}, []int{-1, 3}, []int{0, 3}, []int{1, 3}, []int{2, 3}, []int{3, 3},
-			[]int{-2, 4}, []int{-1, 4}, []int{0, 4}, []int{1, 4}, []int{2, 4},
-		}
-	} else if GlobalData.CurrentSize == SizeHuge {
-		cursor = nil
-		cursor = [][]int{
-			[]int{-3, -8}, []int{-2, -8}, []int{-1, -8}, []int{0, -8}, []int{1, -8}, []int{2, -8}, []int{3, -8},
-			[]int{-5, -7}, []int{-4, -7}, []int{-3, -7}, []int{-2, -7}, []int{-1, -7}, []int{0, -7}, []int{1, -7}, []int{2, -7}, []int{3, -7}, []int{4, -7}, []int{5, -7},
-			[]int{-6, -6}, []int{-5, -6}, []int{-4, -6}, []int{-3, -6}, []int{-2, -6}, []int{-1, -6}, []int{0, -6}, []int{1, -6}, []int{2, -6}, []int{3, -6}, []int{4, -6}, []int{5, -6}, []int{6,-6},
-			[]int{-7, -5}, []int{-6, -5}, []int{-5, -5}, []int{-4, -5}, []int{-3, -5}, []int{-2, -5}, []int{-1, -5}, []int{0, -5}, []int{1, -5}, []int{2, -5}, []int{3, -5}, []int{4, -5}, []int{5, -5}, []int{6, -5}, []int{7, -5},
-			[]int{-7, -4}, []int{-6, -4}, []int{-5, -4}, []int{-4, -4}, []int{-3, -4}, []int{-2, -4}, []int{-1, -4}, []int{0, -4}, []int{1, -4}, []int{2, -4}, []int{3, -4}, []int{4, -4}, []int{5, -4}, []int{6, -4}, []int{7, -4},
-			[]int{-8, -3}, []int{-7, -3}, []int{-6, -3}, []int{-5, -3}, []int{-4, -3}, []int{-3, -3}, []int{-2, -3}, []int{-1, -3}, []int{0, -3}, []int{1, -3}, []int{2, -3}, []int{3, -3}, []int{4, -3}, []int{5, -3}, []int{6, -3}, []int{7, -3}, []int{8, -3},
-			[]int{-8, -2}, []int{-7, -2}, []int{-6, -2}, []int{-5, -2}, []int{-4, -2}, []int{-3, -2}, []int{-2, -2}, []int{-1, -2}, []int{0, -2}, []int{1, -2}, []int{2, -2}, []int{3, -2}, []int{4, -2}, []int{5, -2}, []int{6, -2}, []int{7, -2}, []int{8, -2},
-			[]int{-8, -1}, []int{-7, -1}, []int{-6, -1}, []int{-5, -1}, []int{-4, -1}, []int{-3, -1}, []int{-2, -1}, []int{-1, -1}, []int{0, -1}, []int{1, -1}, []int{2, -1}, []int{3, -1}, []int{4, -1}, []int{5, -1}, []int{6, -1}, []int{7, -1}, []int{8, -1},
-			[]int{-8, 0}, []int{-7, 0}, []int{-6, 0}, []int{-5, 0}, []int{-4, 0}, []int{-3, 0}, []int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0}, []int{3, 0}, []int{4, 0}, []int{5, 0}, []int{6, 0}, []int{7, 0}, []int{8, 0},
-			[]int{-8, 1}, []int{-7, 1}, []int{-6, 1}, []int{-5, 1}, []int{-4, 1}, []int{-3, 1}, []int{-2, 1}, []int{-1, 1}, []int{0, 1}, []int{1, 1}, []int{2, 1}, []int{3, 1}, []int{4, 1}, []int{5, 1}, []int{6, 1}, []int{7, 1}, []int{8, 1},
-			[]int{-8, 2}, []int{-7, 2}, []int{-6, 2}, []int{-5, 2}, []int{-4, 2}, []int{-3, 2}, []int{-2, 2}, []int{-1, 2}, []int{0, 2}, []int{1, 2}, []int{2, 2}, []int{3, 2}, []int{4, 2}, []int{5, 2}, []int{6, 2}, []int{7, 2}, []int{8, 2},
-			[]int{-8, 3}, []int{-7, 3}, []int{-6, 3}, []int{-5, 3}, []int{-4, 3}, []int{-3, 3}, []int{-2, 3}, []int{-1, 3}, []int{0, 3}, []int{1, 3}, []int{2, 3}, []int{3, 3}, []int{4, 3}, []int{5, 3}, []int{6, 3}, []int{7, 3}, []int{8, 3},
-			[]int{-7, 4}, []int{-6, 4}, []int{-5, 4}, []int{-4, 4}, []int{-3, 4}, []int{-2, 4}, []int{-1, 4}, []int{0, 4}, []int{1, 4}, []int{2, 4}, []int{3, 4}, []int{4, 4}, []int{5, 4}, []int{6, 4}, []int{7, 4},
-			[]int{-7, 5}, []int{-6, 5}, []int{-5, 5}, []int{-4, 5}, []int{-3, 5}, []int{-2, 5}, []int{-1, 5}, []int{0, 5}, []int{1, 5}, []int{2, 5}, []int{3, 5}, []int{4, 5}, []int{5, 5}, []int{6, 5}, []int{7, 5},
-			[]int{-6, 6}, []int{-5, 6}, []int{-4, 6}, []int{-3, 6}, []int{-2, 6}, []int{-1, 6}, []int{0, 6}, []int{1, 6}, []int{2, 6}, []int{3, 6}, []int{4, 6}, []int{5, 6}, []int{6,6},
-			[]int{-5, 7}, []int{-4, 7}, []int{-3, 7}, []int{-2, 7}, []int{-1, 7}, []int{0, 7}, []int{1, 7}, []int{2, 7}, []int{3, 7}, []int{4, 7}, []int{5, 7},
-			[]int{-3, 8}, []int{-2, 8}, []int{-1, 8}, []int{0, 8}, []int{1, 8}, []int{2, 8}, []int{3, 8},
-		}
-	}
-	_ = cursor
 	var target *Creature
 	targets := c.FindTargets(FOVLength, b, cs, *o)
 	if LastTarget != nil && LastTarget != c &&
@@ -230,6 +180,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 	targetX, targetY := target.X, target.Y
 	//i := false
 	for {
+		cursor := SetCursorSize()
 		area := [][]int{}
 		for _, v := range cursor {
 			ax := targetX + v[0]
@@ -335,6 +286,59 @@ func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
 		blt.Print(v[0], v[1], "[color="+col+"]X")
 	}
 	blt.Refresh()
+}
+
+func SetCursorSize() [][]int {
+	cursor := [][]int{  // CurrentSize = SizeSmall
+		[]int{0, -1},
+		[]int{-1, 0}, []int{0, 0}, []int{1, 0},
+		[]int{0, 1},
+	}
+	if GlobalData.CurrentSize == SizeMedium {
+		cursor = nil
+		cursor = [][]int{
+			[]int{0, -2},
+			[]int{-1, -1}, []int{0, -1}, []int{1, -1},
+			[]int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0},
+			[]int{-1, 1}, []int{0, 1}, []int{1, 1},
+			[]int{0, 2},
+		}
+	} else if GlobalData.CurrentSize == SizeBig {
+		cursor = nil
+		cursor = [][]int{
+			[]int{-2, -4}, []int{-1, -4}, []int{0, -4}, []int{1, -4}, []int{2, -4},
+			[]int{-3, -3}, []int{-2, -3}, []int{-1, -3}, []int{0, -3}, []int{1, -3}, []int{2, -3}, []int{3, -3},
+			[]int{-4, -2}, []int{-3, -2}, []int{-2, -2}, []int{-1, -2}, []int{0, -2}, []int{1, -2}, []int{2, -2}, []int{3, -2}, []int{4, -2},
+			[]int{-4, -1}, []int{-3, -1}, []int{-2, -1}, []int{-1, -1}, []int{0, -1}, []int{1, -1}, []int{2, -1}, []int{3, -1}, []int{4, -1},
+			[]int{-4, 0}, []int{-3, 0}, []int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0}, []int{3, 0}, []int{4, 0},
+			[]int{-4, 1}, []int{-3, 1}, []int{-2, 1}, []int{-1, 1}, []int{0, 1}, []int{1, 1}, []int{2, 1}, []int{3, 1}, []int{4, 1},
+			[]int{-4, 2}, []int{-3, 2}, []int{-2, 2}, []int{-1, 2}, []int{0, 2}, []int{1, 2}, []int{2, 2}, []int{3, 2}, []int{4, 2},
+			[]int{-3, 3}, []int{-2, 3}, []int{-1, 3}, []int{0, 3}, []int{1, 3}, []int{2, 3}, []int{3, 3},
+			[]int{-2, 4}, []int{-1, 4}, []int{0, 4}, []int{1, 4}, []int{2, 4},
+		}
+	} else if GlobalData.CurrentSize == SizeHuge {
+		cursor = nil
+		cursor = [][]int{
+			[]int{-3, -8}, []int{-2, -8}, []int{-1, -8}, []int{0, -8}, []int{1, -8}, []int{2, -8}, []int{3, -8},
+			[]int{-5, -7}, []int{-4, -7}, []int{-3, -7}, []int{-2, -7}, []int{-1, -7}, []int{0, -7}, []int{1, -7}, []int{2, -7}, []int{3, -7}, []int{4, -7}, []int{5, -7},
+			[]int{-6, -6}, []int{-5, -6}, []int{-4, -6}, []int{-3, -6}, []int{-2, -6}, []int{-1, -6}, []int{0, -6}, []int{1, -6}, []int{2, -6}, []int{3, -6}, []int{4, -6}, []int{5, -6}, []int{6,-6},
+			[]int{-7, -5}, []int{-6, -5}, []int{-5, -5}, []int{-4, -5}, []int{-3, -5}, []int{-2, -5}, []int{-1, -5}, []int{0, -5}, []int{1, -5}, []int{2, -5}, []int{3, -5}, []int{4, -5}, []int{5, -5}, []int{6, -5}, []int{7, -5},
+			[]int{-7, -4}, []int{-6, -4}, []int{-5, -4}, []int{-4, -4}, []int{-3, -4}, []int{-2, -4}, []int{-1, -4}, []int{0, -4}, []int{1, -4}, []int{2, -4}, []int{3, -4}, []int{4, -4}, []int{5, -4}, []int{6, -4}, []int{7, -4},
+			[]int{-8, -3}, []int{-7, -3}, []int{-6, -3}, []int{-5, -3}, []int{-4, -3}, []int{-3, -3}, []int{-2, -3}, []int{-1, -3}, []int{0, -3}, []int{1, -3}, []int{2, -3}, []int{3, -3}, []int{4, -3}, []int{5, -3}, []int{6, -3}, []int{7, -3}, []int{8, -3},
+			[]int{-8, -2}, []int{-7, -2}, []int{-6, -2}, []int{-5, -2}, []int{-4, -2}, []int{-3, -2}, []int{-2, -2}, []int{-1, -2}, []int{0, -2}, []int{1, -2}, []int{2, -2}, []int{3, -2}, []int{4, -2}, []int{5, -2}, []int{6, -2}, []int{7, -2}, []int{8, -2},
+			[]int{-8, -1}, []int{-7, -1}, []int{-6, -1}, []int{-5, -1}, []int{-4, -1}, []int{-3, -1}, []int{-2, -1}, []int{-1, -1}, []int{0, -1}, []int{1, -1}, []int{2, -1}, []int{3, -1}, []int{4, -1}, []int{5, -1}, []int{6, -1}, []int{7, -1}, []int{8, -1},
+			[]int{-8, 0}, []int{-7, 0}, []int{-6, 0}, []int{-5, 0}, []int{-4, 0}, []int{-3, 0}, []int{-2, 0}, []int{-1, 0}, []int{0, 0}, []int{1, 0}, []int{2, 0}, []int{3, 0}, []int{4, 0}, []int{5, 0}, []int{6, 0}, []int{7, 0}, []int{8, 0},
+			[]int{-8, 1}, []int{-7, 1}, []int{-6, 1}, []int{-5, 1}, []int{-4, 1}, []int{-3, 1}, []int{-2, 1}, []int{-1, 1}, []int{0, 1}, []int{1, 1}, []int{2, 1}, []int{3, 1}, []int{4, 1}, []int{5, 1}, []int{6, 1}, []int{7, 1}, []int{8, 1},
+			[]int{-8, 2}, []int{-7, 2}, []int{-6, 2}, []int{-5, 2}, []int{-4, 2}, []int{-3, 2}, []int{-2, 2}, []int{-1, 2}, []int{0, 2}, []int{1, 2}, []int{2, 2}, []int{3, 2}, []int{4, 2}, []int{5, 2}, []int{6, 2}, []int{7, 2}, []int{8, 2},
+			[]int{-8, 3}, []int{-7, 3}, []int{-6, 3}, []int{-5, 3}, []int{-4, 3}, []int{-3, 3}, []int{-2, 3}, []int{-1, 3}, []int{0, 3}, []int{1, 3}, []int{2, 3}, []int{3, 3}, []int{4, 3}, []int{5, 3}, []int{6, 3}, []int{7, 3}, []int{8, 3},
+			[]int{-7, 4}, []int{-6, 4}, []int{-5, 4}, []int{-4, 4}, []int{-3, 4}, []int{-2, 4}, []int{-1, 4}, []int{0, 4}, []int{1, 4}, []int{2, 4}, []int{3, 4}, []int{4, 4}, []int{5, 4}, []int{6, 4}, []int{7, 4},
+			[]int{-7, 5}, []int{-6, 5}, []int{-5, 5}, []int{-4, 5}, []int{-3, 5}, []int{-2, 5}, []int{-1, 5}, []int{0, 5}, []int{1, 5}, []int{2, 5}, []int{3, 5}, []int{4, 5}, []int{5, 5}, []int{6, 5}, []int{7, 5},
+			[]int{-6, 6}, []int{-5, 6}, []int{-4, 6}, []int{-3, 6}, []int{-2, 6}, []int{-1, 6}, []int{0, 6}, []int{1, 6}, []int{2, 6}, []int{3, 6}, []int{4, 6}, []int{5, 6}, []int{6,6},
+			[]int{-5, 7}, []int{-4, 7}, []int{-3, 7}, []int{-2, 7}, []int{-1, 7}, []int{0, 7}, []int{1, 7}, []int{2, 7}, []int{3, 7}, []int{4, 7}, []int{5, 7},
+			[]int{-3, 8}, []int{-2, 8}, []int{-1, 8}, []int{0, 8}, []int{1, 8}, []int{2, 8}, []int{3, 8},
+		}
+	}
+	return cursor
 }
 
 func (c *Creature) FindTargets(length int, b Board, cs Creatures, o Objects) Creatures {
