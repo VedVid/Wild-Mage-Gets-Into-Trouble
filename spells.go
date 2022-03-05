@@ -26,30 +26,34 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package main
 
+const(
+	FireDurationMin = 16
+	FireDurationMax = 20
+	FireDurationNotFlammableDiv = 3
+
+	BarrenDurationMin = 40
+	BarrenDurationMax = 60
+)
+
+var (
+	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
+	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
+	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
+)
+
 func FireArea(area [][]int, b Board) {
 	for _, v := range area {
 		x := v[0]
 		y := v[1]
 		t := b[x][y]
-		t.FireTile()
+		if t.Barren == 0 {
+			t.FireTile()
+		}
 	}
 }
 
 func (t *Tile) FireTile() {
 	t.MakeFire()
-}
-
-func WaterArea(area [][]int, b Board) {
-	for _, v := range area {
-		x := v[0]
-		y := v[1]
-		t := b[x][y]
-		t.WaterTile()
-	}
-}
-
-func (t *Tile) WaterTile() {
-	t.MakeWater()
 }
 
 func (t *Tile) UpdateTile() {
