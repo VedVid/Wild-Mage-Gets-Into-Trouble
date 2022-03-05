@@ -62,7 +62,7 @@ var (
 )
 
 func (t *Tile) MakeFire() {
-	if t.Barren == 0 && t.Fire == 0 && t.Flooded == 0 {
+	if t.Barren == 0 && t.Fire == 0 && t.Flooded == 0 && t.Damp == 0 {
 		if t.Flammable == true {
 			t.Fire = RandRange(FireDurationMin, FireDurationMax)
 			t.Chars = FireChars
@@ -95,10 +95,7 @@ func TryFireAnotherTile(t *Tile, b Board) {
 			if t.Flammable == true {
 				chances = 7
 			}
-			if t.Damp > 0 {
-				chances = chances / 2
-			}
-			if t.Flooded > 0 {
+			if t.Damp > 0 || t.Flooded > 0 {
 				chances = -1
 			}
 			if rand.Intn(100) <= chances {

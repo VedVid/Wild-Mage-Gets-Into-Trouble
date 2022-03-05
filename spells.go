@@ -60,14 +60,6 @@ func (t *Tile) UpdateTile() {
 		}
 	} else if t.Barren > 0 {
 		t.Barren--
-		if t.Barren == 0 {
-			switch t.Name {
-			case "stone ground":
-				t.MakeStoneGround()
-			case "grass":
-				t.MakeGrass()
-			}
-		}
 	}
 	if t.Flooded > 0 {
 		t.Flooded--
@@ -76,13 +68,13 @@ func (t *Tile) UpdateTile() {
 		}
 	} else if t.Damp > 0 {
 		t.Damp--
-		if t.Damp == 0 {
-			switch t.Name {
-			case "stone ground":
-				t.MakeStoneGround()
-			case "grass":
-				t.MakeGrass()
-			}
+	}
+	if t.Fire == 0 && t.Barren == 0 && t.Flooded == 0 && t.Damp == 0 {
+		switch t.Name {
+		case "stone ground":
+			t.MakeStoneGround()
+		case "grass":
+			t.MakeGrass()
 		}
 	}
 }
