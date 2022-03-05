@@ -83,6 +83,10 @@ var HardcodedKeys = []int{
 	blt.TK_KP_9,
 	blt.TK_KP_0,
 	blt.TK_KP_PERIOD,
+	blt.TK_F1,
+	blt.TK_F2,
+	blt.TK_F3,
+	blt.TK_F4,
 	blt.TK_CLOSE, // Do not use in config file!
 }
 
@@ -553,6 +557,14 @@ func addKeyToCustomLayout(resKey string, resValue string) {
 		i = blt.TK_KP_0
 	case "KP_PERIOD":
 		i = blt.TK_KP_PERIOD
+	case "F1":
+		i = blt.TK_F1
+	case "F2":
+		i = blt.TK_F2
+	case "F3":
+		i = blt.TK_F3
+	case "F4":
+		i = blt.TK_F4
 	default:
 		if utf8.RuneCountInString(resValue) == 1 {
 			i = tempMap[[]rune(resValue)[0]]

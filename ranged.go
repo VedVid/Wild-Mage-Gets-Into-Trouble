@@ -194,16 +194,16 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_ESCAPE {
 			break
 		}
-		if key == blt.TK_1 {
+		if key == blt.TK_F1 {
 			GlobalData.CurrentSchool = SchoolWater
 			continue
-		} else if key == blt.TK_2 {
+		} else if key == blt.TK_F2 {
 			GlobalData.CurrentSchool = SchoolFire
 			continue
-		} else if key == blt.TK_3 {
+		} else if key == blt.TK_F3 {
 			GlobalData.CurrentSchool = SchoolAir
 			continue
-		} else if key == blt.TK_4 {
+		} else if key == blt.TK_F4 {
 			GlobalData.CurrentSchool = SchoolEarth
 			continue
 		} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
@@ -220,16 +220,16 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 				GlobalData.CurrentSchool++
 			}
 			continue
-		} else if key == blt.TK_Q {
+		} else if key == blt.TK_1 {
 			GlobalData.CurrentSize = SizeSmall
 			continue
-		} else if key == blt.TK_W {
+		} else if key == blt.TK_2 {
 			GlobalData.CurrentSize = SizeMedium
 			continue
-		} else if key == blt.TK_E {
+		} else if key == blt.TK_3 {
 			GlobalData.CurrentSize = SizeBig
 			continue
-		} else if key == blt.TK_R {
+		} else if key == blt.TK_4 {
 			GlobalData.CurrentSize = SizeHuge
 			continue
 		} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS {
