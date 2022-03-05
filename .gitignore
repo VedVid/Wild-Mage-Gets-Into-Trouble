@@ -6,6 +6,6 @@
 *.exe
 *.gob
 *.orig
-*.txt
 *.ttf
+*.txt
 *.png
