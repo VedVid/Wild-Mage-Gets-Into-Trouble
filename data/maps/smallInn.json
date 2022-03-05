@@ -75,6 +75,7 @@
    "Flooded":{},
    "Damp":{},
    "Chasm":{},
+   "Unstable":{},
    "MonstersCoords":[],
    "MonstersTypes":[]
 }

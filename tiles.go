@@ -47,6 +47,9 @@ const(
 
 	ChasmDurationMin = 95
 	ChasmDurationMax = 100
+
+	UnstableDurationMin = 30
+	UnstableDurationMax = 35
 )
 
 var (
@@ -151,8 +154,16 @@ func (t *Tile) MakeChasm() {
 	t.Barren = 0
 	t.Flooded = 0
 	t.Damp = 0
-	t.Chars = []string{" "}
-	t.Colors = []string{"black"}
+	t.Chars = []string{"…"}
+	t.Colors = []string{"darkest blue"}
+	t.CurrentFrame = 0
+	t.Delay = 0
+}
+
+func (t *Tile) MakeUnstableGround() {
+	t.Unstable = RandRange(UnstableDurationMin, UnstableDurationMax)
+	t.Chars = []string{"."}
+	t.Colors = []string{"darker orange"}
 	t.CurrentFrame = 0
 	t.Delay = 0
 }

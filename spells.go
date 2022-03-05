@@ -84,8 +84,13 @@ func (t *Tile) UpdateTile() {
 	}
 	if t.Chasm > 0 {
 		t.Chasm--
+		if t.Chasm == 0 {
+			t.MakeUnstableGround()
+		}
+	} else if t.Unstable > 0 {
+		t.Unstable--
 	}
-	if t.Fire == 0 && t.Barren == 0 && t.Flooded == 0 && t.Damp == 0 && t.Chasm == 0 {
+	if t.Fire == 0 && t.Barren == 0 && t.Flooded == 0 && t.Damp == 0 && t.Chasm == 0 && t.Unstable == 0 {
 		switch t.Name {
 		case "stone ground":
 			t.MakeStoneGround()
