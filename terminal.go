@@ -35,7 +35,7 @@ import (
 
 const (
 	// Setting BearLibTerminal window.
-	WindowSizeX = 35
+	WindowSizeX = 30
 	WindowSizeY = 30
 	MapSizeX    = 25
 	MapSizeY    = 25
