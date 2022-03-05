@@ -320,7 +320,6 @@ func MoveCursor(x, y *int, dx, dy int) {
 func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
 	blt.Clear()
 	RenderAll(b, o, c)
-	blt.Layer(LookLayer)
 	for _, v := range area {
 		col := "light blue"
 		if GlobalData.CurrentSchool == SchoolFire {
@@ -330,6 +329,9 @@ func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
 		} else if GlobalData.CurrentSchool == SchoolEarth {
 			col = "dark orange"
 		}
+		blt.Layer(BoardLayer)
+		blt.ClearArea(v[0], v[1], 1, 1)
+		blt.Layer(LookLayer)
 		blt.Print(v[0], v[1], "[color="+col+"]X")
 	}
 	blt.Refresh()
