@@ -27,8 +27,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package main
 
 import (
-	"strconv"
-
 	blt "bearlibterminal"
 )
 
@@ -168,7 +166,16 @@ func PrintUI(c *Creature) {
 	blt.Layer(UILayer)
 	name := "Player"
 	blt.Print(UIPosX, UIPosY, name)
-	hp := "[color=red]HP: " + strconv.Itoa(c.HPCurrent) + "%"
+	hp := ""
+	for i := 0; i < c.HPMax; i++ {
+		hpSymbol := "♥"
+		hpColor := "dark red"
+		if i >= c.HPCurrent {
+			hpSymbol = "♡"
+			hpColor = "darker red"
+		}
+		blt.Print(UIPosX+i, UIPosY+1, "[color="+hpColor+"]"+hpSymbol)
+	}
 	blt.Print(UIPosX, UIPosY+1, hp)
 	baseSpellColor := "darker gray"
 	waterColor := baseSpellColor
