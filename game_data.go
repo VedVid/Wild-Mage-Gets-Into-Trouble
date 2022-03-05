@@ -26,9 +26,25 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package main
 
+const (
+	SchoolWater = iota
+	SchoolFire
+	SchoolAir
+	SchoolEarth
+)
+
+const (
+	SizeSmall = iota
+	SizeMedium
+	SizeBig
+	SizeHuge
+)
+
 type GameData struct {
 	/* GameData stores generic data that can be used for calculating
 	   high scores, or for creating morgue files. */
 	TurnsSpent     int
 	MonstersKilled int
+	CurrentSchool  int
+	CurrentSize    int
 }

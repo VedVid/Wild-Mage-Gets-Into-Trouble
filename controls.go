@@ -40,6 +40,16 @@ const (
 	StrMoveEast  = "MOVE_EAST"
 	StrMoveSouth = "MOVE_SOUTH"
 
+	StrSetWater = "SET_WATER"
+	StrSetFire = "SET_FIRE"
+	StrSetAir = "SET_AIR"
+	StrSetEarth = "SET_EARTH"
+
+	StrSetSmall = "SET_SMALL"
+	StrSetMedium = "SET_MEDIUM"
+	StrSetBig = "SET_BIG"
+	StrSetHuge = "SET_HUGE"
+
 	StrTarget = "TARGET"
 	StrLook   = "LOOK"
 )
@@ -50,6 +60,14 @@ var Actions = []string{
 	StrMoveWest,
 	StrMoveEast,
 	StrMoveSouth,
+	StrSetWater,
+	StrSetFire,
+	StrSetAir,
+	StrSetEarth,
+	StrSetSmall,
+	StrSetMedium,
+	StrSetBig,
+	StrSetHuge,
 	StrTarget,
 	StrLook,
 }
@@ -60,6 +78,14 @@ var CommandKeys = map[int]string{
 	blt.TK_RIGHT: StrMoveEast,
 	blt.TK_DOWN:  StrMoveSouth,
 	blt.TK_LEFT:  StrMoveWest,
+	blt.TK_1:     StrSetWater,
+	blt.TK_2:     StrSetFire,
+	blt.TK_3:     StrSetAir,
+	blt.TK_4:     StrSetEarth,
+	blt.TK_Q:     StrSetSmall,
+	blt.TK_W:     StrSetMedium,
+	blt.TK_E:     StrSetBig,
+	blt.TK_R:     StrSetHuge,
 	blt.TK_F:     StrTarget,
 	blt.TK_L:     StrLook,
 }
@@ -86,6 +112,23 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		turnSpent = p.MoveOrAttack(0, 1, *b, o, *c)
 	case StrMoveWest:
 		turnSpent = p.MoveOrAttack(-1, 0, *b, o, *c)
+
+	case StrSetWater:
+		GlobalData.CurrentSchool = SchoolWater
+	case StrSetFire:
+		GlobalData.CurrentSchool = SchoolFire
+	case StrSetAir:
+		GlobalData.CurrentSchool = SchoolAir
+	case StrSetEarth:
+		GlobalData.CurrentSchool = SchoolEarth
+	case StrSetSmall:
+		GlobalData.CurrentSize = SizeSmall
+	case StrSetMedium:
+		GlobalData.CurrentSize = SizeMedium
+	case StrSetBig:
+		GlobalData.CurrentSize = SizeBig
+	case StrSetHuge:
+		GlobalData.CurrentSize = SizeHuge
 
 	case StrTarget:
 		turnSpent = p.Target(*b, o, *c)
