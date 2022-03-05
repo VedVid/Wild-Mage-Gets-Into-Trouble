@@ -26,12 +26,8 @@
       ".........................",
       "........................."
    ],
-   "Data":[
-
-   ],
-   "Layouts":[
-
-   ],
+   "Data":[],
+   "Layouts":[],
    "Chars":{
       ".":["."],
       ",":[","]
@@ -70,6 +66,12 @@
       ".":false,
       ",":false
    },
+   "Flammable":{
+      ".":false,
+      ",":true
+   },
+   "Fire":{},
+   "Barren":{},
    "MonstersCoords":[],
    "MonstersTypes":[]
 }
