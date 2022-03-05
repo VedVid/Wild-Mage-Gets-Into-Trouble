@@ -565,6 +565,14 @@ func addKeyToCustomLayout(resKey string, resValue string) {
 		i = blt.TK_F3
 	case "F4":
 		i = blt.TK_F4
+	case "LBRACKET":
+		i = blt.TK_LBRACKET
+	case "RBRACKET":
+		i = blt.TK_RBRACKET
+	case "MINUS":
+		i = blt.TK_MINUS
+	case "EQUALS":
+		i = blt.TK_EQUALS
 	default:
 		if utf8.RuneCountInString(resValue) == 1 {
 			i = tempMap[[]rune(resValue)[0]]

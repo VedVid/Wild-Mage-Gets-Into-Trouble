@@ -44,11 +44,19 @@ const (
 	StrSetFire = "SET_FIRE"
 	StrSetAir = "SET_AIR"
 	StrSetEarth = "SET_EARTH"
+	StrNextSchool1 = "NEXT_SCHOOL_1"
+	StrNextSchool2 = "NEXT_SCHOOL_2"
+	StrPrevSchool1 = "PREV_SCHOOL_1"
+	StrPrevSchool2 = "PREV_SCHOOL_2"
 
 	StrSetSmall = "SET_SMALL"
 	StrSetMedium = "SET_MEDIUM"
 	StrSetBig = "SET_BIG"
 	StrSetHuge = "SET_HUGE"
+	StrNextSize1 = "NEXT_SIZE_1"
+	StrNextSize2 = "NEXT_SIZE_2"
+	StrPrevSize1 = "PREV_SIZE_1"
+	StrPrevSize2 = "PREV_SIZE_2"
 
 	StrTarget = "TARGET"
 	StrLook   = "LOOK"
@@ -64,30 +72,46 @@ var Actions = []string{
 	StrSetFire,
 	StrSetAir,
 	StrSetEarth,
+	StrNextSchool1,
+	StrNextSchool2,
+	StrPrevSchool1,
+	StrPrevSchool2,
 	StrSetSmall,
 	StrSetMedium,
 	StrSetBig,
 	StrSetHuge,
+	StrNextSize1,
+	StrNextSize2,
+	StrPrevSize1,
+	StrPrevSize2,
 	StrTarget,
 	StrLook,
 }
 
 var CommandKeys = map[int]string{
 	// Mapping keyboard scancodes to Action identifiers.
-	blt.TK_UP:    StrMoveNorth,
-	blt.TK_RIGHT: StrMoveEast,
-	blt.TK_DOWN:  StrMoveSouth,
-	blt.TK_LEFT:  StrMoveWest,
-	blt.TK_F1:    StrSetWater,
-	blt.TK_F2:    StrSetFire,
-	blt.TK_F3:    StrSetAir,
-	blt.TK_F4:    StrSetEarth,
-	blt.TK_1:     StrSetSmall,
-	blt.TK_2:     StrSetMedium,
-	blt.TK_3:     StrSetBig,
-	blt.TK_4:     StrSetHuge,
-	blt.TK_F:     StrTarget,
-	blt.TK_L:     StrLook,
+	blt.TK_UP:          StrMoveNorth,
+	blt.TK_RIGHT:       StrMoveEast,
+	blt.TK_DOWN:        StrMoveSouth,
+	blt.TK_LEFT:        StrMoveWest,
+	blt.TK_F1:          StrSetWater,
+	blt.TK_F2:          StrSetFire,
+	blt.TK_F3:          StrSetAir,
+	blt.TK_F4:          StrSetEarth,
+	blt.TK_KP_MULTIPLY: StrNextSchool1,
+	blt.TK_RBRACKET:    StrNextSchool2,
+	blt.TK_KP_DIVIDE:   StrPrevSchool1,
+	blt.TK_LBRACKET:    StrPrevSchool2,
+	blt.TK_1:           StrSetSmall,
+	blt.TK_2:           StrSetMedium,
+	blt.TK_3:           StrSetBig,
+	blt.TK_4:           StrSetHuge,
+	blt.TK_EQUALS:      StrNextSize1,
+	blt.TK_KP_PLUS:     StrNextSize2,
+	blt.TK_MINUS:       StrPrevSize1,
+	blt.TK_KP_MINUS:    StrPrevSize2,
+	blt.TK_F:           StrTarget,
+	blt.TK_L:           StrLook,
 }
 
 /* Place to store customized controls scheme,
@@ -121,6 +145,18 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		GlobalData.CurrentSchool = SchoolAir
 	case StrSetEarth:
 		GlobalData.CurrentSchool = SchoolEarth
+	case StrPrevSchool1, StrPrevSchool2:
+		if GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSchool = SchoolEarth
+		} else {
+			GlobalData.CurrentSchool--
+		}
+	case StrNextSchool1, StrNextSchool2:
+		if GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSchool = SchoolWater
+		} else {
+			GlobalData.CurrentSchool++
+		}
 	case StrSetSmall:
 		GlobalData.CurrentSize = SizeSmall
 	case StrSetMedium:
@@ -129,6 +165,18 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		GlobalData.CurrentSize = SizeBig
 	case StrSetHuge:
 		GlobalData.CurrentSize = SizeHuge
+	case StrPrevSize1, StrPrevSize2:
+		if GlobalData.CurrentSize == SizeSmall {
+			GlobalData.CurrentSize = SizeHuge
+		} else {
+			GlobalData.CurrentSize--
+		}
+	case StrNextSize1, StrNextSize2:
+		if GlobalData.CurrentSize == SizeHuge {
+			GlobalData.CurrentSize = SizeSmall
+		} else {
+			GlobalData.CurrentSize++
+		}
 
 	case StrTarget:
 		turnSpent = p.Target(*b, o, *c)
