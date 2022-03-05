@@ -170,6 +170,31 @@ func PrintUI(c *Creature) {
 	blt.Print(UIPosX, UIPosY, name)
 	hp := "[color=red]HP: " + strconv.Itoa(c.HPCurrent) + "%"
 	blt.Print(UIPosX, UIPosY+1, hp)
+	baseSpellColor := "dark gray"
+	waterColor := baseSpellColor
+	if GlobalData.CurrentSchool == SchoolWater {
+		waterColor = "blue"
+	}
+	water := "[color=" + waterColor + "]≈"
+	blt.Print(UIPosX, UIPosY+2, water)
+	fireColor := baseSpellColor
+	if GlobalData.CurrentSchool == SchoolFire {
+		fireColor = "red"
+	}
+	fire := "[color=" + fireColor + "]☄"
+	blt.Print(UIPosX+1, UIPosY+2, fire)
+	airColor := baseSpellColor
+	if GlobalData.CurrentSchool == SchoolAir {
+		airColor = "white"
+	}
+	air := "[color=" + airColor + "]☇"
+	blt.Print(UIPosX+2, UIPosY+2, air)
+	earthColor := baseSpellColor
+	if GlobalData.CurrentSchool == SchoolEarth {
+		earthColor = "darker orange"
+	}
+	earth := "[color=" + earthColor + "]⛰"
+	blt.Print(UIPosX+3, UIPosY+2, earth)
 }
 
 func PrintLog() {
