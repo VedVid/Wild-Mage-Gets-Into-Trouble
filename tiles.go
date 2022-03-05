@@ -70,6 +70,14 @@ func TryFireAnotherTile(t *Tile, b Board) {
 	}
 }
 
+func (t *Tile) MakeBarren() {
+	t.Barren = RandRange(BarrenDurationMin, BarrenDurationMax)
+	t.Chars = []string{"."}
+	t.Colors = []string{"darker gray"}
+	t.CurrentFrame = 0
+	t.Delay = 0
+}
+
 func (t *Tile) MakeWater() {
 	if t.Fire == 0 {
 		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
@@ -80,10 +88,10 @@ func (t *Tile) MakeWater() {
 	}
 }
 
-func (t *Tile) MakeBarren() {
-	t.Barren = RandRange(BarrenDurationMin, BarrenDurationMax)
+func (t *Tile) MakeDamp() {
+	t.Damp = RandRange(DampDurationMin, DampDurationMax)
 	t.Chars = []string{"."}
-	t.Colors = []string{"darker gray"}
+	t.Colors = []string{"lighter blue"}
 	t.CurrentFrame = 0
 	t.Delay = 0
 }

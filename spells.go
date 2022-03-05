@@ -37,6 +37,9 @@ const(
 
 	FloodedDurationMin = 30
 	FloodedDurationMax = 40
+
+	DampDurationMin = 25
+	DampDurationMax = 35
 )
 
 var (
@@ -104,6 +107,11 @@ func (t *Tile) UpdateTile() {
 	if t.Flooded > 0 {
 		t.Flooded--
 		if t.Flooded == 0 {
+			t.MakeDamp()
+		}
+	} else if t.Damp > 0 {
+		t.Damp--
+		if t.Damp == 0 {
 			switch t.Name {
 			case "stone ground":
 				t.MakeStoneGround()

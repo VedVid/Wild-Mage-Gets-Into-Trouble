@@ -43,6 +43,7 @@ type Tile struct {
 	Fire      int
 	Barren    int
 	Flooded   int
+	Damp      int
 	CollisionProperties
 }
 
@@ -66,6 +67,7 @@ type MapJson struct {
 	Fire           map[string]int
 	Barren         map[string]int
 	Flooded        map[string]int
+	Damp           map[string]int
 	MonstersCoords [][]int
 	MonstersTypes  []string
 }
@@ -74,7 +76,7 @@ type MapJson struct {
    to hold data of its every cell. */
 type Board [][]*Tile
 
-func NewTile(layer, x, y, currentFrame, delay, fire, barren, flooded int, name, colorDark string, chars, colors []string,
+func NewTile(layer, x, y, currentFrame, delay, fire, barren, flooded, damp int, name, colorDark string, chars, colors []string,
 	alwaysVisible, explored, flammable, blocked, blocksSight bool) (*Tile, error) {
 	/* Function NewTile takes all values necessary by its struct,
 	   and creates then returns pointer to Tile. */
@@ -105,7 +107,7 @@ func NewTile(layer, x, y, currentFrame, delay, fire, barren, flooded int, name, 
 	tileVisibilityProperties := VisibilityProperties{layer, alwaysVisible}
 	tileCollisionProperties := CollisionProperties{blocked, blocksSight}
 	tileNew := &Tile{tileBasicProperties, tileAnimationProperties, tileVisibilityProperties,
-		explored, flammable, fire, barren, flooded, tileCollisionProperties}
+		explored, flammable, fire, barren, flooded, damp, tileCollisionProperties}
 	return tileNew, err
 }
 
@@ -123,7 +125,7 @@ func InitializeEmptyMap() Board {
 	for x := 0; x < MapSizeX; x++ {
 		for y := 0; y < MapSizeY; y++ {
 			var err error
-			b[x][y], err = NewTile(BoardLayer, x, y, 0, 0, 0, 0, 0, "floor", "dark gray",
+			b[x][y], err = NewTile(BoardLayer, x, y, 0, 0, 0, 0, 0, 0, "floor", "dark gray",
 				[]string{"."}, []string{"light gray"}, true, false, false, false, false)
 			if err != nil {
 				fmt.Println(err)
@@ -166,6 +168,7 @@ func ReplaceTile(t *Tile, s string, m *MapJson) {
 	t.Fire = m.Fire[s]
 	t.Barren = m.Barren[s]
 	t.Flooded = m.Flooded[s]
+	t.Damp = m.Damp[s]
 	t.Blocked = m.Blocked[s]
 	t.BlocksSight = m.BlocksSight[s]
 }
