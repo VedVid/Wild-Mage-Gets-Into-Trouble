@@ -72,6 +72,16 @@ func TryFireAnotherTile(t *Tile, b Board) {
 	}
 }
 
+func (t *Tile) MakeWater() {
+	if t.Fire == 0 {
+		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
+		t.Chars = FloodedChars
+		t.Colors = FloodedColors
+		t.CurrentFrame = len(FloodedChars) - t.Flooded
+		t.Delay = 1
+	}
+}
+
 func (t *Tile) MakeBarren() {
 	t.Barren = RandRange(BarrenDurationMin, BarrenDurationMax)
 	t.Chars = []string{"."}

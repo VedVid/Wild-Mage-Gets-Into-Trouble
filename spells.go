@@ -33,12 +33,24 @@ const(
 
 	BarrenDurationMin = 40
 	BarrenDurationMax = 60
+
+	FloodedDurationMin = 30
+	FloodedDurationMax = 40
 )
 
 var (
 	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
 	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
 	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
+
+	FloodedChars = []string{"≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈",
+							"≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈", "≈",
+							"≈", "≈", "≈", "~", "~", "~", "~", "~", "~", "~",
+							"~", "~", "~", "~", "~", "~", "~", "~", "~", "~"}
+	FloodedColors = []string{"blue", "blue", "blue", "blue", "blue", "dark blue", "dark blue", "dark blue", "dark blue", "dark blue",
+							"blue", "blue", "blue", "blue", "blue", "lighter blue", "lighter blue", "lighter blue", "blue", "blue",
+							"lighter blue", "blue", "blue", "darker blue", "light blue", "blue", "blue", "light blue", "light blue", "light blue",
+							"blue", "blue", "blue", "blue", "dark blue", "light blue", "light blue", "lighter blue", "lighter blue", "blue"}
 )
 
 func FireArea(area [][]int, b Board) {
@@ -56,6 +68,21 @@ func (t *Tile) FireTile() {
 	t.MakeFire()
 }
 
+func WaterArea(area [][]int, b Board) {
+	for _, v := range area {
+		x := v[0]
+		y := v[1]
+		t := b[x][y]
+		if t.Fire == 0 {
+			t.WaterTile()
+		}
+	}
+}
+
+func (t *Tile) WaterTile() {
+	t.MakeWater()
+}
+
 func (t *Tile) UpdateTile() {
 	if t.Fire > 0 {
 		t.Fire--
@@ -65,6 +92,17 @@ func (t *Tile) UpdateTile() {
 	} else if t.Barren > 0 {
 		t.Barren--
 		if t.Barren == 0 {
+			switch t.Name {
+			case "stone ground":
+				t.MakeStoneGround()
+			case "grass":
+				t.MakeGrass()
+			}
+		}
+	}
+	if t.Flooded > 0 {
+		t.Flooded--
+		if t.Flooded == 0 {
 			switch t.Name {
 			case "stone ground":
 				t.MakeStoneGround()
