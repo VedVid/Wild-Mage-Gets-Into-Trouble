@@ -170,7 +170,7 @@ func PrintUI(c *Creature) {
 	blt.Print(UIPosX, UIPosY, name)
 	hp := "[color=red]HP: " + strconv.Itoa(c.HPCurrent) + "%"
 	blt.Print(UIPosX, UIPosY+1, hp)
-	baseSpellColor := "dark gray"
+	baseSpellColor := "darker gray"
 	waterColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolWater {
 		waterColor = "blue"
@@ -185,7 +185,7 @@ func PrintUI(c *Creature) {
 	blt.Print(UIPosX+1, UIPosY+2, fire)
 	airColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolAir {
-		airColor = "white"
+		airColor = "#DDDDDD"
 	}
 	air := "[color=" + airColor + "]☇"
 	blt.Print(UIPosX+2, UIPosY+2, air)
@@ -195,6 +195,70 @@ func PrintUI(c *Creature) {
 	}
 	earth := "[color=" + earthColor + "]⛰"
 	blt.Print(UIPosX+3, UIPosY+2, earth)
+	baseSizeColor := "dark gray"
+	if GlobalData.CurrentSchool == SchoolWater {
+		colorWaterSize := "light blue"
+		colorSmall := baseSizeColor
+		colorMedium := baseSizeColor
+		colorBig := baseSizeColor
+		colorHuge := baseSizeColor
+		switch GlobalData.CurrentSize {
+		case SizeSmall:
+			colorSmall = colorWaterSize
+		case SizeMedium:
+			colorMedium = colorWaterSize
+		case SizeBig:
+			colorBig = colorWaterSize
+		case SizeHuge:
+			colorHuge = colorWaterSize
+		}
+		blt.Print(UIPosX, UIPosY+3, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX, UIPosY+4, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX, UIPosY+5, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX, UIPosY+6, "[color=" + colorHuge + "]↑")
+	}
+	if GlobalData.CurrentSchool == SchoolFire {
+		colorWaterSize := "light red"
+		colorSmall := baseSizeColor
+		colorMedium := baseSizeColor
+		colorBig := baseSizeColor
+		colorHuge := baseSizeColor
+		switch GlobalData.CurrentSize {
+		case SizeSmall:
+			colorSmall = colorWaterSize
+		case SizeMedium:
+			colorMedium = colorWaterSize
+		case SizeBig:
+			colorBig = colorWaterSize
+		case SizeHuge:
+			colorHuge = colorWaterSize
+		}
+		blt.Print(UIPosX+1, UIPosY+3, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+1, UIPosY+4, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+1, UIPosY+5, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+1, UIPosY+6, "[color=" + colorHuge + "]↑")
+	}
+	if GlobalData.CurrentSchool == SchoolAir {
+		colorWaterSize := "#FCFCFC"
+		colorSmall := baseSizeColor
+		colorMedium := baseSizeColor
+		colorBig := baseSizeColor
+		colorHuge := baseSizeColor
+		switch GlobalData.CurrentSize {
+		case SizeSmall:
+			colorSmall = colorWaterSize
+		case SizeMedium:
+			colorMedium = colorWaterSize
+		case SizeBig:
+			colorBig = colorWaterSize
+		case SizeHuge:
+			colorHuge = colorWaterSize
+		}
+		blt.Print(UIPosX+2, UIPosY+3, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+2, UIPosY+4, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+2, UIPosY+5, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+2, UIPosY+6, "[color=" + colorHuge + "]↑")
+	}
 }
 
 func PrintLog() {
