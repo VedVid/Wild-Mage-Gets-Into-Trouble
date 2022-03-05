@@ -120,7 +120,7 @@ func (t *Tile) MakeWater() {
 		t.Colors = FloodedColors
 		t.CurrentFrame = len(FloodedChars) - t.Flooded
 		t.Delay = 1
-	} else {
+	} else if t.Fire > 0 {
 		// Maybe we could add some STEAM here?
 		t.Fire = 0
 		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
@@ -128,6 +128,9 @@ func (t *Tile) MakeWater() {
 		t.Colors = FloodedColors
 		t.CurrentFrame = len(FloodedChars) - t.Flooded
 		t.Delay = 1
+	}
+	if t.Barren > 0 {
+		t.Barren = 0
 	}
 }
 
