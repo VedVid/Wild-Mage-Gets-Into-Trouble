@@ -31,7 +31,7 @@ import (
 )
 
 func (t *Tile) MakeFire() {
-	if t.Flammable == true {
+	if t.Flammable == true && t.Barren == 0 && t.Fire == 0 {
 		t.Fire = RandRange(FireDurationMin, FireDurationMax)
 		t.Chars = []string{}
 		t.Colors = []string{}
@@ -42,7 +42,7 @@ func (t *Tile) MakeFire() {
 			t.Delay = 1
 		}
 	}
-	if t.Flammable == false {
+	if t.Flammable == false && t.Barren == 0 && t.Fire == 0 {
 		t.Fire = RandRange(FireDurationMin, FireDurationMax) / FireDurationNotFlammableDiv
 		t.Chars = []string{}
 		t.Colors = []string{}
@@ -51,6 +51,23 @@ func (t *Tile) MakeFire() {
 			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
 			t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
 			t.Delay = 1
+		}
+	}
+}
+
+func TryFireAnotherTile(t *Tile, b Board) {
+	for x := t.X-1; x <= t.X+1; x++ {
+		for y := t.Y-1; y <= t.Y+1; y++ {
+			if x < 0 || x >= MapSizeX || y < 0 || y >= MapSizeY {
+				continue
+			}
+			chances := 2
+			if t.Flammable == true {
+				chances = 7
+			}
+			if rand.Intn(100) <= chances {
+				b[x][y].MakeFire()
+			}
 		}
 	}
 }

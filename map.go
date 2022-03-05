@@ -135,6 +135,10 @@ func UpdateTiles(b Board) {
 	for x := 0; x < MapSizeX; x++ {
 		for y := 0; y < MapSizeY; y++ {
 			b[x][y].UpdateTile()
+			// Pożar się rozprzestrzenia!
+			if b[x][y].Fire > 0 {
+				TryFireAnotherTile(b[x][y], b)
+			}
 		}
 	}
 }

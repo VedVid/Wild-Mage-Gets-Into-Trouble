@@ -31,8 +31,8 @@ const(
 	FireDurationMax = 20
 	FireDurationNotFlammableDiv = 3
 
-	BarrenDurationMin = 10
-	BarrenDurationMax = 15
+	BarrenDurationMin = 40
+	BarrenDurationMax = 60
 )
 
 var (
