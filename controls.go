@@ -42,10 +42,6 @@ const (
 
 	StrTarget = "TARGET"
 	StrLook   = "LOOK"
-	StrPickup = "PICKUP"
-
-	StrInventory = "INVENTORY"
-	StrEquipment = "EQUIPMENT"
 )
 
 var Actions = []string{
@@ -56,9 +52,6 @@ var Actions = []string{
 	StrMoveSouth,
 	StrTarget,
 	StrLook,
-	StrPickup,
-	StrInventory,
-	StrEquipment,
 }
 
 var CommandKeys = map[int]string{
@@ -69,9 +62,6 @@ var CommandKeys = map[int]string{
 	blt.TK_LEFT:  StrMoveWest,
 	blt.TK_F:     StrTarget,
 	blt.TK_L:     StrLook,
-	blt.TK_G:     StrPickup,
-	blt.TK_I:     StrInventory,
-	blt.TK_E:     StrEquipment,
 }
 
 /* Place to store customized controls scheme,
@@ -101,12 +91,6 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		turnSpent = p.Target(*b, o, *c)
 	case StrLook:
 		p.Look(*b, *o, *c)
-	case StrPickup:
-		turnSpent = p.PickUp(o)
-	case StrInventory:
-		turnSpent = p.InventoryMenu(o)
-	case StrEquipment:
-		turnSpent = p.EquipmentMenu(o)
 	}
 	return turnSpent
 }
