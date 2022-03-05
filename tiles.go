@@ -62,24 +62,25 @@ var (
 )
 
 func (t *Tile) MakeFire() {
-	if t.Flammable == true && t.Barren == 0 && t.Fire == 0 {
-		t.Fire = RandRange(FireDurationMin, FireDurationMax)
-		t.Chars = FireChars
-		t.CurrentFrame = len(FireChars) - t.Fire
-		t.Delay = 1
-		t.Colors = []string{}
-		for i := 0; i < len(FireChars); i++ {
-			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
-		}
-	}
-	if t.Flammable == false && t.Barren == 0 && t.Fire == 0 {
-		t.Fire = RandRange(FireNotFlammableDurationMin, FireNotFlammableDurationMax)
-		t.Chars = FireNotFlammableChars
-		t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
-		t.Delay = 1
-		t.Colors = []string{}
-		for i := 0; i < len(FireNotFlammableChars); i++ {
-			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+	if t.Barren == 0 && t.Fire == 0 && t.Flooded == 0 {
+		if t.Flammable == true {
+			t.Fire = RandRange(FireDurationMin, FireDurationMax)
+			t.Chars = FireChars
+			t.CurrentFrame = len(FireChars) - t.Fire
+			t.Delay = 1
+			t.Colors = []string{}
+			for i := 0; i < len(FireChars); i++ {
+				t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			}
+		} else {
+			t.Fire = RandRange(FireNotFlammableDurationMin, FireNotFlammableDurationMax)
+			t.Chars = FireNotFlammableChars
+			t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
+			t.Delay = 1
+			t.Colors = []string{}
+			for i := 0; i < len(FireNotFlammableChars); i++ {
+				t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			}
 		}
 	}
 }
@@ -93,6 +94,12 @@ func TryFireAnotherTile(t *Tile, b Board) {
 			chances := 2
 			if t.Flammable == true {
 				chances = 7
+			}
+			if t.Damp > 0 {
+				chances = chances / 2
+			}
+			if t.Flooded > 0 {
+				chances = -1
 			}
 			if rand.Intn(100) <= chances {
 				b[x][y].MakeFire()

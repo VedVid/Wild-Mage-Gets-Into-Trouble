@@ -31,9 +31,7 @@ func FireArea(area [][]int, b Board) {
 		x := v[0]
 		y := v[1]
 		t := b[x][y]
-		if t.Barren == 0 {
-			t.FireTile()
-		}
+		t.FireTile()
 	}
 }
 
@@ -46,9 +44,7 @@ func WaterArea(area [][]int, b Board) {
 		x := v[0]
 		y := v[1]
 		t := b[x][y]
-		if t.Fire == 0 {
-			t.WaterTile()
-		}
+		t.WaterTile()
 	}
 }
 
