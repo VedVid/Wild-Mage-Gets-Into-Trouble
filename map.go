@@ -131,6 +131,14 @@ func InitializeEmptyMap() Board {
 	return b
 }
 
+func UpdateTiles(b Board) {
+	for x := 0; x < MapSizeX; x++ {
+		for y := 0; y < MapSizeY; y++ {
+			b[x][y].UpdateTile()
+		}
+	}
+}
+
 func ReplaceTile(t *Tile, s string, m *MapJson) {
 	/* ReplaceTile is function that takes tile, string (supposed to be
 	   one-character-lenght - symbol of map tile, taken from json map) and

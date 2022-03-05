@@ -26,51 +26,53 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package main
 
-const(
-	FireDurationMin = 16
-	FireDurationMax = 20
-	FireDurationNotFlammableDiv = 3
-
-	BarrenDurationMin = 10
-	BarrenDurationMax = 15
+import (
+	"math/rand"
 )
 
-var (
-	FireChars = []string{"^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "^", "'", "'", "'", "'", "'", ".", ".", ".", "."}
-	FireNotFlammableChars = []string{"^", "^", "'", "'", ".", "."}
-	FireColors = []string{"red", "red", "red", "light red", "light red", "dark red", "dark red", "lighter red", "lighter red", "darker red", "darker red"}
-)
-
-func FireArea(area [][]int, b Board) {
-	for _, v := range area {
-		x := v[0]
-		y := v[1]
-		t := b[x][y]
-		if t.Barren == 0 {
-			t.FireTile()
+func (t *Tile) MakeFire() {
+	if t.Flammable == true {
+		t.Fire = RandRange(FireDurationMin, FireDurationMax)
+		t.Chars = []string{}
+		t.Colors = []string{}
+		for i := 0; i < t.Fire; i++ {
+			t.Chars = append(t.Chars, FireChars[i])
+			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			t.CurrentFrame = len(FireChars) - t.Fire
+			t.Delay = 1
+		}
+	}
+	if t.Flammable == false {
+		t.Fire = RandRange(FireDurationMin, FireDurationMax) / FireDurationNotFlammableDiv
+		t.Chars = []string{}
+		t.Colors = []string{}
+		for i := 0; i < t.Fire; i++ {
+			t.Chars = append(t.Chars, FireNotFlammableChars[i])
+			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
+			t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
+			t.Delay = 1
 		}
 	}
 }
 
-func (t *Tile) FireTile() {
-	t.MakeFire()
+func (t *Tile) MakeBarren() {
+	t.Barren = RandRange(BarrenDurationMin, BarrenDurationMax)
+	t.Chars = []string{"░"}
+	t.Colors = []string{"darkest gray"}
+	t.CurrentFrame = 0
+	t.Delay = 0
 }
 
-func (t *Tile) UpdateTile() {
-	if t.Fire > 0 {
-		t.Fire--
-		if t.Fire == 0 {
-			t.MakeBarren()
-		}
-	} else if t.Barren > 0 {
-		t.Barren--
-		if t.Barren == 0 {
-			switch t.Name {
-			case "stone ground":
-				t.MakeStoneGround()
-			case "grass":
-				t.MakeGrass()
-			}
-		}
-	}
+func (t *Tile) MakeStoneGround() {
+	t.Chars = []string{"."}
+	t.Colors = []string{"gray"}
+	t.CurrentFrame = 0
+	t.Delay = 0
+}
+
+func (t *Tile) MakeGrass() {
+	t.Chars = []string{","}
+	t.Colors = []string{"dark green"}
+	t.CurrentFrame = 0
+	t.Delay = 0
 }
