@@ -29,7 +29,8 @@ package main
 const(
 	FireDurationMin = 16
 	FireDurationMax = 20
-	FireDurationNotFlammableDiv = 3
+	FireNotFlammableDurationMin = 3
+	FireNotFlammableDurationMax = 6
 
 	BarrenDurationMin = 40
 	BarrenDurationMax = 60

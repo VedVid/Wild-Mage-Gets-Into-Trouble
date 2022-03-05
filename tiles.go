@@ -42,14 +42,13 @@ func (t *Tile) MakeFire() {
 		}
 	}
 	if t.Flammable == false && t.Barren == 0 && t.Fire == 0 {
-		t.Fire = RandRange(FireDurationMin, FireDurationMax) / FireDurationNotFlammableDiv
-		t.Chars = []string{}
+		t.Fire = RandRange(FireNotFlammableDurationMin, FireNotFlammableDurationMax)
+		t.Chars = FireNotFlammableChars
+		t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
+		t.Delay = 1
 		t.Colors = []string{}
-		for i := 0; i < t.Fire; i++ {
-			t.Chars = append(t.Chars, FireNotFlammableChars[i])
+		for i := 0; i <= t.Fire; i++ {
 			t.Colors = append(t.Colors, FireColors[rand.Intn(len(FireColors))])
-			t.CurrentFrame = len(FireNotFlammableChars) - t.Fire
-			t.Delay = 1
 		}
 	}
 }
