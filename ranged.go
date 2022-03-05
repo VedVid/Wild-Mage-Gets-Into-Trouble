@@ -228,26 +228,20 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		}
 	}
 	targetX, targetY := target.X, target.Y
-	i := false
+	//i := false
 	for {
-		vec, err := NewBrensenham(c.X, c.Y, targetX, targetY)
-		if err != nil {
-			fmt.Println(err)
+		area := [][]int{}
+		for _, v := range cursor {
+			area = append(area, []int{targetX+v[0], targetY+v[1]})
 		}
-		_ = ComputeBrensenham(vec)
-		valid, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
-		PrintBrensenham(vec, BrensenhamWhyTarget, BrensenhamColorGood, BrensenhamColorBad, b, *o, cs)
-		if monsterHit != nil {
-			msg := "There is " + monsterHit.Name + " here."
-			PrintLookingMessage(msg, i)
-		}
+		fmt.Println(area)
 		key := ReadInput()
 		if key == blt.TK_ESCAPE {
 			break
 		}
-		if key == blt.TK_F {
+		/*if key == blt.TK_F {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
-			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 && valid == true {
+			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 {
 				LastTarget = monsterAimed
 				c.AttackTarget(monsterAimed, o)
 			} else {
@@ -280,9 +274,9 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			}
 			targetX, targetY = target.X, target.Y
 			continue // Switch target
-		}
+		}*/
 		CursorMovement(&targetX, &targetY, key)
-		i = true
+		//i = true
 	}
 	return turnSpent
 }
