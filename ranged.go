@@ -197,6 +197,12 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if AdjustSpell(key) == true {
 			continue
 		}
+		if key == blt.TK_F {
+			if GlobalData.CurrentSchool == SchoolFire {
+				FireArea(area, b)
+			}
+			continue
+		}
 		/*if key == blt.TK_F {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 {
