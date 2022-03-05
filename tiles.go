@@ -57,8 +57,8 @@ func (t *Tile) MakeFire() {
 
 func (t *Tile) MakeBarren() {
 	t.Barren = RandRange(BarrenDurationMin, BarrenDurationMax)
-	t.Chars = []string{"░"}
-	t.Colors = []string{"darkest gray"}
+	t.Chars = []string{"."}
+	t.Colors = []string{"darker gray"}
 	t.CurrentFrame = 0
 	t.Delay = 0
 }
