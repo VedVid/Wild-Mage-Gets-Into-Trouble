@@ -10,15 +10,17 @@ Player has three spells at the disposal: can spreat fire, cause flood, and creat
 No matter what happen, ground will go back to the normal state after some time.
 
 Controls:
-arrows: move
-[, numpad /: previous spell
-], numpad \*: next spell
--, numpad -: smaller area of effect of the spell
-=, numpad +: larger area of effect of the spell
-F1: cast water
-F2: cast fire
-F3: cast chasm
-1: small area of effect
-2: medium area of effect
-3: large area of effect
-4: huge area of effect
+
+- arrows: move
+- \[, numpad /: previous spell
+- \], numpad \*: next spell
+- -, numpad -: smaller area of effect of the spell
+- =, numpad +: larger area of effect of the spell
+- F1: cast water
+- F2: cast fire
+- F3: cast chasm
+- 1: small area of effect
+- 2: medium area of effect
+- 3: large area of effect
+- 4: huge area of effect
+
