@@ -42,7 +42,6 @@ const (
 
 	StrSetWater = "SET_WATER"
 	StrSetFire = "SET_FIRE"
-	StrSetAir = "SET_AIR"
 	StrSetEarth = "SET_EARTH"
 	StrNextSchool1 = "NEXT_SCHOOL_1"
 	StrNextSchool2 = "NEXT_SCHOOL_2"
@@ -70,7 +69,6 @@ var Actions = []string{
 	StrMoveSouth,
 	StrSetWater,
 	StrSetFire,
-	StrSetAir,
 	StrSetEarth,
 	StrNextSchool1,
 	StrNextSchool2,
@@ -96,8 +94,7 @@ var CommandKeys = map[int]string{
 	blt.TK_LEFT:        StrMoveWest,
 	blt.TK_F1:          StrSetWater,
 	blt.TK_F2:          StrSetFire,
-	blt.TK_F3:          StrSetAir,
-	blt.TK_F4:          StrSetEarth,
+	blt.TK_F3:          StrSetEarth,
 	blt.TK_KP_MULTIPLY: StrNextSchool1,
 	blt.TK_RBRACKET:    StrNextSchool2,
 	blt.TK_KP_DIVIDE:   StrPrevSchool1,
@@ -141,8 +138,6 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		GlobalData.CurrentSchool = SchoolWater
 	case StrSetFire:
 		GlobalData.CurrentSchool = SchoolFire
-	case StrSetAir:
-		GlobalData.CurrentSchool = SchoolAir
 	case StrSetEarth:
 		GlobalData.CurrentSchool = SchoolEarth
 	case StrPrevSchool1, StrPrevSchool2:

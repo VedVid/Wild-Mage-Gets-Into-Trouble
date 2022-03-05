@@ -190,18 +190,12 @@ func PrintUI(c *Creature) {
 	}
 	fire := "[color=" + fireColor + "]☄"
 	blt.Print(UIPosX+1, UIPosY+2, fire)
-	airColor := baseSpellColor
-	if GlobalData.CurrentSchool == SchoolAir {
-		airColor = "#DDDDDD"
-	}
-	air := "[color=" + airColor + "]☇"
-	blt.Print(UIPosX+2, UIPosY+2, air)
 	earthColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolEarth {
 		earthColor = "darker orange"
 	}
 	earth := "[color=" + earthColor + "]⛰"
-	blt.Print(UIPosX+3, UIPosY+2, earth)
+	blt.Print(UIPosX+2, UIPosY+2, earth)
 	baseSizeColor := "dark gray"
 	if GlobalData.CurrentSchool == SchoolWater {
 		colorWaterSize := "light blue"
@@ -245,27 +239,6 @@ func PrintUI(c *Creature) {
 		blt.Print(UIPosX+1, UIPosY+5, "[color=" + colorBig + "]↗")
 		blt.Print(UIPosX+1, UIPosY+6, "[color=" + colorHuge + "]↑")
 	}
-	if GlobalData.CurrentSchool == SchoolAir {
-		colorAirSize := "#FCFCFC"
-		colorSmall := baseSizeColor
-		colorMedium := baseSizeColor
-		colorBig := baseSizeColor
-		colorHuge := baseSizeColor
-		switch GlobalData.CurrentSize {
-		case SizeSmall:
-			colorSmall = colorAirSize
-		case SizeMedium:
-			colorMedium = colorAirSize
-		case SizeBig:
-			colorBig = colorAirSize
-		case SizeHuge:
-			colorHuge = colorAirSize
-		}
-		blt.Print(UIPosX+2, UIPosY+3, "[color=" + colorSmall + "]↘")
-		blt.Print(UIPosX+2, UIPosY+4, "[color=" + colorMedium + "]→")
-		blt.Print(UIPosX+2, UIPosY+5, "[color=" + colorBig + "]↗")
-		blt.Print(UIPosX+2, UIPosY+6, "[color=" + colorHuge + "]↑")
-	}
 	if GlobalData.CurrentSchool == SchoolEarth {
 		colorEarthSize := "dark orange"
 		colorSmall := baseSizeColor
@@ -282,10 +255,10 @@ func PrintUI(c *Creature) {
 		case SizeHuge:
 			colorHuge = colorEarthSize
 		}
-		blt.Print(UIPosX+3, UIPosY+3, "[color=" + colorSmall + "]↘")
-		blt.Print(UIPosX+3, UIPosY+4, "[color=" + colorMedium + "]→")
-		blt.Print(UIPosX+3, UIPosY+5, "[color=" + colorBig + "]↗")
-		blt.Print(UIPosX+3, UIPosY+6, "[color=" + colorHuge + "]↑")
+		blt.Print(UIPosX+2, UIPosY+3, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+2, UIPosY+4, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+2, UIPosY+5, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+2, UIPosY+6, "[color=" + colorHuge + "]↑")
 	}
 }
 

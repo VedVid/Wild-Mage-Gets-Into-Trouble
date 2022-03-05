@@ -29,7 +29,6 @@ package main
 const (
 	SchoolWater = iota
 	SchoolFire
-	SchoolAir
 	SchoolEarth
 )
 

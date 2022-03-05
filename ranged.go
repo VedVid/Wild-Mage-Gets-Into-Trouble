@@ -286,8 +286,6 @@ func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
 		col := "light blue"
 		if GlobalData.CurrentSchool == SchoolFire {
 			col = "light red"
-		} else if GlobalData.CurrentSchool == SchoolAir {
-			col = "#FCFCFC"
 		} else if GlobalData.CurrentSchool == SchoolEarth {
 			col = "dark orange"
 		}
@@ -359,8 +357,6 @@ func AdjustSpell(key int) bool {
 	} else if key == blt.TK_F2 {
 		GlobalData.CurrentSchool = SchoolFire
 	} else if key == blt.TK_F3 {
-		GlobalData.CurrentSchool = SchoolAir
-	} else if key == blt.TK_F4 {
 		GlobalData.CurrentSchool = SchoolEarth
 	} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
 		if GlobalData.CurrentSchool == SchoolWater {
