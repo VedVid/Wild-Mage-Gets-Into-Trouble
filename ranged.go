@@ -194,57 +194,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_ESCAPE {
 			break
 		}
-		if key == blt.TK_F1 {
-			GlobalData.CurrentSchool = SchoolWater
-			continue
-		} else if key == blt.TK_F2 {
-			GlobalData.CurrentSchool = SchoolFire
-			continue
-		} else if key == blt.TK_F3 {
-			GlobalData.CurrentSchool = SchoolAir
-			continue
-		} else if key == blt.TK_F4 {
-			GlobalData.CurrentSchool = SchoolEarth
-			continue
-		} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
-			if GlobalData.CurrentSchool == SchoolWater {
-				GlobalData.CurrentSchool = SchoolEarth
-			} else {
-				GlobalData.CurrentSchool--
-			}
-			continue
-		} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
-			if GlobalData.CurrentSchool == SchoolEarth {
-				GlobalData.CurrentSchool = SchoolWater
-			} else {
-				GlobalData.CurrentSchool++
-			}
-			continue
-		} else if key == blt.TK_1 {
-			GlobalData.CurrentSize = SizeSmall
-			continue
-		} else if key == blt.TK_2 {
-			GlobalData.CurrentSize = SizeMedium
-			continue
-		} else if key == blt.TK_3 {
-			GlobalData.CurrentSize = SizeBig
-			continue
-		} else if key == blt.TK_4 {
-			GlobalData.CurrentSize = SizeHuge
-			continue
-		} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS {
-			if GlobalData.CurrentSize == SizeSmall {
-				GlobalData.CurrentSize = SizeHuge
-			} else {
-				GlobalData.CurrentSize--
-			}
-			continue
-		} else if key == blt.TK_KP_PLUS || key == blt.TK_EQUALS {
-			if GlobalData.CurrentSize == SizeHuge {
-				GlobalData.CurrentSize = SizeSmall
-			} else {
-				GlobalData.CurrentSize++
-			}
+		if AdjustSpell(key) == true {
 			continue
 		}
 		/*if key == blt.TK_F {
@@ -392,6 +342,54 @@ func SetCursorSize() [][]int {
 		}
 	}
 	return cursor
+}
+
+func AdjustSpell(key int) bool {
+	keyCorrect := true
+	if key == blt.TK_F1 {
+		GlobalData.CurrentSchool = SchoolWater
+	} else if key == blt.TK_F2 {
+		GlobalData.CurrentSchool = SchoolFire
+	} else if key == blt.TK_F3 {
+		GlobalData.CurrentSchool = SchoolAir
+	} else if key == blt.TK_F4 {
+		GlobalData.CurrentSchool = SchoolEarth
+	} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
+		if GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSchool = SchoolEarth
+		} else {
+			GlobalData.CurrentSchool--
+		}
+	} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
+		if GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSchool = SchoolWater
+		} else {
+			GlobalData.CurrentSchool++
+		}
+	} else if key == blt.TK_1 {
+		GlobalData.CurrentSize = SizeSmall
+	} else if key == blt.TK_2 {
+		GlobalData.CurrentSize = SizeMedium
+	} else if key == blt.TK_3 {
+		GlobalData.CurrentSize = SizeBig
+	} else if key == blt.TK_4 {
+		GlobalData.CurrentSize = SizeHuge
+	} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS {
+		if GlobalData.CurrentSize == SizeSmall {
+			GlobalData.CurrentSize = SizeHuge
+		} else {
+			GlobalData.CurrentSize--
+		}
+	} else if key == blt.TK_KP_PLUS || key == blt.TK_EQUALS {
+		if GlobalData.CurrentSize == SizeHuge {
+			GlobalData.CurrentSize = SizeSmall
+		} else {
+			GlobalData.CurrentSize++
+		}
+	} else {
+		keyCorrect = false
+	}
+	return keyCorrect
 }
 
 func (c *Creature) FindTargets(length int, b Board, cs Creatures, o Objects) Creatures {
