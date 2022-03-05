@@ -28,6 +28,7 @@ package main
 
 import (
 	blt "bearlibterminal"
+	"flag"
 	"fmt"
 	"math/rand"
 	"os"
@@ -113,6 +114,9 @@ func StartGame(b *Board, c *Creatures, o *Objects) {
 }
 
 func init() {
+	fontSizeFlag := flag.Int("fs", FontSize, "font size")
+	flag.Parse()
+	ActualFontSize = *fontSizeFlag
 	// Get seed for random number generator
 	rand.Seed(time.Now().UTC().UnixNano())
 	// sin and cos tables for FOV algorithm

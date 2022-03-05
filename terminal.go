@@ -53,6 +53,8 @@ const (
 	FontSize    = 18
 )
 
+var ActualFontSize = FontSize
+
 func constrainThreads() {
 	/* Constraining processor and threads is necessary,
 	   because BearLibTerminal often crashes otherwise. */
@@ -65,7 +67,7 @@ func InitializeBLT() {
 	constrainThreads()
 	blt.Open()
 	sizeX, sizeY := strconv.Itoa(WindowSizeX), strconv.Itoa(WindowSizeY)
-	sizeFont := strconv.Itoa(FontSize)
+	sizeFont := strconv.Itoa(ActualFontSize)
 	window := "window: size=" + sizeX + "x" + sizeY
 	blt.Set(window + ", title=' " + GameTitle + " " + GameVersion +
 		"'; font: " + FontName + ", size=" + sizeFont)
