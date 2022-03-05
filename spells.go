@@ -52,6 +52,19 @@ func (t *Tile) WaterTile() {
 	t.MakeWater()
 }
 
+func RemoveArea(area [][]int, b Board) {
+	for _, v := range area {
+		x := v[0]
+		y := v[1]
+		t := b[x][y]
+		t.RemoveTile()
+	}
+}
+
+func (t *Tile) RemoveTile() {
+	t.MakeChasm()
+}
+
 func (t *Tile) UpdateTile() {
 	if t.Fire > 0 {
 		t.Fire--
@@ -69,7 +82,10 @@ func (t *Tile) UpdateTile() {
 	} else if t.Damp > 0 {
 		t.Damp--
 	}
-	if t.Fire == 0 && t.Barren == 0 && t.Flooded == 0 && t.Damp == 0 {
+	if t.Chasm > 0 {
+		t.Chasm--
+	}
+	if t.Fire == 0 && t.Barren == 0 && t.Flooded == 0 && t.Damp == 0 && t.Chasm == 0 {
 		switch t.Name {
 		case "stone ground":
 			t.MakeStoneGround()

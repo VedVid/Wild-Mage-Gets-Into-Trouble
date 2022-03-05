@@ -202,6 +202,8 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 				FireArea(area, b)
 			} else if GlobalData.CurrentSchool == SchoolWater {
 				WaterArea(area, b)
+			} else if GlobalData.CurrentSchool == SchoolEarth {
+				RemoveArea(area, b)
 			}
 			break
 		}

@@ -74,6 +74,7 @@
    "Barren":{},
    "Flooded":{},
    "Damp":{},
+   "Chasm":{},
    "MonstersCoords":[],
    "MonstersTypes":[]
 }

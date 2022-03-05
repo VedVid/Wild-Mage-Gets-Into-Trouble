@@ -44,6 +44,9 @@ const(
 
 	DampDurationMin = 25
 	DampDurationMax = 35
+
+	ChasmDurationMin = 95
+	ChasmDurationMax = 100
 )
 
 var (
@@ -62,7 +65,7 @@ var (
 )
 
 func (t *Tile) MakeFire() {
-	if t.Barren == 0 && t.Fire == 0 && t.Flooded == 0 && t.Damp == 0 {
+	if t.Barren == 0 && t.Fire == 0 && t.Flooded == 0 && t.Damp == 0 && t.Chasm == 0 {
 		if t.Flammable == true {
 			t.Fire = RandRange(FireDurationMin, FireDurationMax)
 			t.Chars = FireChars
@@ -114,13 +117,13 @@ func (t *Tile) MakeBarren() {
 }
 
 func (t *Tile) MakeWater() {
-	if t.Fire == 0 {
+	if t.Fire == 0 && t.Chasm == 0 {
 		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
 		t.Chars = FloodedChars
 		t.Colors = FloodedColors
 		t.CurrentFrame = len(FloodedChars) - t.Flooded
 		t.Delay = 1
-	} else if t.Fire > 0 {
+	} else if t.Fire > 0 && t.Chasm == 0 {
 		// Maybe we could add some STEAM here?
 		t.Fire = 0
 		t.Flooded = RandRange(FloodedDurationMin, FloodedDurationMax)
@@ -138,6 +141,18 @@ func (t *Tile) MakeDamp() {
 	t.Damp = RandRange(DampDurationMin, DampDurationMax)
 	t.Chars = []string{"."}
 	t.Colors = []string{"lighter blue"}
+	t.CurrentFrame = 0
+	t.Delay = 0
+}
+
+func (t *Tile) MakeChasm() {
+	t.Chasm = RandRange(ChasmDurationMin, ChasmDurationMax)
+	t.Fire = 0
+	t.Barren = 0
+	t.Flooded = 0
+	t.Damp = 0
+	t.Chars = []string{" "}
+	t.Colors = []string{"black"}
 	t.CurrentFrame = 0
 	t.Delay = 0
 }
