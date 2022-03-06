@@ -532,13 +532,13 @@ func AdjustSpell(key int, c *Creature) bool {
 		GlobalData.CurrentSize = SizeBig
 	} else if key == blt.TK_4 {
 		GlobalData.CurrentSize = SizeHuge
-	} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS {
+	} else if key == blt.TK_KP_MINUS || key == blt.TK_MINUS || ((key == blt.TK_MOUSE_SCROLL) && blt.State(blt.TK_MOUSE_WHEEL) == 1) {
 		if GlobalData.CurrentSize == SizeSmall {
 			GlobalData.CurrentSize = SizeHuge
 		} else {
 			GlobalData.CurrentSize--
 		}
-	} else if key == blt.TK_KP_PLUS || key == blt.TK_EQUALS {
+	} else if key == blt.TK_KP_PLUS || key == blt.TK_EQUALS || ((key == blt.TK_MOUSE_SCROLL) && blt.State(blt.TK_MOUSE_WHEEL) == -1) {
 		if GlobalData.CurrentSize == SizeHuge {
 			GlobalData.CurrentSize = SizeSmall
 		} else {

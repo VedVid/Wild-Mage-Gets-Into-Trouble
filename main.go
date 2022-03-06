@@ -57,12 +57,8 @@ func main() {
 		}
 		if blt.HasInput() == true {
 			key := ReadInput()
-			//key := blt.Read()
-			if key == blt.TK_MOUSE_LEFT {
-				fmt.Println(blt.State(blt.TK_MOUSE_X), blt.State(blt.TK_MOUSE_Y))
-			}
-			if key == blt.TK_MOUSE_MOVE {
-				fmt.Println("yeaaaah!")
+			if key == blt.TK_MOUSE_SCROLL {
+				fmt.Println(blt.State(blt.TK_MOUSE_WHEEL))
 			}
 			if (key == blt.TK_S && blt.Check(blt.TK_SHIFT) != 0) ||
 				key == blt.TK_CLOSE {
