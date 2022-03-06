@@ -578,6 +578,14 @@ func addKeyToCustomLayout(resKey string, resValue string) {
 		i = blt.TK_MINUS
 	case "EQUALS":
 		i = blt.TK_EQUALS
+	case "MOUSE_LEFT":
+		i = blt.TK_MOUSE_LEFT
+	case "MOUSE_RIGHT":
+		i = blt.TK_MOUSE_RIGHT
+	case "MOUSE_SCROLL":
+		i = blt.TK_MOUSE_SCROLL
+	case "MOUSE_WHEEL":
+		i = blt.TK_MOUSE_WHEEL
 	default:
 		if utf8.RuneCountInString(resValue) == 1 {
 			i = tempMap[[]rune(resValue)[0]]

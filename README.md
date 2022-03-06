@@ -24,3 +24,9 @@ Controls:
 - 3: large area of effect
 - 4: huge area of effect
 
+During targeting:
+
+- left mouse button: fire bolt, cast spell
+- right mouse button: change selected mage school
+- scroll up / down: change area of effect
+

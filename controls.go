@@ -61,6 +61,11 @@ const (
 	StrTargetGun = "TARGET_GUN"
 	StrReload = "RELOAD"
 	StrLook   = "LOOK"
+
+	StrMouseLeftClick = "LEFT_CLICK"
+	StrMouseRightClick = "RIGHT_CLICK"
+	StrMouseScroll = "SCROLL"
+	StrMouseWheel = "WHEEL"
 )
 
 var Actions = []string{
@@ -88,33 +93,41 @@ var Actions = []string{
 	StrTargetGun,
 	StrReload,
 	StrLook,
+	StrMouseLeftClick,
+	StrMouseRightClick,
+	StrMouseScroll,
+	StrMouseWheel,
 }
 
 var CommandKeys = map[int]string{
 	// Mapping keyboard scancodes to Action identifiers.
-	blt.TK_UP:          StrMoveNorth,
-	blt.TK_RIGHT:       StrMoveEast,
-	blt.TK_DOWN:        StrMoveSouth,
-	blt.TK_LEFT:        StrMoveWest,
-	blt.TK_F1:          StrSetWater,
-	blt.TK_F2:          StrSetFire,
-	blt.TK_F3:          StrSetEarth,
-	blt.TK_KP_MULTIPLY: StrNextSchool1,
-	blt.TK_RBRACKET:    StrNextSchool2,
-	blt.TK_KP_DIVIDE:   StrPrevSchool1,
-	blt.TK_LBRACKET:    StrPrevSchool2,
-	blt.TK_1:           StrSetSmall,
-	blt.TK_2:           StrSetMedium,
-	blt.TK_3:           StrSetBig,
-	blt.TK_4:           StrSetHuge,
-	blt.TK_EQUALS:      StrNextSize1,
-	blt.TK_KP_PLUS:     StrNextSize2,
-	blt.TK_MINUS:       StrPrevSize1,
-	blt.TK_KP_MINUS:    StrPrevSize2,
-	blt.TK_F:           StrTargetSpell,
-	blt.TK_T:           StrTargetGun,
-	blt.TK_R:           StrReload,
-	blt.TK_L:           StrLook,
+	blt.TK_UP:           StrMoveNorth,
+	blt.TK_RIGHT:        StrMoveEast,
+	blt.TK_DOWN:         StrMoveSouth,
+	blt.TK_LEFT:         StrMoveWest,
+	blt.TK_F1:           StrSetWater,
+	blt.TK_F2:           StrSetFire,
+	blt.TK_F3:           StrSetEarth,
+	blt.TK_KP_MULTIPLY:  StrNextSchool1,
+	blt.TK_RBRACKET:     StrNextSchool2,
+	blt.TK_KP_DIVIDE:    StrPrevSchool1,
+	blt.TK_LBRACKET:     StrPrevSchool2,
+	blt.TK_1:            StrSetSmall,
+	blt.TK_2:            StrSetMedium,
+	blt.TK_3:            StrSetBig,
+	blt.TK_4:            StrSetHuge,
+	blt.TK_EQUALS:       StrNextSize1,
+	blt.TK_KP_PLUS:      StrNextSize2,
+	blt.TK_MINUS:        StrPrevSize1,
+	blt.TK_KP_MINUS:     StrPrevSize2,
+	blt.TK_F:            StrTargetSpell,
+	blt.TK_T:            StrTargetGun,
+	blt.TK_R:            StrReload,
+	blt.TK_L:            StrLook,
+	blt.TK_MOUSE_LEFT:   StrMouseLeftClick,
+	blt.TK_MOUSE_RIGHT:  StrMouseRightClick,
+	blt.TK_MOUSE_SCROLL: StrMouseScroll,
+	blt.TK_MOUSE_WHEEL:  StrMouseWheel,
 }
 
 /* Place to store customized controls scheme,
@@ -131,6 +144,9 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 	   Otherwise, return false. */
 	turnSpent := false
 	switch com {
+	case StrMouseLeftClick:
+		turnSpent = ContextMouseLeft(p, *b, *o, *c)
+
 	case StrMoveNorth:
 		turnSpent = p.MoveOrAttack(0, -1, *b, o, *c)
 	case StrMoveEast:
@@ -202,7 +218,7 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		}
 
 	case StrTargetSpell:
-		turnSpent = p.Target(*b, o, *c)
+		turnSpent = p.Target(*b, o, *c, nil)
 	case StrTargetGun:
 		turnSpent = p.Target2(*b, o, *c)
 	case StrReload:
@@ -212,6 +228,27 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		}
 	case StrLook:
 		p.Look(*b, *o, *c)
+	}
+	return turnSpent
+}
+
+func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
+	turnSpent := false
+	x := blt.State(blt.TK_MOUSE_X)
+	y := blt.State(blt.TK_MOUSE_Y)
+	if x >= 0 && x < MapSizeX && y >= 0 && y < MapSizeY {
+		// Clicks on map
+		var monster *Creature
+		for _, v := range c {
+			if v.X == x && v.Y == y && v.HPCurrent > 0 {
+				monster = v
+			}
+		}
+		if monster != nil {
+			turnSpent = p.Target(b, &o, c, monster)
+		} else {
+			p.Look(b, o, c)
+		}
 	}
 	return turnSpent
 }
