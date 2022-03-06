@@ -510,7 +510,7 @@ func AdjustSpell(key int, c *Creature) bool {
 			AddMessage("You invoke fire aura.")
 			c.Colors = []string{"#FF7F7F"}
 		}
-	} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
+	} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET || key == blt.TK_MOUSE_RIGHT {
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolFire
 			AddMessage("You invoke fire aura.")
