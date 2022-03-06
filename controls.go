@@ -142,42 +142,42 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 
 	case StrSetWater:
 		GlobalData.CurrentSchool = SchoolWater
-		AddMessage("You feel water aura around.")
+		AddMessage("You invoke water aura.")
 		p.Colors = []string{"#73C2FB"}
 	case StrSetFire:
 		GlobalData.CurrentSchool = SchoolFire
-		AddMessage("You feel fire aura around.")
+		AddMessage("You invoke fire aura.")
 		p.Colors = []string{"#FF7F7F"}
 	case StrSetEarth:
 		GlobalData.CurrentSchool = SchoolEarth
-		AddMessage("You feel earth aura around.")
+		AddMessage("You invoke earth aura.")
 		p.Colors = []string{"#D2B48C"}
 	case StrPrevSchool1, StrPrevSchool2:
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolEarth
-			AddMessage("You feel earth aura round.")
+			AddMessage("You invoke earth aura.")
 			p.Colors = []string{"#D2B48C"}
 		} else if GlobalData.CurrentSchool == SchoolFire {
 			GlobalData.CurrentSchool = SchoolWater
-			AddMessage("You feel water aura around.")
+			AddMessage("You invoke water aura.")
 			p.Colors = []string{"#73C2FB"}
 		} else {
 			GlobalData.CurrentSchool = SchoolFire
-			AddMessage("You feel fire aura around.")
+			AddMessage("You invoke fire aura.")
 			p.Colors = []string{"#FF7F7F"}
 		}
 	case StrNextSchool1, StrNextSchool2:
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolFire
-			AddMessage("You feel fire aura around.")
+			AddMessage("You invoke fire aura.")
 			p.Colors = []string{"#FF7F7F"}
 		} else if GlobalData.CurrentSchool == SchoolFire {
 			GlobalData.CurrentSchool = SchoolEarth
-			AddMessage("You feel earth aura around.")
+			AddMessage("You invoke earth aura.")
 			p.Colors = []string{"#D2B48C"}
 		} else {
 			GlobalData.CurrentSchool = SchoolWater
-			AddMessage("You feel water aura around.")
+			AddMessage("You invoke water aura.")
 			p.Colors = []string{"#73C2FB"}
 		}
 	case StrSetSmall:

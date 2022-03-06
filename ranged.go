@@ -462,42 +462,42 @@ func AdjustSpell(key int, c *Creature) bool {
 	keyCorrect := true
 	if key == blt.TK_F1 {
 		GlobalData.CurrentSchool = SchoolWater
-		AddMessage("You feel water aura around.")
+		AddMessage("You invoke water aura.")
 		c.Colors = []string{"#73C2FB"}
 	} else if key == blt.TK_F2 {
 		GlobalData.CurrentSchool = SchoolFire
-		AddMessage("You feel fire aura around.")
+		AddMessage("You invoke fire aura.")
 		c.Colors = []string{"#FF7F7F"}
 	} else if key == blt.TK_F3 {
 		GlobalData.CurrentSchool = SchoolEarth
-		AddMessage("You feel earth aura around.")
+		AddMessage("You invoke earth aura.")
 		c.Colors = []string{"#D2B48C"}
 	} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolEarth
-			AddMessage("You feel earth aura around.")
+			AddMessage("You invoke earth aura.")
 			c.Colors = []string{"#D2B48C"}
 		} else if GlobalData.CurrentSchool == SchoolFire {
 			GlobalData.CurrentSchool = SchoolWater
-			AddMessage("You feel water aura around.")
+			AddMessage("You invoke water aura.")
 			c.Colors = []string{"#73C2FB"}
 		} else {
 			GlobalData.CurrentSchool = SchoolFire
-			AddMessage("You feel fire aura around.")
+			AddMessage("You invoke fire aura.")
 			c.Colors = []string{"#FF7F7F"}
 		}
 	} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolFire
-			AddMessage("You feel fire aura around.")
+			AddMessage("You invoke fire aura.")
 			c.Colors = []string{"#FF7F7F"}
 		} else if GlobalData.CurrentSchool == SchoolFire {
 			GlobalData.CurrentSchool = SchoolEarth
-			AddMessage("You feel earth aura around.")
+			AddMessage("You invoke earth aura.")
 			c.Colors = []string{"#D2B48C"}
 		} else {
 			GlobalData.CurrentSchool = SchoolWater
-			AddMessage("You feel water aura around.")
+			AddMessage("You invoke water aura.")
 			c.Colors = []string{"#73C2FB"}
 		}
 	} else if key == blt.TK_1 {
