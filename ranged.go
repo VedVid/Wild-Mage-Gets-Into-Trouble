@@ -198,6 +198,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			continue
 		}
 		if key == blt.TK_F || key == blt.TK_ENTER {
+			turnSpent = true
 			if GlobalData.CurrentSchool == SchoolFire {
 				FireArea(area, b)
 			} else if GlobalData.CurrentSchool == SchoolWater {
