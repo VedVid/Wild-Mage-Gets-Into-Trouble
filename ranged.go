@@ -211,34 +211,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 				LastTarget = monsterAimed
 			}
 			break
-		}
-		/*if key == blt.TK_F {
-
-
-
-				c.AttackTarget(monsterAimed, o)
-			} else {
-				if monsterAimed == c {
-					break // Do not hurt yourself.
-				}
-				if monsterHit != nil {
-					if monsterHit.HPCurrent > 0 {
-						LastTarget = monsterHit
-						c.AttackTarget(monsterHit, o)
-					}
-				} else {
-					vx, vy := FindBrensenhamDirection(vec)
-					v := ExtrapolateBrensenham(vec, vx, vy)
-					_, _, monsterHitIndirectly, _ := ValidateBrensenham(v, b, targets, *o)
-					if monsterHitIndirectly != nil {
-						c.AttackTarget(monsterHitIndirectly, o)
-					}
-				}
-			}
-			turnSpent = true
-			break
 		} else if key == blt.TK_TAB {
-			i = true
 			monster := FindMonsterByXY(targetX, targetY, cs)
 			if monster != nil {
 				target = NextTarget(monster, targets)
@@ -247,9 +220,8 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			}
 			targetX, targetY = target.X, target.Y
 			continue // Switch target
-		}*/
+		}
 		CursorMovement(&targetX, &targetY, key)
-		//i = true
 	}
 	return turnSpent
 }
