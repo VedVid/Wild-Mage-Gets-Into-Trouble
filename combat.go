@@ -103,6 +103,7 @@ func CheckMagic(b Board, c Creatures, o *Objects) {
 		if b[x][y].Chasm > 0 {
 			if monster.CanFly != FullAbility {
 				monster.TakeDamage(999, o)
+				monster.Chars = []string{""}
 			}
 		}
 	}

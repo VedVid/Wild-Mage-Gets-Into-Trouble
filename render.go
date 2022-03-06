@@ -141,6 +141,9 @@ func PrintCreatures(b Board, c Creatures) {
 	   Checks for every creature on its coords if certain conditions are met:
 	   AlwaysVisible bool is set to true, or is in player fov. */
 	for _, v := range c {
+		if v.Chars[0] == "" {
+			continue
+		}
 		if (IsInFOV(b, c[0].X, c[0].Y, v.X, v.Y) == true) ||
 			(v.AlwaysVisible == true) {
 			blt.Layer(v.Layer)
@@ -284,7 +287,7 @@ func clearUnderDead(c Creatures) {
 	/* Clears map tiles under the dead bodies. */
 	blt.Layer(BoardLayer)
 	for _, v := range c {
-		if v.Layer == DeadLayer {
+		if v.Layer == DeadLayer && v.Chars[0] != "" {
 			blt.ClearArea(v.X, v.Y, 1, 1)
 		}
 	}
