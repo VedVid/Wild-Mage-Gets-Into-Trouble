@@ -385,6 +385,13 @@ func CursorMovement(x, y *int, key int) {
 		MoveCursor(x, y, 0, 1)
 	case blt.TK_LEFT:
 		MoveCursor(x, y, -1, 0)
+	case blt.TK_MOUSE_MOVE:
+		newX := blt.State(blt.TK_MOUSE_X)
+		newY := blt.State(blt.TK_MOUSE_Y)
+		if newX > 0 && newX < MapSizeX && newY > 0 && newY < MapSizeY {
+			*x = newX
+			*y = newY
+		}
 	}
 }
 
