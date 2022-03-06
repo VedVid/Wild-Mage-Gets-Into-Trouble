@@ -56,17 +56,39 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 		_ = ComputeBrensenham(vec)
 		_, _, _, _ = ValidateBrensenham(vec, b, cs, o)
 		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, cs)
-		if b[targetX][targetY].Explored == true {
-			if IsInFOV(b, c.X, c.Y, targetX, targetY) == true {
-				s := GetAllStringsFromTile(targetX, targetY, b, cs, o)
-				msg = FormatLookingMessage(s, true)
-			} else {
-				// Skip monsters if tile is out of c's field of view.
-				s := GetAllStringsFromTile(targetX, targetY, b, nil, o)
-				msg = FormatLookingMessage(s, false)
+		var monster *Creature
+		var monsterDead *Creature
+		var tile *Tile
+		for _, vc := range cs {
+			if vc.X == targetX && vc.Y == targetY {
+				if vc.HPCurrent > 0 {
+					monster = vc
+					break
+				} else {
+					monsterDead = vc
+				}
+			}
+		}
+		tile = b[targetX][targetY]
+		if monster != nil {
+			msg = monster.Name
+			if monster.FireResistance == FullAbility {
+				msg = msg + " [[Fire res]]"
+			} else if monster.FireResistance == NoAbility {
+				msg = msg + " [[Fire vuln]]"
+			}
+			if monster.CanFly == FullAbility {
+				msg = msg + " [[Flying]]"
+			}
+			if monster.CanSwim == FullAbility && monster.CanFly != FullAbility {
+				msg = msg + " [[Can swim]]"
 			}
 		} else {
-			msg = "You don't know what is here."
+			if monsterDead != nil {
+				msg = tile.Name + ", corpse."
+			} else {
+				msg = tile.Name
+			}
 		}
 		PrintLookingMessage(msg, i)
 		key := ReadInput()
@@ -110,31 +132,8 @@ func FormatLookingMessage(s []string, fov bool) string {
 	   If slice contains only one item, it creates simplest message.
 	   If slice is longer, it starts to format message - but it is
 	   explicitly visible in function body. */
-	const inFov = "see"
-	const outFov = "recall"
-	txt := ""
-	if fov == true {
-		txt = inFov
-	} else {
-		txt = outFov
-	}
-	if len(s) == 0 {
-		return "There is nothing here."
-	}
-	if len(s) == 1 {
-		return "You " + txt + " " + s[0] + " here."
-	}
-	msg := "You " + txt + " "
-	for i, v := range s {
-		if i < len(s)-2 { // Regular items.
-			msg = msg + v + ", "
-		} else if i == len(s)-1-1 { // One-before-last item.
-			msg = msg + v + " and "
-		} else { // Last item.
-			msg = msg + v + " here."
-		}
-	}
-	return msg
+	_ = fov
+	return s[0]
 }
 
 func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
@@ -197,7 +196,18 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		_ = ComputeBrensenham(vec)
 		_, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
 		if monsterHit != nil {
-			msg := "There is " + monsterHit.Name + " here."
+			msg := monsterHit.Name
+			if monsterHit.FireResistance == FullAbility {
+				msg = msg + " [[Fire res]]"
+			} else if monsterHit.FireResistance == NoAbility {
+				msg = msg + " [[Fire vuln]]"
+			}
+			if monsterHit.CanFly == FullAbility {
+				msg = msg + " [[Flying]]"
+			}
+			if monsterHit.CanSwim == FullAbility && monsterHit.CanFly != FullAbility {
+				msg = msg + " [[Can swim]]"
+			}
 			PrintLookingMessage(msg, i)
 		}
 		key := ReadInput()
@@ -293,7 +303,18 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 		valid, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
 		PrintBrensenham(vec, BrensenhamWhyTarget, BrensenhamColorGood, BrensenhamColorBad, b, *o, cs)
 		if monsterHit != nil {
-			msg := "There is " + monsterHit.Name + " here."
+			msg := monsterHit.Name
+			if monsterHit.FireResistance == FullAbility {
+				msg = msg + " [[-Fire]]"
+			} else if monsterHit.FireResistance == NoAbility {
+				msg = msg + " [[+Fire]]"
+			}
+			if monsterHit.CanFly == FullAbility {
+				msg = msg + " [[Flying]]"
+			}
+			if monsterHit.CanSwim == FullAbility && monsterHit.CanFly != FullAbility {
+				msg = msg + " [[Can swim]]"
+			}
 			PrintLookingMessage(msg, i)
 		}
 		key := ReadInput()
