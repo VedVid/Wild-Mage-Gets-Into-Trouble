@@ -144,6 +144,9 @@ func PrintCreatures(b Board, c Creatures) {
 		if v.Chars[0] == "" {
 			continue
 		}
+		if v.HPCurrent <= 0 && (b[v.X][v.Y].Fire > 0 || b[v.X][v.Y].Flooded > 0 || b[v.X][v.Y].Chasm > 0) {
+			continue
+		}
 		if (IsInFOV(b, c[0].X, c[0].Y, v.X, v.Y) == true) ||
 			(v.AlwaysVisible == true) {
 			blt.Layer(v.Layer)
@@ -276,18 +279,18 @@ func PrintLog() {
 	PrintMessages(LogPosX, LogPosY, "")
 }
 
-func ClearNotVisible(o Objects, c Creatures) {
+func ClearNotVisible(o Objects, c Creatures, b Board) {
 	/* Removes all glyphs that should not be currently visible, just before
 	   rendering. */
-	clearUnderDead(c)
+	clearUnderDead(c, b)
 	clearUnderCreatures(o, c)
 }
 
-func clearUnderDead(c Creatures) {
+func clearUnderDead(c Creatures, b Board) {
 	/* Clears map tiles under the dead bodies. */
 	blt.Layer(BoardLayer)
 	for _, v := range c {
-		if v.Layer == DeadLayer && v.Chars[0] != "" {
+		if v.Layer == DeadLayer && v.Chars[0] != "" && b[v.X][v.Y].Fire <= 0 && b[v.X][v.Y].Flooded <= 0 && b[v.X][v.Y].Chasm <= 0 {
 			blt.ClearArea(v.X, v.Y, 1, 1)
 		}
 	}
@@ -349,7 +352,7 @@ func RenderAll(b Board, o Objects, c Creatures) {
 	CastRays(b, c[0].X, c[0].Y)
 	PrintBoard(b, c)
 	PrintCreatures(b, c)
-	ClearNotVisible(o, c)
+	ClearNotVisible(o, c, b)
 	PrintUI((c)[0])
 	PrintLog()
 	blt.Refresh()
