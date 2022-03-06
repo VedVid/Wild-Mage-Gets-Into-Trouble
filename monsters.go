@@ -39,9 +39,9 @@ const (
 )
 
 const (
-	FullResistance = 2
-	PartialResistance = 1
-	NoResistance = 0
+	FullAbility = 2
+	PartialAbility = 1
+	NoAbility = 0
 )
 
 type Creature struct {
@@ -406,9 +406,9 @@ func SpawnMonsters(c *Creatures, b Board) {
 		// Check if ground is safe to spawn
 		safe := true
 		if b[x][y].Fire > 0 {
-			if monster.FireResistance == 0 {
+			if monster.FireResistance == NoAbility {
 				safe = false
-			} else if monster.FireResistance == 1 {
+			} else if monster.FireResistance == PartialAbility {
 				// There is small chance that monster with partial resistance
 				// will spawn in fire
 				if rand.Intn(100) > 15 {
@@ -417,9 +417,9 @@ func SpawnMonsters(c *Creatures, b Board) {
 			}
 		}
 		if b[x][y].Flooded > 0 {
-			if monster.CanSwim == 0 {
+			if monster.CanSwim == NoAbility {
 				safe = false
-			} else if monster.CanSwim == 1 {
+			} else if monster.CanSwim == PartialAbility {
 				// There is small chance that monster that barely can swim
 				// will spawn in water
 				if rand.Intn(100) > 15 {
@@ -428,7 +428,7 @@ func SpawnMonsters(c *Creatures, b Board) {
 			}
 		}
 		if b[x][y].Chasm > 0 {
-			if monster.CanFly != 2 {
+			if monster.CanFly != FullAbility {
 				safe = false
 			}
 		}

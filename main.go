@@ -70,10 +70,11 @@ func main() {
 			turnSpent := Controls(key, (*actors)[0], cells, actors, objs)
 			if turnSpent == true {
 				GlobalData.TurnsSpent++
+				CheckMagic(*cells, *actors, objs)
 				CreaturesTakeTurn(*cells, *actors, *objs)
+				SpawnMonsters(actors, *cells)
 				UpdateFrames(*cells, *objs, *actors)
 				UpdateTiles(*cells)
-				SpawnMonsters(actors, *cells)
 			}
 		}
 	}

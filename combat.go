@@ -80,3 +80,30 @@ func (c *Creature) TakeDamage(dmg int, o *Objects) {
 		c.Die(o)
 	}
 }
+
+func CheckMagic(b Board, c Creatures, o *Objects) {
+	for i := 0; i < len(c); i++ {
+		monster := c[i]
+		x := monster.X
+		y := monster.Y
+		if b[x][y].Fire > 0 {
+			if monster.FireResistance == NoAbility {
+				monster.Die(o)
+			} else if monster.FireResistance == PartialAbility {
+				monster.TakeDamage(1, o)
+			}
+		}
+		if b[x][y].Flooded > 0 {
+			if monster.CanSwim == NoAbility {
+				monster.Die(o)
+			} else if monster.CanSwim == PartialAbility {
+				monster.TakeDamage(1, o)
+			}
+		}
+		if b[x][y].Chasm > 0 {
+			if monster.CanFly != FullAbility {
+				monster.Die(o)
+			}
+		}
+	}
+}
