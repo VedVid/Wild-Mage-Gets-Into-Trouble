@@ -75,6 +75,9 @@ func (c *Creature) AttackTarget(t *Creature, o *Objects) {
 		}
 		dmg = att + att2 - def
 	}
+	if dmg < 0 {
+		dmg = 0
+	}
 	t.TakeDamage(dmg, o)
 }
 
