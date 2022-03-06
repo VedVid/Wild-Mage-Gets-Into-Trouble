@@ -24,9 +24,19 @@ Controls:
 - 3: large area of effect
 - 4: huge area of effect
 
+It is possible to use mouse, too.
+
 During targeting:
 
 - left mouse button: fire bolt, cast spell
 - right mouse button: change selected mage school
 - scroll up / down: change area of effect
+
+Outside targeting mode:
+
+- left mouse button:
+	- on mana icon: cast spell
+	- on active spell: cast spell
+	- on inactive spell: switch spell
+	- on area-of-effect icon: set area-of-effect size
 

@@ -274,6 +274,8 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 				AddMessage("You invoke earth aura.")
 				p.Colors = []string{"#D2B48C"}
 			}
+		} else if x >= UIPosX && x <= UIPosX+4 && (y == UIPosY+3 || y == UIPosY+4) {
+			turnSpent = p.Target(b, &o, c, nil)
 		} else if x == UIPosX+1 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSize = SizeSmall
 		} else if x == UIPosX+1 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolWater {
