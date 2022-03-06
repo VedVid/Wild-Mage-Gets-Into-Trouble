@@ -170,7 +170,6 @@ func PrintUI(c *Creature) {
 	   new elements of game mechanics will be introduced. So, for now, it
 	   provides only one basic, yet essential information: player's HP. */
 	blt.Layer(UILayer)
-	hp := ""
 	j := 0
 	k := 0
 	for i := 0; i < c.HPMax; i++ {
@@ -187,26 +186,34 @@ func PrintUI(c *Creature) {
 			k = 1
 		}
 	}
-	blt.Print(UIPosX, UIPosY+1, hp)
+	for i := 0; i < c.AmmoMax; i++ {
+		ammoSymbol := "♦"
+		ammoColor := "dark yellow"
+		if i >= c.AmmoCurrent {
+			ammoSymbol = "♢"
+			ammoColor = "darker yellow"
+		}
+		blt.Print(UIPosX+i, UIPosY+2, "[color="+ammoColor+"]"+ammoSymbol)
+	}
 	baseSpellColor := "darker gray"
 	waterColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolWater {
 		waterColor = "blue"
 	}
 	water := "[color=" + waterColor + "]≈"
-	blt.Print(UIPosX+1, UIPosY+2, water)
+	blt.Print(UIPosX+1, UIPosY+3, water)
 	fireColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolFire {
 		fireColor = "red"
 	}
 	fire := "[color=" + fireColor + "]☄"
-	blt.Print(UIPosX+2, UIPosY+2, fire)
+	blt.Print(UIPosX+2, UIPosY+3, fire)
 	earthColor := baseSpellColor
 	if GlobalData.CurrentSchool == SchoolEarth {
 		earthColor = "darker orange"
 	}
 	earth := "[color=" + earthColor + "]⛰"
-	blt.Print(UIPosX+3, UIPosY+2, earth)
+	blt.Print(UIPosX+3, UIPosY+3, earth)
 	baseSizeColor := "dark gray"
 	if GlobalData.CurrentSchool == SchoolWater {
 		colorWaterSize := "light blue"
@@ -224,10 +231,10 @@ func PrintUI(c *Creature) {
 		case SizeHuge:
 			colorHuge = colorWaterSize
 		}
-		blt.Print(UIPosX+1, UIPosY+3, "[color=" + colorSmall + "]↘")
-		blt.Print(UIPosX+1, UIPosY+4, "[color=" + colorMedium + "]→")
-		blt.Print(UIPosX+1, UIPosY+5, "[color=" + colorBig + "]↗")
-		blt.Print(UIPosX+1, UIPosY+6, "[color=" + colorHuge + "]↑")
+		blt.Print(UIPosX+1, UIPosY+4, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+1, UIPosY+5, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+1, UIPosY+6, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+1, UIPosY+7, "[color=" + colorHuge + "]↑")
 	}
 	if GlobalData.CurrentSchool == SchoolFire {
 		colorFireSize := "light red"
@@ -245,10 +252,10 @@ func PrintUI(c *Creature) {
 		case SizeHuge:
 			colorHuge = colorFireSize
 		}
-		blt.Print(UIPosX+2, UIPosY+3, "[color=" + colorSmall + "]↘")
-		blt.Print(UIPosX+2, UIPosY+4, "[color=" + colorMedium + "]→")
-		blt.Print(UIPosX+2, UIPosY+5, "[color=" + colorBig + "]↗")
-		blt.Print(UIPosX+2, UIPosY+6, "[color=" + colorHuge + "]↑")
+		blt.Print(UIPosX+2, UIPosY+4, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+2, UIPosY+5, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+2, UIPosY+6, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+2, UIPosY+7, "[color=" + colorHuge + "]↑")
 	}
 	if GlobalData.CurrentSchool == SchoolEarth {
 		colorEarthSize := "dark orange"
@@ -266,10 +273,10 @@ func PrintUI(c *Creature) {
 		case SizeHuge:
 			colorHuge = colorEarthSize
 		}
-		blt.Print(UIPosX+3, UIPosY+3, "[color=" + colorSmall + "]↘")
-		blt.Print(UIPosX+3, UIPosY+4, "[color=" + colorMedium + "]→")
-		blt.Print(UIPosX+3, UIPosY+5, "[color=" + colorBig + "]↗")
-		blt.Print(UIPosX+3, UIPosY+6, "[color=" + colorHuge + "]↑")
+		blt.Print(UIPosX+3, UIPosY+4, "[color=" + colorSmall + "]↘")
+		blt.Print(UIPosX+3, UIPosY+5, "[color=" + colorMedium + "]→")
+		blt.Print(UIPosX+3, UIPosY+6, "[color=" + colorBig + "]↗")
+		blt.Print(UIPosX+3, UIPosY+7, "[color=" + colorHuge + "]↑")
 	}
 }
 

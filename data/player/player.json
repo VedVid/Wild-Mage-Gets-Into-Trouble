@@ -87,5 +87,7 @@
     ],
     "FireResistance":1,
     "CanSwim":1,
-    "CanFly":0
+    "CanFly":0,
+    "AmmoMax":5,
+    "AmmoCurrent":5
 }

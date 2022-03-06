@@ -56,6 +56,8 @@ type Creature struct {
 	FireResistance int
 	CanSwim int
 	CanFly int
+	AmmoMax int
+	AmmoCurrent int
 }
 
 // Creatures holds every creature on map.
