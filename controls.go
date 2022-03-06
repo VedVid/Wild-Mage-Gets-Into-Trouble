@@ -274,6 +274,30 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 				AddMessage("You invoke earth aura.")
 				p.Colors = []string{"#D2B48C"}
 			}
+		} else if x == UIPosX+1 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSize = SizeSmall
+		} else if x == UIPosX+1 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSize = SizeMedium
+		} else if x == UIPosX+1 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSize = SizeBig
+		} else if x == UIPosX+1 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSize = SizeHuge
+		} else if x == UIPosX+2 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSize = SizeSmall
+		} else if x == UIPosX+2 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSize = SizeMedium
+		} else if x == UIPosX+2 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSize = SizeBig
+		} else if x == UIPosX+2 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSize = SizeHuge
+		} else if x == UIPosX+3 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSize = SizeSmall
+		} else if x == UIPosX+3 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSize = SizeMedium
+		} else if x == UIPosX+3 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSize = SizeBig
+		} else if x == UIPosX+3 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolEarth {
+			GlobalData.CurrentSize = SizeHuge
 		}
 	}
 	return turnSpent
