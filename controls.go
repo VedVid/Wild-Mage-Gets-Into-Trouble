@@ -281,29 +281,77 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 		} else if x >= UIPosX && x <= UIPosX+4 && (y == UIPosY+3 || y == UIPosY+4) {
 			turnSpent = p.Target(b, &o, c, nil)
 		} else if x == UIPosX+1 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolWater {
-			GlobalData.CurrentSize = SizeSmall
+			if GlobalData.CurrentSize == SizeSmall {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeSmall
+			}
 		} else if x == UIPosX+1 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolWater {
-			GlobalData.CurrentSize = SizeMedium
+			if GlobalData.CurrentSize == SizeMedium {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeMedium
+			}
 		} else if x == UIPosX+1 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolWater {
-			GlobalData.CurrentSize = SizeBig
+			if GlobalData.CurrentSize == SizeBig {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeBig
+			}
 		} else if x == UIPosX+1 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolWater {
-			GlobalData.CurrentSize = SizeHuge
+			if GlobalData.CurrentSize == SizeHuge {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeHuge
+			}
 		} else if x == UIPosX+2 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolFire {
-			GlobalData.CurrentSize = SizeSmall
+			if GlobalData.CurrentSize == SizeSmall {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeSmall
+			}
 		} else if x == UIPosX+2 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolFire {
-			GlobalData.CurrentSize = SizeMedium
+			if GlobalData.CurrentSize == SizeMedium {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeMedium
+			}
 		} else if x == UIPosX+2 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolFire {
-			GlobalData.CurrentSize = SizeBig
+			if GlobalData.CurrentSize == SizeBig {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeBig
+			}
 		} else if x == UIPosX+2 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolFire {
-			GlobalData.CurrentSize = SizeHuge
+			if GlobalData.CurrentSize == SizeHuge {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeHuge
+			}
 		} else if x == UIPosX+3 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolEarth {
-			GlobalData.CurrentSize = SizeSmall
+			if GlobalData.CurrentSize == SizeSmall {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeSmall
+			}
 		} else if x == UIPosX+3 && y == UIPosY+7 && GlobalData.CurrentSchool == SchoolEarth {
-			GlobalData.CurrentSize = SizeMedium
+			if GlobalData.CurrentSize == SizeMedium {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeMedium
+			}
 		} else if x == UIPosX+3 && y == UIPosY+8 && GlobalData.CurrentSchool == SchoolEarth {
-			GlobalData.CurrentSize = SizeBig
+			if GlobalData.CurrentSize == SizeBig {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeBig
+			}
 		} else if x == UIPosX+3 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolEarth {
-			GlobalData.CurrentSize = SizeHuge
+			if GlobalData.CurrentSize == SizeHuge {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSize = SizeHuge
+			}
 		}
 	}
 	return turnSpent
