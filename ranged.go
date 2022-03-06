@@ -312,6 +312,9 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_ESCAPE {
 			break
 		}
+		if AdjustSpell(key, c) == true {
+			continue
+		}
 		if key == blt.TK_T || key == blt.TK_ENTER {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 && valid == true {
