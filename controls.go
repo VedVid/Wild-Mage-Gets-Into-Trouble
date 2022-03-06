@@ -249,6 +249,32 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 		} else {
 			p.Look(b, o, c)
 		}
+	} else {
+		if x == UIPosX+1 && y == UIPosY+5 {
+			if GlobalData.CurrentSchool == SchoolWater {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSchool = SchoolWater
+				AddMessage("You invoke water aura.")
+				p.Colors = []string{"#73C2FB"}
+			}
+		} else if x == UIPosX+2 && y == UIPosY+5 {
+			if GlobalData.CurrentSchool == SchoolFire {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSchool = SchoolFire
+				AddMessage("You invoke fire aura.")
+				p.Colors = []string{"#FF7F7F"}
+			}
+		} else if x == UIPosX+3 && y == UIPosY+5 {
+			if GlobalData.CurrentSchool == SchoolEarth {
+				turnSpent = p.Target(b, &o, c, nil)
+			} else {
+				GlobalData.CurrentSchool = SchoolEarth
+				AddMessage("You invoke earth aura.")
+				p.Colors = []string{"#D2B48C"}
+			}
+		}
 	}
 	return turnSpent
 }
