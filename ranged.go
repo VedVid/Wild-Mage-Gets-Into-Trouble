@@ -278,6 +278,10 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 	    * in other cases, game will try to move cursor; invalid input
 	      is ignored */
 	turnSpent := false
+	if c.AmmoCurrent <= 0 {
+		AddMessage("No more bolts in crossbow!")
+		return turnSpent
+	}
 	var target *Creature
 	targets := c.FindTargets(FOVLength, b, cs, *o)
 	if LastTarget != nil && LastTarget != c &&
@@ -331,6 +335,7 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 					}
 				}
 			}
+			c.AmmoCurrent--
 			turnSpent = true
 			break
 		} else if key == blt.TK_TAB {
