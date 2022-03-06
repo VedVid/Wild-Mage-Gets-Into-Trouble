@@ -26,6 +26,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package main
 
+const ManaRegenDiv = 5
+
 func FireArea(area [][]int, b Board) {
 	for _, v := range area {
 		x := v[0]

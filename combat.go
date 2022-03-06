@@ -93,6 +93,12 @@ func (c *Creature) TakeDamage(dmg int, o *Objects) {
 }
 
 func CheckMagic(b Board, c Creatures, o *Objects) {
+	if GlobalData.TurnsSpent % ManaRegenDiv == 0 {
+		c[0].ManaCurrent++
+		if c[0].ManaCurrent > c[0].ManaMax {
+			c[0].ManaCurrent = c[0].ManaMax
+		}
+	}
 	for i := 0; i < len(c); i++ {
 		monster := c[i]
 		x := monster.X
