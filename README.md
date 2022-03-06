@@ -35,8 +35,15 @@ During targeting:
 Outside targeting mode:
 
 - left mouse button:
+	- on map tile: look
+	- on monster: cast spell
+	- on ammo icon: shoot crossbow
 	- on mana icon: cast spell
 	- on active spell: cast spell
 	- on inactive spell: switch spell
 	- on area-of-effect icon: set area-of-effect size
+- right mouse button:
+	- on monster: shoot crossbow
+	- on ammo cion: reload crossbow
+
 

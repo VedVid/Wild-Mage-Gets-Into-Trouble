@@ -146,6 +146,8 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 	switch com {
 	case StrMouseLeftClick:
 		turnSpent = ContextMouseLeft(p, *b, *o, *c)
+	case StrMouseRightClick:
+		turnSpent = ContextMouseRight(p, *b, *o, *c)
 
 	case StrMoveNorth:
 		turnSpent = p.MoveOrAttack(0, -1, *b, o, *c)
@@ -302,6 +304,31 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 			GlobalData.CurrentSize = SizeBig
 		} else if x == UIPosX+3 && y == UIPosY+9 && GlobalData.CurrentSchool == SchoolEarth {
 			GlobalData.CurrentSize = SizeHuge
+		}
+	}
+	return turnSpent
+}
+
+func ContextMouseRight(p *Creature, b Board, o Objects, c Creatures) bool {
+	turnSpent := false
+	x := blt.State(blt.TK_MOUSE_X)
+	y := blt.State(blt.TK_MOUSE_Y)
+	if x >= 0 && x < MapSizeX && y >= 0 && y < MapSizeY {
+		var monster *Creature
+		for _, v := range c {
+			if v.X == x && v.Y == y && v.HPCurrent > 0 {
+				monster = v
+			}
+		}
+		if monster != nil {
+			turnSpent = p.Target2(b, &o, c, monster)
+		}
+	} else {
+		if x >= UIPosX && x <= UIPosX+4 && y == UIPosY+2 {
+			if p.AmmoCurrent < p.AmmoMax {
+				p.AmmoCurrent++
+				turnSpent = true
+			}
 		}
 	}
 	return turnSpent
