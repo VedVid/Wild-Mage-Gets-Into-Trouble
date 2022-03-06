@@ -220,7 +220,7 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 	case StrTargetSpell:
 		turnSpent = p.Target(*b, o, *c, nil)
 	case StrTargetGun:
-		turnSpent = p.Target2(*b, o, *c)
+		turnSpent = p.Target2(*b, o, *c, nil)
 	case StrReload:
 		if p.AmmoCurrent < p.AmmoMax {
 			p.AmmoCurrent++
@@ -274,6 +274,8 @@ func ContextMouseLeft(p *Creature, b Board, o Objects, c Creatures) bool {
 				AddMessage("You invoke earth aura.")
 				p.Colors = []string{"#D2B48C"}
 			}
+		} else if x >= UIPosX && x <= UIPosX+4 && y == UIPosY+2 {
+			turnSpent = p.Target2(b, &o, c, nil)
 		} else if x >= UIPosX && x <= UIPosX+4 && (y == UIPosY+3 || y == UIPosY+4) {
 			turnSpent = p.Target(b, &o, c, nil)
 		} else if x == UIPosX+1 && y == UIPosY+6 && GlobalData.CurrentSchool == SchoolWater {

@@ -256,7 +256,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures, t *Creature) bool {
 	return turnSpent
 }
 
-func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
+func (c *Creature) Target2(b Board, o *Objects, cs Creatures, t *Creature) bool {
 	/* Target is method of Creature, that takes game map, objects, and
 	   creatures as arguments. Returns bool that serves as indicator if
 	   action took some time or not.
@@ -299,6 +299,9 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 		if err != nil {
 			fmt.Println(err)
 		}
+	}
+	if t != nil {
+		target = t
 	}
 	targetX, targetY := target.X, target.Y
 	i := false
