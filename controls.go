@@ -59,6 +59,7 @@ const (
 
 	StrTargetSpell = "TARGET_SPELL"
 	StrTargetGun = "TARGET_GUN"
+	StrReload = "RELOAD"
 	StrLook   = "LOOK"
 )
 
@@ -85,6 +86,7 @@ var Actions = []string{
 	StrPrevSize2,
 	StrTargetSpell,
 	StrTargetGun,
+	StrReload,
 	StrLook,
 }
 
@@ -111,6 +113,7 @@ var CommandKeys = map[int]string{
 	blt.TK_KP_MINUS:    StrPrevSize2,
 	blt.TK_F:           StrTargetSpell,
 	blt.TK_T:           StrTargetGun,
+	blt.TK_R:           StrReload,
 	blt.TK_L:           StrLook,
 }
 
@@ -202,6 +205,11 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		turnSpent = p.Target(*b, o, *c)
 	case StrTargetGun:
 		turnSpent = p.Target2(*b, o, *c)
+	case StrReload:
+		if p.AmmoCurrent < p.AmmoMax {
+			p.AmmoCurrent++
+			turnSpent = true
+		}
 	case StrLook:
 		p.Look(*b, *o, *c)
 	}
