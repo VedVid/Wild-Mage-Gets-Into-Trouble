@@ -194,7 +194,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if key == blt.TK_ESCAPE {
 			break
 		}
-		if AdjustSpell(key) == true {
+		if AdjustSpell(key, c) == true {
 			continue
 		}
 		if key == blt.TK_F || key == blt.TK_ENTER {
@@ -353,25 +353,47 @@ func SetCursorSize() [][]int {
 	return cursor
 }
 
-func AdjustSpell(key int) bool {
+func AdjustSpell(key int, c *Creature) bool {
 	keyCorrect := true
 	if key == blt.TK_F1 {
 		GlobalData.CurrentSchool = SchoolWater
+		AddMessage("You feel water aura around.")
+		c.Colors = []string{"#73C2FB"}
 	} else if key == blt.TK_F2 {
 		GlobalData.CurrentSchool = SchoolFire
+		AddMessage("You feel fire aura around.")
+		c.Colors = []string{"#FF7F7F"}
 	} else if key == blt.TK_F3 {
 		GlobalData.CurrentSchool = SchoolEarth
+		AddMessage("You feel earth aura around.")
+		c.Colors = []string{"#D2B48C"}
 	} else if key == blt.TK_KP_DIVIDE || key == blt.TK_LBRACKET {
 		if GlobalData.CurrentSchool == SchoolWater {
 			GlobalData.CurrentSchool = SchoolEarth
+			AddMessage("You feel earth aura around.")
+			c.Colors = []string{"#D2B48C"}
+		} else if GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSchool = SchoolWater
+			AddMessage("You feel water aura around.")
+			c.Colors = []string{"#73C2FB"}
 		} else {
-			GlobalData.CurrentSchool--
+			GlobalData.CurrentSchool = SchoolFire
+			AddMessage("You feel fire aura around.")
+			c.Colors = []string{"#FF7F7F"}
 		}
 	} else if key == blt.TK_KP_MULTIPLY || key == blt.TK_RBRACKET {
-		if GlobalData.CurrentSchool == SchoolEarth {
-			GlobalData.CurrentSchool = SchoolWater
+		if GlobalData.CurrentSchool == SchoolWater {
+			GlobalData.CurrentSchool = SchoolFire
+			AddMessage("You feel fire aura around.")
+			c.Colors = []string{"#FF7F7F"}
+		} else if GlobalData.CurrentSchool == SchoolFire {
+			GlobalData.CurrentSchool = SchoolEarth
+			AddMessage("You feel earth aura around.")
+			c.Colors = []string{"#D2B48C"}
 		} else {
-			GlobalData.CurrentSchool++
+			GlobalData.CurrentSchool = SchoolWater
+			AddMessage("You feel water aura around.")
+			c.Colors = []string{"#73C2FB"}
 		}
 	} else if key == blt.TK_1 {
 		GlobalData.CurrentSize = SizeSmall
