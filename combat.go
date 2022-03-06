@@ -88,21 +88,21 @@ func CheckMagic(b Board, c Creatures, o *Objects) {
 		y := monster.Y
 		if b[x][y].Fire > 0 {
 			if monster.FireResistance == NoAbility {
-				monster.Die(o)
+				monster.TakeDamage(999, o)
 			} else if monster.FireResistance == PartialAbility {
 				monster.TakeDamage(1, o)
 			}
 		}
 		if b[x][y].Flooded > 0 {
 			if monster.CanSwim == NoAbility {
-				monster.Die(o)
+				monster.TakeDamage(999, o)
 			} else if monster.CanSwim == PartialAbility {
 				monster.TakeDamage(1, o)
 			}
 		}
 		if b[x][y].Chasm > 0 {
 			if monster.CanFly != FullAbility {
-				monster.Die(o)
+				monster.TakeDamage(999, o)
 			}
 		}
 	}
