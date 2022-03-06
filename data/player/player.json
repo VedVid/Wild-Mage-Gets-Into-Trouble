@@ -84,5 +84,8 @@
             "Slot":-1,
             "Use":1
         }
-    ]
+    ],
+    "FireResistance":1,
+    "CanSwim":1,
+    "CanFly":0
 }
