@@ -92,7 +92,7 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 		}
 		PrintLookingMessage(msg, i)
 		key := ReadInput()
-		if key == blt.TK_ESCAPE || key == blt.TK_ENTER || key == blt.TK_SPACE {
+		if key == blt.TK_ESCAPE || key == blt.TK_ENTER || key == blt.TK_SPACE || key == blt.TK_MOUSE_LEFT {
 			break
 		}
 		CursorMovement(&targetX, &targetY, key)
@@ -225,6 +225,13 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures, t *Creature) bool {
 			continue
 		}
 		if key == blt.TK_F || key == blt.TK_ENTER || key == blt.TK_MOUSE_LEFT {
+			if key == blt.TK_MOUSE_LEFT {
+				tmpX := blt.State(blt.TK_MOUSE_X)
+				tmpY := blt.State(blt.TK_MOUSE_Y)
+				if tmpX < 0 || tmpX >= MapSizeX || tmpY < 0 || tmpY >= MapSizeY {
+					break
+				}
+			}
 			turnSpent = true
 			c.ManaCurrent--
 			if GlobalData.CurrentSchool == SchoolFire {
@@ -336,6 +343,13 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures, t *Creature) bool 
 			continue
 		}
 		if key == blt.TK_T || key == blt.TK_ENTER || key == blt.TK_MOUSE_LEFT {
+			if key == blt.TK_MOUSE_LEFT {
+				tmpX := blt.State(blt.TK_MOUSE_X)
+				tmpY := blt.State(blt.TK_MOUSE_Y)
+				if tmpX < 0 || tmpX >= MapSizeX || tmpY < 0 || tmpY >= MapSizeY {
+					break
+				}
+			}
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 && valid == true {
 				LastTarget = monsterAimed

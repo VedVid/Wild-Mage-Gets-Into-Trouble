@@ -28,7 +28,7 @@ It is possible to use mouse, too.
 
 During targeting:
 
-- left mouse button: fire bolt, cast spell
+- left mouse button: fire bolt, cast spell, cancel action (if clicked outside the map)
 - right mouse button: change selected mage school
 - scroll up / down: change area of effect
 
