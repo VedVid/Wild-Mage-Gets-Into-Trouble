@@ -287,6 +287,13 @@ func PrintRangedCharacter(x, y int, color, why string, valid bool, c *Creature) 
 	   of validity test as arguments.
 	   It draws green rectangle if cursor position is valid,
 	   and red cross if it is not. */
+	for i := 0; i < LookLayer; i++ {
+		if i == CreaturesLayer || i == PlayerLayer {
+			continue
+		}
+		blt.Layer(i)
+		blt.ClearArea(x, y, 1, 1)
+	}
 	blt.Layer(LookLayer)
 	if valid == true {
 		if why == BrensenhamWhyInspect {
