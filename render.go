@@ -187,10 +187,10 @@ func PrintUI(c *Creature) {
 		}
 	}
 	for i := 0; i < c.AmmoMax; i++ {
-		ammoSymbol := "♦"
+		ammoSymbol := "♠"
 		ammoColor := "dark yellow"
 		if i >= c.AmmoCurrent {
-			ammoSymbol = "♢"
+			ammoSymbol = "♤"
 			ammoColor = "darker yellow"
 		}
 		blt.Print(UIPosX+i, UIPosY+2, "[color="+ammoColor+"]"+ammoSymbol)
