@@ -87,23 +87,41 @@ func CheckMagic(b Board, c Creatures, o *Objects) {
 		x := monster.X
 		y := monster.Y
 		if b[x][y].Fire > 0 {
-			if monster.FireResistance == NoAbility {
-				monster.TakeDamage(999, o)
-			} else if monster.FireResistance == PartialAbility {
-				monster.TakeDamage(1, o)
+			if i != 0 {
+				if monster.FireResistance == NoAbility {
+					monster.TakeDamage(999, o)
+				} else if monster.FireResistance == PartialAbility {
+					monster.TakeDamage(1, o)
+				}
+			} else {
+				if GlobalData.CurrentSchool != SchoolFire {
+					monster.TakeDamage(1, o)
+				}
 			}
 		}
 		if b[x][y].Flooded > 0 {
-			if monster.CanSwim == NoAbility {
-				monster.TakeDamage(999, o)
-			} else if monster.CanSwim == PartialAbility {
-				monster.TakeDamage(1, o)
+			if i != 0 {
+				if monster.CanSwim == NoAbility {
+					monster.TakeDamage(999, o)
+				} else if monster.CanSwim == PartialAbility {
+					monster.TakeDamage(1, o)
+				}
+			} else {
+				if GlobalData.CurrentSchool != SchoolWater {
+					monster.TakeDamage(1, o)
+				}
 			}
 		}
 		if b[x][y].Chasm > 0 {
-			if monster.CanFly != FullAbility {
-				monster.TakeDamage(999, o)
-				monster.Chars = []string{""}
+			if i != 0 {
+				if monster.CanFly != FullAbility {
+					monster.TakeDamage(999, o)
+					monster.Chars = []string{""}
+				}
+			} else {
+				if GlobalData.CurrentSchool != SchoolEarth {
+					monster.TakeDamage(999, o)
+				}
 			}
 		}
 	}
