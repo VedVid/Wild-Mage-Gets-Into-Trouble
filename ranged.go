@@ -310,9 +310,9 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 		if monsterHit != nil {
 			msg := monsterHit.Name
 			if monsterHit.FireResistance == FullAbility {
-				msg = msg + " [[-Fire]]"
+				msg = msg + " [[Fire res]]"
 			} else if monsterHit.FireResistance == NoAbility {
-				msg = msg + " [[+Fire]]"
+				msg = msg + " [[Fire vuln]]"
 			}
 			if monsterHit.CanFly == FullAbility {
 				msg = msg + " [[Flying]]"
