@@ -82,7 +82,7 @@ func (c *Creature) TakeDamage(dmg int, o *Objects) {
 }
 
 func CheckMagic(b Board, c Creatures, o *Objects) {
-	for i := 0; i < len(c); i++ {
+	for i := 1; i < len(c); i++ {
 		monster := c[i]
 		x := monster.X
 		y := monster.Y
