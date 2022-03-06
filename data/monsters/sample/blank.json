@@ -88,5 +88,6 @@
             "Slot":INTEGER,
             "Use":INTEGER
         }
-    ]
+    ],
+    "Rarity":STRING
 }

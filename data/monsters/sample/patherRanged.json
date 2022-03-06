@@ -1,13 +1,13 @@
 {
-    "Name":"enemy1",
+    "Name":"enemy2",
     "Chars":["T"],
-    "Colors":["green"],
-    "ColorDark":"green",
+    "Colors":["red"],
+    "ColorDark":"red",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
     "BlocksSight":false,
-    "AIType":2,
+    "AIType":5,
     "AITriggered":false,
     "HPMax":10,
     "HPCurrent":10,
@@ -20,5 +20,6 @@
     ],
     "Inventory":[
         null
-    ]
+    ],
+    "Rarity":"rare"
 }
