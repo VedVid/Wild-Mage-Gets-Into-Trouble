@@ -30,7 +30,7 @@ During targeting:
 
 - left mouse button: fire bolt, cast spell, cancel action (if clicked outside the map)
 - right mouse button: change selected mage school
-- scroll up / down: change area of effect
+- scroll up / down: change area of effect size
 
 Outside targeting mode:
 
@@ -44,6 +44,6 @@ Outside targeting mode:
 	- on area-of-effect icon: set area-of-effect size
 - right mouse button:
 	- on monster: shoot crossbow
-	- on ammo cion: reload crossbow
-
-
+	- on ammo icon: reload crossbow
+	- otherwise: switch spell
+- scroll up / down: change area of effect size
