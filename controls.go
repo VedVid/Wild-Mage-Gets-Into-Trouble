@@ -57,7 +57,8 @@ const (
 	StrPrevSize1 = "PREV_SIZE_1"
 	StrPrevSize2 = "PREV_SIZE_2"
 
-	StrTarget = "TARGET"
+	StrTargetSpell = "TARGET_SPELL"
+	StrTargetGun = "TARGET_GUN"
 	StrLook   = "LOOK"
 )
 
@@ -82,7 +83,8 @@ var Actions = []string{
 	StrNextSize2,
 	StrPrevSize1,
 	StrPrevSize2,
-	StrTarget,
+	StrTargetSpell,
+	StrTargetGun,
 	StrLook,
 }
 
@@ -107,7 +109,8 @@ var CommandKeys = map[int]string{
 	blt.TK_KP_PLUS:     StrNextSize2,
 	blt.TK_MINUS:       StrPrevSize1,
 	blt.TK_KP_MINUS:    StrPrevSize2,
-	blt.TK_F:           StrTarget,
+	blt.TK_F:           StrTargetSpell,
+	blt.TK_T:           StrTargetGun,
 	blt.TK_L:           StrLook,
 }
 
@@ -195,8 +198,10 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 			GlobalData.CurrentSize++
 		}
 
-	case StrTarget:
+	case StrTargetSpell:
 		turnSpent = p.Target(*b, o, *c)
+	case StrTargetGun:
+		turnSpent = p.Target2(*b, o, *c)
 	case StrLook:
 		p.Look(*b, *o, *c)
 	}

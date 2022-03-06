@@ -250,6 +250,106 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 	return turnSpent
 }
 
+func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
+	/* Target is method of Creature, that takes game map, objects, and
+	   creatures as arguments. Returns bool that serves as indicator if
+	   action took some time or not.
+	   This method is "the big one", general, for handling targeting.
+	   In short, player starts targetting, line is drawn from player
+	   to monster, then function waits for input (confirmation - "fire",
+	   breaking the loop, or continuing).
+	   Explicitly:
+	   - creates list of all potential targets in fov
+	    * tries to automatically last target, but
+	    * if fails, it targets the nearest enemy
+	   - draws line between source (receiver) and target (coords)
+	    * creates new vector
+	    * checks if it is valid - monsterHit should not be nil
+	    * prints brensenham's line (ie so-called "vector")
+	   - waits for player input
+	    * if player cancels, function ends
+	    * if player confirms, valley is shoot (in target, or empty space)
+	    * if valley is shot in empty space, vector is extrapolated to check
+	      if it will hit any target
+	    * player can switch between targets as well; it targets
+	      next target automatically; at first, only monsters that are
+	      valid target (ie clean shot is possible), then monsters that
+	      are in range and fov, but line of shot is not clear
+	    * in other cases, game will try to move cursor; invalid input
+	      is ignored */
+	turnSpent := false
+	var target *Creature
+	targets := c.FindTargets(FOVLength, b, cs, *o)
+	if LastTarget != nil && LastTarget != c &&
+		IsInFOV(b, c.X, c.Y, LastTarget.X, LastTarget.Y) == true {
+		target = LastTarget
+	} else {
+		var err error
+		target, err = c.FindTarget(targets)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+	targetX, targetY := target.X, target.Y
+	i := false
+	for {
+		vec, err := NewBrensenham(c.X, c.Y, targetX, targetY)
+		if err != nil {
+			fmt.Println(err)
+		}
+		_ = ComputeBrensenham(vec)
+		valid, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
+		PrintBrensenham(vec, BrensenhamWhyTarget, BrensenhamColorGood, BrensenhamColorBad, b, *o, cs)
+		if monsterHit != nil {
+			msg := "There is " + monsterHit.Name + " here."
+			PrintLookingMessage(msg, i)
+		}
+		key := ReadInput()
+		if key == blt.TK_ESCAPE {
+			break
+		}
+		if key == blt.TK_T || key == blt.TK_ENTER {
+			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
+			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 && valid == true {
+				LastTarget = monsterAimed
+				c.AttackTarget(monsterAimed, o)
+			} else {
+				if monsterAimed == c {
+					break // Do not hurt yourself.
+				}
+				if monsterHit != nil {
+					if monsterHit.HPCurrent > 0 {
+						LastTarget = monsterHit
+						c.AttackTarget(monsterHit, o)
+					}
+				} else {
+					vx, vy := FindBrensenhamDirection(vec)
+					v := ExtrapolateBrensenham(vec, vx, vy)
+					_, _, monsterHitIndirectly, _ := ValidateBrensenham(v, b, targets, *o)
+					if monsterHitIndirectly != nil {
+						c.AttackTarget(monsterHitIndirectly, o)
+					}
+				}
+			}
+			turnSpent = true
+			break
+		} else if key == blt.TK_TAB {
+			i = true
+			monster := FindMonsterByXY(targetX, targetY, cs)
+			if monster != nil {
+				target = NextTarget(monster, targets)
+			} else {
+				target = NextTarget(target, targets)
+			}
+			targetX, targetY = target.X, target.Y
+			continue // Switch target
+		}
+		CursorMovement(&targetX, &targetY, key)
+		i = true
+	}
+	return turnSpent
+}
+
 func CursorMovement(x, y *int, key int) {
 	/* CursorMovement is function that takes pointers to coords, and
 	   int-based user input. It uses MoveCursor function to
