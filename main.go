@@ -55,26 +55,35 @@ func main() {
 			blt.Read()
 			break
 		}
-		key := ReadInput()
-		if (key == blt.TK_S && blt.Check(blt.TK_SHIFT) != 0) ||
-			key == blt.TK_CLOSE {
-			err := SaveGame(*cells, *actors, *objs)
-			if err != nil {
-				fmt.Println(err)
+		if blt.HasInput() == true {
+			//key := ReadInput()
+			key := blt.Read()
+			if key == blt.TK_MOUSE_LEFT {
+				fmt.Println(blt.State(blt.TK_MOUSE_X), blt.State(blt.TK_MOUSE_Y))
 			}
-			break
-		} else if key == blt.TK_Q && blt.Check(blt.TK_SHIFT) != 0 {
-			DeleteSaves()
-			break
-		} else {
-			turnSpent := Controls(key, (*actors)[0], cells, actors, objs)
-			if turnSpent == true {
-				GlobalData.TurnsSpent++
-				CheckMagic(*cells, *actors, objs)
-				CreaturesTakeTurn(*cells, *actors, *objs)
-				SpawnMonsters(actors, *cells)
-				UpdateFrames(*cells, *objs, *actors)
-				UpdateTiles(*cells)
+			if key == blt.TK_MOUSE_MOVE {
+				fmt.Println("yeaaaah!")
+			}
+			if (key == blt.TK_S && blt.Check(blt.TK_SHIFT) != 0) ||
+				key == blt.TK_CLOSE {
+				err := SaveGame(*cells, *actors, *objs)
+				if err != nil {
+					fmt.Println(err)
+				}
+				break
+			} else if key == blt.TK_Q && blt.Check(blt.TK_SHIFT) != 0 {
+				DeleteSaves()
+				break
+			} else {
+				turnSpent := Controls(key, (*actors)[0], cells, actors, objs)
+				if turnSpent == true {
+					GlobalData.TurnsSpent++
+					CheckMagic(*cells, *actors, objs)
+					CreaturesTakeTurn(*cells, *actors, *objs)
+					SpawnMonsters(actors, *cells)
+					UpdateFrames(*cells, *objs, *actors)
+					UpdateTiles(*cells)
+				}
 			}
 		}
 	}

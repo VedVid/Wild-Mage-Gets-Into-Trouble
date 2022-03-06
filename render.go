@@ -28,6 +28,8 @@ package main
 
 import (
 	blt "bearlibterminal"
+
+	"strconv"
 )
 
 const (
@@ -294,6 +296,10 @@ func PrintUI(c *Creature) {
 		blt.Print(UIPosX+3, UIPosY+8, "[color=" + colorBig + "]↗")
 		blt.Print(UIPosX+3, UIPosY+9, "[color=" + colorHuge + "]↑")
 	}
+	currentTurn := strconv.Itoa(GlobalData.TurnsSpent)
+	blt.Print(UIPosX, LogPosY-2, "[color=white]#" + currentTurn)
+	monstersKilled := strconv.Itoa(GlobalData.MonstersKilled)
+	blt.Print(UIPosX, LogPosY-1, "[color=white]☠" + monstersKilled)
 }
 
 func PrintLog() {

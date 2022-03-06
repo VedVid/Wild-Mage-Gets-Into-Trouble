@@ -71,6 +71,7 @@ func InitializeBLT() {
 	window := "window: size=" + sizeX + "x" + sizeY
 	blt.Set(window + ", title=' " + GameTitle + " " + GameVersion +
 		"'; font: " + FontName + ", size=" + sizeFont)
+	blt.Set("input.filter={keyboard, mouse+}")
 	blt.Clear()
 	blt.Refresh()
 }
