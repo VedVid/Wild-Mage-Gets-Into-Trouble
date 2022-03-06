@@ -56,8 +56,8 @@ func main() {
 			break
 		}
 		if blt.HasInput() == true {
-			//key := ReadInput()
-			key := blt.Read()
+			key := ReadInput()
+			//key := blt.Read()
 			if key == blt.TK_MOUSE_LEFT {
 				fmt.Println(blt.State(blt.TK_MOUSE_X), blt.State(blt.TK_MOUSE_Y))
 			}

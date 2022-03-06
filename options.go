@@ -88,7 +88,9 @@ var HardcodedKeys = []int{
 	blt.TK_F3,
 	blt.TK_F4,
 	blt.TK_CLOSE, // Do not use in config file!
+	blt.TK_MOUSE_MOVE,
 	blt.TK_MOUSE_LEFT,
+	blt.TK_MOUSE_RIGHT,
 }
 
 /* The default keyboard layout.
