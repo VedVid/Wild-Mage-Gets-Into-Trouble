@@ -148,6 +148,20 @@ func Command(com string, p *Creature, b *Board, c *Creatures, o *Objects) bool {
 		turnSpent = ContextMouseLeft(p, *b, *o, *c)
 	case StrMouseRightClick:
 		turnSpent = ContextMouseRight(p, *b, *o, *c)
+	case StrMouseScroll:
+		if blt.State(blt.TK_MOUSE_WHEEL) == -1 {
+			if GlobalData.CurrentSize == SizeSmall {
+				GlobalData.CurrentSize = SizeHuge
+			} else {
+				GlobalData.CurrentSize--
+			}
+		} else if blt.State(blt.TK_MOUSE_WHEEL) == 1 {
+			if GlobalData.CurrentSize == SizeHuge {
+				GlobalData.CurrentSize = SizeSmall
+			} else {
+				GlobalData.CurrentSize++
+			}
+		}
 
 	case StrMoveNorth:
 		turnSpent = p.MoveOrAttack(0, -1, *b, o, *c)
