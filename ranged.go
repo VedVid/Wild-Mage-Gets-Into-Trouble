@@ -221,7 +221,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		if AdjustSpell(key, c) == true {
 			continue
 		}
-		if key == blt.TK_F || key == blt.TK_ENTER {
+		if key == blt.TK_F || key == blt.TK_ENTER || key == blt.TK_MOUSE_LEFT {
 			turnSpent = true
 			c.ManaCurrent--
 			if GlobalData.CurrentSchool == SchoolFire {
@@ -329,7 +329,7 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures) bool {
 		if AdjustSpell(key, c) == true {
 			continue
 		}
-		if key == blt.TK_T || key == blt.TK_ENTER {
+		if key == blt.TK_T || key == blt.TK_ENTER || key == blt.TK_MOUSE_LEFT {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 && valid == true {
 				LastTarget = monsterAimed
