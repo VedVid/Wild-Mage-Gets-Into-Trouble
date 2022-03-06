@@ -277,7 +277,6 @@ func ClearNotVisible(o Objects, c Creatures) {
 	/* Removes all glyphs that should not be currently visible, just before
 	   rendering. */
 	clearUnderDead(c)
-	clearUnderObjects(o, c)
 	clearUnderCreatures(o, c)
 }
 
@@ -346,7 +345,6 @@ func RenderAll(b Board, o Objects, c Creatures) {
 	blt.Clear()
 	CastRays(b, c[0].X, c[0].Y)
 	PrintBoard(b, c)
-	PrintObjects(b, o, c)
 	PrintCreatures(b, c)
 	ClearNotVisible(o, c)
 	PrintUI((c)[0])
