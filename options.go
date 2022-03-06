@@ -91,6 +91,8 @@ var HardcodedKeys = []int{
 	blt.TK_MOUSE_MOVE,
 	blt.TK_MOUSE_LEFT,
 	blt.TK_MOUSE_RIGHT,
+	blt.TK_MOUSE_WHEEL,
+	blt.TK_MOUSE_SCROLL,
 }
 
 /* The default keyboard layout.
