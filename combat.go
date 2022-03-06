@@ -33,39 +33,47 @@ func (c *Creature) AttackTarget(t *Creature, o *Objects) {
 	   Critical hit is if attack roll is the same as receiver
 	   attack attribute.
 	   Result of attack is displayed in combat log, but messages need more polish. */
-	att := RandInt(c.Attack) //basic attack roll
-	att2 := 0                //critical bonus
-	def := t.Defense         //opponent's defense
-	dmg := 0                 //dmg delivered
-	crit := false            //was it critical hit?
-	if att == c.Attack {     //critical hit!
-		crit = true
-		att2 = RandInt(c.Attack)
-	}
-	switch {
-	case att < def: // Attack score if lower than target defense.
-		if crit == false {
-			AddMessage("Attack deflected!")
-		} else {
-			dmg = att2 // Critical hit, but against heavily armored enemy.
-			AddMessage("Critical hit! <heavily armored enemy>")
+	att := RandInt(c.Attack)
+	att2 := 0
+	def := t.Defense
+	crit := false
+	dmg := 0
+	if c.AIType == PlayerAI {
+		if att == c.Attack {     //critical hit!
+			crit = true
+			att2 = RandInt(c.Attack)
 		}
-	case att == def: // Attack score is equal to target defense.
-		if crit == false {
-			dmg = 1 // It's just a scratch...
-			AddMessage("Attack successful, but it is just a scratch...")
-		} else {
-			dmg = att
-			AddMessage("Critical hit, but it barely bypassed opponent's armor.")
+		switch {
+		case att < def: // Attack score if lower than target defense.
+			if crit == true {
+				dmg = att2
+			}
+		case att == def: // Attack score is equal to target defense.
+			if crit == false {
+				dmg = 1 // It's just a scratch...
+			} else {
+				dmg = att
+			}
+		case att > def: // Attack score is bigger than target defense.
+			if crit == false {
+				dmg = att
+			} else {
+				dmg = att + att2 // Critical attack!
+			}
 		}
-	case att > def: // Attack score is bigger than target defense.
-		if crit == false {
-			dmg = att
-			AddMessage("Successful attack!")
-		} else {
-			dmg = att + att2 // Critical attack!
-			AddMessage("Critical attack!")
+		if GlobalData.CurrentSchool == SchoolFire && t.FireResistance == NoAbility {
+			dmg *= 2
+		} else if GlobalData.CurrentSchool == SchoolWater && t.CanSwim == NoAbility {
+			dmg *= 2
+		} else if GlobalData.CurrentSchool == SchoolEarth && t.CanFly == NoAbility {
+			dmg *= 2
 		}
+	} else {
+		if att == c.Attack {
+			crit = true
+			att2 = RandInt(c.Attack)
+		}
+		dmg = att + att2 - def
 	}
 	t.TakeDamage(dmg, o)
 }
