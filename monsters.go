@@ -435,6 +435,8 @@ func SpawnMonsters(c *Creatures, b Board) {
 		if safe == false {
 			continue
 		} else {
+			monster.X = x
+			monster.Y = y
 			spawn = true
 			break
 		}
