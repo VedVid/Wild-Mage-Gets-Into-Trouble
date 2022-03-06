@@ -178,7 +178,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		}
 	}
 	targetX, targetY := target.X, target.Y
-	//i := false
+	i := false
 	for {
 		cursor := SetCursorSize()
 		area := [][]int{}
@@ -190,6 +190,16 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			}
 		}
 		PrintCursor(area, b, *o, cs)
+		vec, err := NewBrensenham(c.X, c.Y, targetX, targetY)
+		if err != nil {
+			fmt.Println(err)
+		}
+		_ = ComputeBrensenham(vec)
+		_, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
+		if monsterHit != nil {
+			msg := "There is " + monsterHit.Name + " here."
+			PrintLookingMessage(msg, i)
+		}
 		key := ReadInput()
 		if key == blt.TK_ESCAPE {
 			break
@@ -212,6 +222,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			}
 			break
 		} else if key == blt.TK_TAB {
+			i = true
 			monster := FindMonsterByXY(targetX, targetY, cs)
 			if monster != nil {
 				target = NextTarget(monster, targets)
@@ -222,6 +233,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			continue // Switch target
 		}
 		CursorMovement(&targetX, &targetY, key)
+		i = true
 	}
 	return turnSpent
 }
