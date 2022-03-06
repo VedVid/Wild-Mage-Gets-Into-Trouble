@@ -73,6 +73,7 @@ func main() {
 				CreaturesTakeTurn(*cells, *actors, *objs)
 				UpdateFrames(*cells, *objs, *actors)
 				UpdateTiles(*cells)
+				SpawnMonsters(actors)
 			}
 		}
 	}

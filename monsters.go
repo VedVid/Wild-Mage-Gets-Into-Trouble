@@ -29,6 +29,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"math/rand"
 	"unicode/utf8"
 )
 
@@ -340,4 +341,41 @@ func FindMonsterByXY(x, y int, c Creatures) *Creature {
 		}
 	}
 	return monster
+}
+
+func SpawnMonsters(c *Creatures) {
+	player := (*c)[0]
+	place := ""
+	edges := []string{"n", "w", "e", "s"}
+	for {
+		place = edges[rand.Intn(len(edges))]
+		if place == "n" && player.Y < (MapSizeY/4) {
+			continue
+		} else if place == "s" && player.Y > (MapSizeY/4*3) {
+			continue
+		} else if place == "w" && player.X < (MapSizeX/4) {
+			continue
+		} else if place == "e" && player.X > (MapSizeX/4*3) {
+			continue
+		} else {
+			break
+		}
+	}
+	x := 0
+	y := 0
+	if place == "n" {
+		x = RandRange(5, MapSizeX-6)
+		y = 0
+	} else if place == "s" {
+		x = RandRange(5, MapSizeX-6)
+		y = MapSizeY-1
+	} else if place == "w" {
+		x = 0
+		y = RandRange(5, MapSizeY-6)
+	} else {
+		x = MapSizeX-1
+		y = RandRange(5, MapSizeY-6)
+	}
+	monster, _ := NewCreature(x, y, "Manticore.json")
+	*c = append(*c, monster)
 }
