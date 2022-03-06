@@ -347,34 +347,53 @@ func SpawnMonsters(c *Creatures) {
 	player := (*c)[0]
 	place := ""
 	edges := []string{"n", "w", "e", "s"}
-	for {
+	x := 0
+	y := 0
+	for i := 0; i < 50; i++ {
+		// Check if location is far enough from player
 		place = edges[rand.Intn(len(edges))]
-		if place == "n" && player.Y < (MapSizeY/4) {
-			continue
-		} else if place == "s" && player.Y > (MapSizeY/4*3) {
-			continue
-		} else if place == "w" && player.X < (MapSizeX/4) {
-			continue
-		} else if place == "e" && player.X > (MapSizeX/4*3) {
+		if place == "n" {
+			if player.Y > (MapSizeY/4) {
+				x = RandRange(5, MapSizeX-6)
+				y = 0
+			} else {
+				continue
+			}
+		} else if place == "s" {
+			if player.Y < (MapSizeY/4*3) {
+				x = RandRange(5, MapSizeX-6)
+				y = MapSizeY-1
+			} else {
+				continue
+			}
+		} else if place == "w" {
+			if player.X > (MapSizeX/4) {
+				x = 0
+				y = RandRange(5, MapSizeY-6)
+			} else {
+				continue
+			}
+		} else if place == "e" {
+			if player.X < (MapSizeX/4*3) {
+				x = MapSizeX-1
+				y = RandRange(5, MapSizeY-6)
+			} else {
+				continue
+			}
+		}
+		// Check if place is not occupied already
+		occupied := false
+		for _, v := range *c {
+			if v.X == x && v.Y == y {
+				occupied = true
+				break
+			}
+		}
+		if occupied == true {
 			continue
 		} else {
 			break
 		}
-	}
-	x := 0
-	y := 0
-	if place == "n" {
-		x = RandRange(5, MapSizeX-6)
-		y = 0
-	} else if place == "s" {
-		x = RandRange(5, MapSizeX-6)
-		y = MapSizeY-1
-	} else if place == "w" {
-		x = 0
-		y = RandRange(5, MapSizeY-6)
-	} else {
-		x = MapSizeX-1
-		y = RandRange(5, MapSizeY-6)
 	}
 	monster, _ := NewCreature(x, y, "Manticore.json")
 	*c = append(*c, monster)
