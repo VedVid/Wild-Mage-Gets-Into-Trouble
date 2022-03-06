@@ -343,7 +343,7 @@ func FindMonsterByXY(x, y int, c Creatures) *Creature {
 	return monster
 }
 
-func SpawnMonsters(c *Creatures) {
+func SpawnMonsters(c *Creatures, b Board) {
 	player := (*c)[0]
 	place := ""
 	edges := []string{"n", "w", "e", "s"}
@@ -390,6 +390,14 @@ func SpawnMonsters(c *Creatures) {
 			}
 		}
 		if occupied == true {
+			continue
+		}
+		// Check if ground is safe to spawn
+		safe := true
+		if b[x][y].Fire > 0 || b[x][y].Flooded > 0 || b[x][y].Chasm > 0 {
+			safe = false
+		}
+		if safe == false {
 			continue
 		} else {
 			break
