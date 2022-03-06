@@ -305,11 +305,11 @@ func PrintRangedCharacter(x, y int, color, why string, valid bool, c *Creature) 
 			}
 		} else {
 			color = c.Colors[0]
-			ch := "[color=" + color + "]○[/color]"
+			ch := "[color=" + color + "]☉[/color]"  // ○☉✗✠⨳
 			blt.Print(x, y, ch)
 		}
 	} else {
-		ch := "[color=" + color + "]" + "X" + "[/color]"
+		ch := "[color=" + color + "]" + "✗" + "[/color]"
 		blt.Print(x, y, ch)
 	}
 }
