@@ -255,7 +255,7 @@ func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board
 		y := vec.TilesY[i]
 		if x >= 0 && x < MapSizeX && y >= 0 && y < MapSizeY {
 			if why == BrensenhamWhyInspect {
-				PrintRangedCharacter(x, y, BrensenhamColorNeutral, true)
+				PrintRangedCharacter(x, y, BrensenhamColorNeutral, why, true, c[0])
 				if i == 0 && length == 1 {
 					break
 				}
@@ -263,17 +263,17 @@ func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board
 				if IsInFOV(b,
 					vec.StartX, vec.StartY, vec.TargetX, vec.TargetY) == true {
 					if vec.Values[i] == true {
-						PrintRangedCharacter(x, y, color1, true)
+						PrintRangedCharacter(x, y, color1, why, true, c[0])
 					} else {
-						PrintRangedCharacter(x, y, color2, false)
+						PrintRangedCharacter(x, y, color2, why, false, c[0])
 					}
 				} else {
 					if IsInFOV(b,
 						vec.StartX, vec.StartY,
 						vec.TilesX[i], vec.TilesY[i]) == true {
-						PrintRangedCharacter(x, y, color1, true)
+						PrintRangedCharacter(x, y, color1, why, true, c[0])
 					} else {
-						PrintRangedCharacter(x, y, color2, false)
+						PrintRangedCharacter(x, y, color2, why, false, c[0])
 					}
 				}
 			}
@@ -282,17 +282,23 @@ func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board
 	blt.Refresh()
 }
 
-func PrintRangedCharacter(x, y int, color string, valid bool) {
+func PrintRangedCharacter(x, y int, color, why string, valid bool, c *Creature) {
 	/* Function PrintRangedCharacter takes coords, color, and result
 	   of validity test as arguments.
 	   It draws green rectangle if cursor position is valid,
 	   and red cross if it is not. */
 	blt.Layer(LookLayer)
 	if valid == true {
-		var chars = []string{"▁", "▏", "▕", "▔"}
-		for i, v := range chars {
-			blt.Layer(LookLayer + i)
-			ch := "[color=" + color + "]" + v + "[/color]"
+		if why == BrensenhamWhyInspect {
+			var chars = []string{"▁", "▏", "▕", "▔"}
+			for i, v := range chars {
+				blt.Layer(LookLayer + i)
+				ch := "[color=" + color + "]" + v + "[/color]"
+				blt.Print(x, y, ch)
+			}
+		} else {
+			color = c.Colors[0]
+			ch := "[color=" + color + "]○[/color]"
 			blt.Print(x, y, ch)
 		}
 	} else {
