@@ -89,5 +89,7 @@
     "CanSwim":1,
     "CanFly":0,
     "AmmoMax":5,
-    "AmmoCurrent":5
+    "AmmoCurrent":5,
+    "ManaMax":10,
+    "ManaCurrent":10
 }

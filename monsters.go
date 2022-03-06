@@ -58,6 +58,8 @@ type Creature struct {
 	CanFly int
 	AmmoMax int
 	AmmoCurrent int
+	ManaMax int
+	ManaCurrent int
 }
 
 // Creatures holds every creature on map.

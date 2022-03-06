@@ -164,6 +164,10 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 	    * in other cases, game will try to move cursor; invalid input
 	      is ignored */
 	turnSpent := false
+	if c.ManaCurrent <= 0 {
+		AddMessage("No mana!")
+		return turnSpent
+	}
 	var target *Creature
 	targets := c.FindTargets(FOVLength, b, cs, *o)
 	if LastTarget != nil && LastTarget != c &&
@@ -219,6 +223,7 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 		}
 		if key == blt.TK_F || key == blt.TK_ENTER {
 			turnSpent = true
+			c.ManaCurrent--
 			if GlobalData.CurrentSchool == SchoolFire {
 				FireArea(area, b)
 			} else if GlobalData.CurrentSchool == SchoolWater {
