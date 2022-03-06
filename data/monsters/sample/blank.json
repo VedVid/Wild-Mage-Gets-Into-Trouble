@@ -89,5 +89,8 @@
             "Use":INTEGER
         }
     ],
-    "Rarity":STRING
+    "Rarity":STRING,
+    "FireResistance":INTEGER,
+    "CanSwin":INTEGER,
+    "CanFly":INTEGER
 }

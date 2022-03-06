@@ -38,6 +38,12 @@ const (
 	CorpseChar = "%"
 )
 
+const (
+	FullResistance = 2
+	PartialResistance = 1
+	NoResistance = 0
+)
+
 type Creature struct {
 	/* Creatures are living objects that
 	   moves, attacks, dies, etc. */
@@ -47,6 +53,9 @@ type Creature struct {
 	CollisionProperties
 	FighterProperties
 	EquipmentComponent
+	FireResistance int
+	CanSwim int
+	CanFly int
 }
 
 // Creatures holds every creature on map.
@@ -344,11 +353,13 @@ func FindMonsterByXY(x, y int, c Creatures) *Creature {
 }
 
 func SpawnMonsters(c *Creatures, b Board) {
+	monster, _ := NewCreature(0, 0, "Manticore.json")
 	player := (*c)[0]
 	place := ""
 	edges := []string{"n", "w", "e", "s"}
 	x := 0
 	y := 0
+	spawn := false
 	for i := 0; i < 50; i++ {
 		// Check if location is far enough from player
 		place = edges[rand.Intn(len(edges))]
@@ -394,15 +405,41 @@ func SpawnMonsters(c *Creatures, b Board) {
 		}
 		// Check if ground is safe to spawn
 		safe := true
-		if b[x][y].Fire > 0 || b[x][y].Flooded > 0 || b[x][y].Chasm > 0 {
-			safe = false
+		if b[x][y].Fire > 0 {
+			if monster.FireResistance == 0 {
+				safe = false
+			} else if monster.FireResistance == 1 {
+				// There is small chance that monster with partial resistance
+				// will spawn in fire
+				if rand.Intn(100) > 15 {
+					safe = false
+				}
+			}
+		}
+		if b[x][y].Flooded > 0 {
+			if monster.CanSwim == 0 {
+				safe = false
+			} else if monster.CanSwim == 1 {
+				// There is small chance that monster that barely can swim
+				// will spawn in water
+				if rand.Intn(100) > 15 {
+					safe = false
+				}
+			}
+		}
+		if b[x][y].Chasm > 0 {
+			if monster.CanFly != 2 {
+				safe = false
+			}
 		}
 		if safe == false {
 			continue
 		} else {
+			spawn = true
 			break
 		}
 	}
-	monster, _ := NewCreature(x, y, "Manticore.json")
-	*c = append(*c, monster)
+	if spawn == true {
+		*c = append(*c, monster)
+	}
 }

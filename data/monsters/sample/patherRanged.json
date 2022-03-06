@@ -21,5 +21,8 @@
     "Inventory":[
         null
     ],
-    "Rarity":"rare"
+    "Rarity":"rare",
+    "FireResistance":0,
+    "CanSwim":0,
+    "CanFly":0
 }

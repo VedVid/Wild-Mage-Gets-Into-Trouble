@@ -89,5 +89,8 @@
             "Use":1
         }
     ],
-    "Rarity":"player"
+    "Rarity":"player",
+    "FireResistance":0,
+    "CanSwim":0,
+    "CanFly":0
 }
