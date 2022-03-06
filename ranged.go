@@ -206,12 +206,16 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures) bool {
 			} else if GlobalData.CurrentSchool == SchoolEarth {
 				RemoveArea(area, b)
 			}
-			break
-		}
-		/*if key == blt.TK_F {
 			monsterAimed := FindMonsterByXY(targetX, targetY, cs)
 			if monsterAimed != nil && monsterAimed != c && monsterAimed.HPCurrent > 0 {
 				LastTarget = monsterAimed
+			}
+			break
+		}
+		/*if key == blt.TK_F {
+
+
+
 				c.AttackTarget(monsterAimed, o)
 			} else {
 				if monsterAimed == c {
