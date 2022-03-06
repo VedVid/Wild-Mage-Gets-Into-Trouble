@@ -1,0 +1,28 @@
+{
+    "Name":"Chamrosh",
+    "Chars":["C"],
+    "Colors":["dark yellow"],
+    "ColorDark":"dark yellow",
+    "Layer":5,
+    "AlwaysVisible":false,
+    "Blocked":true,
+    "BlocksSight":false,
+    "AIType":2,
+    "AITriggered":false,
+    "HPMax":2,
+    "HPCurrent":2,
+    "Attack":1,
+    "Defense":0,
+    "Equipment":[
+        null,
+        null,
+        null
+    ],
+    "Inventory":[
+        null
+    ],
+    "Rarity":"rare",
+    "FireResistance":0,
+    "CanSwim":2,
+    "CanFly":2
+}

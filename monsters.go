@@ -353,7 +353,8 @@ func FindMonsterByXY(x, y int, c Creatures) *Creature {
 }
 
 func SpawnMonsters(c *Creatures, b Board) {
-	monster, _ := NewCreature(0, 0, "Manticore.json")
+	allMonsters := []string{"Manticore.json", "Chamrosh.json"}
+	monster, _ := NewCreature(0, 0, allMonsters[rand.Intn(len(allMonsters))])
 	player := (*c)[0]
 	place := ""
 	edges := []string{"n", "w", "e", "s"}
