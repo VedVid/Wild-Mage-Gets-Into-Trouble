@@ -405,6 +405,20 @@ func ContextMouseRight(p *Creature, b Board, o Objects, c Creatures) bool {
 				p.AmmoCurrent++
 				turnSpent = true
 			}
+		} else if (x >= UIPosX && x <= UIPosX+4 && y >= UIPosY+5) || y >= LogPosY {
+			if GlobalData.CurrentSchool == SchoolWater {
+				GlobalData.CurrentSchool = SchoolFire
+				AddMessage("You invoke fire aura.")
+				p.Colors = []string{"#FF7F7F"}
+			} else if GlobalData.CurrentSchool == SchoolFire {
+				GlobalData.CurrentSchool = SchoolEarth
+				AddMessage("You invoke earth aura.")
+				p.Colors = []string{"#D2B48C"}
+			} else {
+				GlobalData.CurrentSchool = SchoolWater
+				AddMessage("You invoke water aura.")
+				p.Colors = []string{"#73C2FB"}
+			}
 		}
 	}
 	return turnSpent
