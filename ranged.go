@@ -433,7 +433,7 @@ func MoveCursor(x, y *int, dx, dy int) {
 
 func PrintCursor(area [][]int, b Board, o Objects, c Creatures) {
 	blt.Clear()
-	RenderAll(b, o, c, -1, -1)
+	RenderAll(b, o, c)
 	for _, v := range area {
 		col := "light blue"
 		if GlobalData.CurrentSchool == SchoolFire {

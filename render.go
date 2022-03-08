@@ -29,7 +29,6 @@ package main
 import (
 	blt "bearlibterminal"
 
-	"fmt"
 	"strconv"
 )
 
@@ -303,20 +302,6 @@ func PrintUI(c *Creature) {
 	blt.Print(UIPosX, LogPosY-1, "[color=white]☠" + monstersKilled)
 }
 
-func PrintPath(b Board, o Objects, c Creatures, mouseX, mouseY int) {
-	if mouseX >= 0 && mouseX < MapSizeX && mouseY >= 0 && mouseY < MapSizeY {
-		startX, startY := c[0].X, c[0].Y
-		targetX, targetY := mouseX, mouseY
-		vec, err := NewBrensenham(startX, startY, targetX, targetY)
-		if err != nil {
-			fmt.Println(err)
-		}
-		_ = ComputeBrensenham(vec)
-		_, _, _, _ = ValidateBrensenham(vec, b, c, o)
-		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, c)
-	}
-}
-
 func PrintLog() {
 	/* Function PrintLog prints game messages at the bottom of screen. */
 	blt.Layer(UILayer)
@@ -382,7 +367,7 @@ func clearUnderCreatures(o Objects, c Creatures) {
 	}
 }
 
-func RenderAll(b Board, o Objects, c Creatures, mouseX, mouseY int) {
+func RenderAll(b Board, o Objects, c Creatures) {
 	/* Function RenderAll prints every tile and character on game screen.
 	   Takes board slice (ie level map), slice of objects, and slice of creatures
 	   as arguments.
@@ -398,7 +383,6 @@ func RenderAll(b Board, o Objects, c Creatures, mouseX, mouseY int) {
 	PrintCreatures(b, c)
 	ClearNotVisible(o, c, b)
 	PrintUI((c)[0])
-	PrintPath(b, o, c, mouseX, mouseY)
 	PrintLog()
 	blt.Refresh()
 }
