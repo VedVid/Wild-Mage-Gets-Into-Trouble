@@ -42,23 +42,15 @@ var GlobalData GameData
 
 var MsgBuf = []string{}
 var LastTarget *Creature
-var Clear bool
 
 func main() {
 	var cells = new(Board)
 	var objs = new(Objects)
 	var actors = new(Creatures)
 	StartGame(cells, actors, objs)
-	oldMouseX := -1
-	oldMouseY := -1
 	for {
-		Clear = false
 		mouseX := blt.State(blt.TK_MOUSE_X)
 		mouseY := blt.State(blt.TK_MOUSE_Y)
-		if mouseX != oldMouseX || mouseY != oldMouseY {
-			Clear = true
-		}
-		oldMouseX, oldMouseY = mouseX, mouseY
 		RenderAll(*cells, *objs, *actors, mouseX, mouseY)
 		if (*actors)[0].HPCurrent <= 0 {
 			DeleteSaves()
