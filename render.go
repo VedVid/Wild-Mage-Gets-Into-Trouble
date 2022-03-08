@@ -313,7 +313,8 @@ func PrintPath(b Board, o Objects, c Creatures, mouseX, mouseY int) {
 		}
 		_ = ComputeBrensenham(vec)
 		_, _, _, _ = ValidateBrensenham(vec, b, c, o)
-		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, c)
+		fmt.Println(Clear)
+		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, c, Clear)
 	}
 }
 

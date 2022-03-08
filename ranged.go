@@ -55,7 +55,7 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 		}
 		_ = ComputeBrensenham(vec)
 		_, _, _, _ = ValidateBrensenham(vec, b, cs, o)
-		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, cs)
+		PrintBrensenham(vec, BrensenhamWhyInspect, BrensenhamColorNeutral, BrensenhamColorNeutral, b, o, cs, true)
 		var monster *Creature
 		var monsterDead *Creature
 		var tile *Tile
@@ -319,7 +319,7 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures, t *Creature) bool 
 		}
 		_ = ComputeBrensenham(vec)
 		valid, _, monsterHit, _ := ValidateBrensenham(vec, b, targets, *o)
-		PrintBrensenham(vec, BrensenhamWhyTarget, BrensenhamColorGood, BrensenhamColorBad, b, *o, cs)
+		PrintBrensenham(vec, BrensenhamWhyTarget, BrensenhamColorGood, BrensenhamColorBad, b, *o, cs, true)
 		if monsterHit != nil {
 			msg := monsterHit.Name
 			if monsterHit.FireResistance == FullAbility {
