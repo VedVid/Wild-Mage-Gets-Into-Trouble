@@ -235,53 +235,51 @@ Loop:
 	return valid, tile, monster, object
 }
 
-func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board, o Objects, c Creatures, clear bool) {
+func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board, o Objects, c Creatures) {
 	/* Function PrintBrensenham has to take Brensenham, and (unfortunately,
 	   due to flawed game architecture) Board, "global" Objects, and
 	   Creatures.
 	   At start, it clears whole screen and redraws it.
 	   Then, it uses tile coords of Brensenham (ie TilesX and TilesY)
 	   to set coordinates of printing line symbol.*/
-	if clear == true {
-		blt.Clear()
-		RenderAll(b, o, c, -1, -1)
-		blt.Layer(LookLayer)
-		length := len(vec.TilesX)
-		for i := 0; i < length; i++ {
-			if i == 0 && length > 1 {
-				// Do not draw over player, unless he is targeting self.
-				continue
-			}
-			x := vec.TilesX[i]
-			y := vec.TilesY[i]
-			if x >= 0 && x < MapSizeX && y >= 0 && y < MapSizeY {
-				if why == BrensenhamWhyInspect {
-					PrintRangedCharacter(x, y, BrensenhamColorNeutral, why, true, c[0])
-					if i == 0 && length == 1 {
-						break
-					}
-				} else if why == BrensenhamWhyTarget {
-					if IsInFOV(b,
-						vec.StartX, vec.StartY, vec.TargetX, vec.TargetY) == true {
-						if vec.Values[i] == true {
-							PrintRangedCharacter(x, y, color1, why, true, c[0])
-						} else {
-							PrintRangedCharacter(x, y, color2, why, false, c[0])
-						}
+	blt.Clear()
+	RenderAll(b, o, c, -1, -1)
+	blt.Layer(LookLayer)
+	length := len(vec.TilesX)
+	for i := 0; i < length; i++ {
+		if i == 0 && length > 1 {
+			// Do not draw over player, unless he is targeting self.
+			continue
+		}
+		x := vec.TilesX[i]
+		y := vec.TilesY[i]
+		if x >= 0 && x < MapSizeX && y >= 0 && y < MapSizeY {
+			if why == BrensenhamWhyInspect {
+				PrintRangedCharacter(x, y, BrensenhamColorNeutral, why, true, c[0])
+				if i == 0 && length == 1 {
+					break
+				}
+			} else if why == BrensenhamWhyTarget {
+				if IsInFOV(b,
+					vec.StartX, vec.StartY, vec.TargetX, vec.TargetY) == true {
+					if vec.Values[i] == true {
+						PrintRangedCharacter(x, y, color1, why, true, c[0])
 					} else {
-						if IsInFOV(b,
-							vec.StartX, vec.StartY,
-							vec.TilesX[i], vec.TilesY[i]) == true {
-							PrintRangedCharacter(x, y, color1, why, true, c[0])
-						} else {
-							PrintRangedCharacter(x, y, color2, why, false, c[0])
-						}
+						PrintRangedCharacter(x, y, color2, why, false, c[0])
+					}
+				} else {
+					if IsInFOV(b,
+						vec.StartX, vec.StartY,
+						vec.TilesX[i], vec.TilesY[i]) == true {
+						PrintRangedCharacter(x, y, color1, why, true, c[0])
+					} else {
+						PrintRangedCharacter(x, y, color2, why, false, c[0])
 					}
 				}
 			}
 		}
-		blt.Refresh()
 	}
+	blt.Refresh()
 }
 
 func PrintRangedCharacter(x, y int, color, why string, valid bool, c *Creature) {
