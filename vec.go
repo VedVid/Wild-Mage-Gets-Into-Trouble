@@ -243,7 +243,7 @@ func PrintBrensenham(vec *Brensenham, why string, color1, color2 string, b Board
 	   Then, it uses tile coords of Brensenham (ie TilesX and TilesY)
 	   to set coordinates of printing line symbol.*/
 	blt.Clear()
-	RenderAll(b, o, c)
+	RenderAll(b, o, c, -1, -1)
 	blt.Layer(LookLayer)
 	length := len(vec.TilesX)
 	for i := 0; i < length; i++ {

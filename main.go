@@ -49,7 +49,9 @@ func main() {
 	var actors = new(Creatures)
 	StartGame(cells, actors, objs)
 	for {
-		RenderAll(*cells, *objs, *actors)
+		mouseX := blt.State(blt.TK_MOUSE_X)
+		mouseY := blt.State(blt.TK_MOUSE_Y)
+		RenderAll(*cells, *objs, *actors, mouseX, mouseY)
 		if (*actors)[0].HPCurrent <= 0 {
 			DeleteSaves()
 			blt.Read()
