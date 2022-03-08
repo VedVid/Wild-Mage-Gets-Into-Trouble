@@ -57,9 +57,6 @@ func main() {
 		}
 		if blt.HasInput() == true {
 			key := ReadInput()
-			if key == blt.TK_MOUSE_SCROLL {
-				fmt.Println(blt.State(blt.TK_MOUSE_WHEEL))
-			}
 			if (key == blt.TK_S && blt.Check(blt.TK_SHIFT) != 0) ||
 				key == blt.TK_CLOSE {
 				err := SaveGame(*cells, *actors, *objs)
