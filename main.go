@@ -47,12 +47,13 @@ func main() {
 	var cells = new(Board)
 	var objs = new(Objects)
 	var actors = new(Creatures)
+	PrintOverlay("start")
 	StartGame(cells, actors, objs)
 	for {
 		RenderAll(*cells, *objs, *actors)
 		if (*actors)[0].HPCurrent <= 0 {
 			DeleteSaves()
-			blt.Read()
+			PrintOverlay("dead")
 			break
 		}
 		if blt.HasInput() == true {
