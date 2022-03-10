@@ -73,15 +73,20 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 		if monster != nil {
 			msg = monster.Name
 			if monster.FireResistance == FullAbility {
-				msg = msg + " [[Fire res]]"
+				msg = msg + " [[Fire immunity]]"
+			} else if monster.FireResistantce == PartialAbility {
+				msg = msg + " [[Fire resistance]]"
+			}
 			} else if monster.FireResistance == NoAbility {
-				msg = msg + " [[Fire vuln]]"
+				msg = msg + " [[Fire vulnerability]]"
 			}
 			if monster.CanFly == FullAbility {
 				msg = msg + " [[Flying]]"
 			}
 			if monster.CanSwim == FullAbility && monster.CanFly != FullAbility {
 				msg = msg + " [[Can swim]]"
+			} else if monster.CanSwim == PartialAbility {
+				msg = msg + " [[Water resistance]]"
 			}
 		} else {
 			if monsterDead != nil {
