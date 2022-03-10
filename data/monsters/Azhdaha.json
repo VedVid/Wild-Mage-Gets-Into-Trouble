@@ -1,17 +1,17 @@
 {
-    "Name":"Manticore",
-    "Chars":["M"],
-    "Colors":["dark red"],
-    "ColorDark":"dark red",
+    "Name":"Azdaha",
+    "Chars":["A"],
+    "Colors":["light gray"],
+    "ColorDark":"light gray",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
     "BlocksSight":false,
     "AIType":2,
     "AITriggered":false,
-    "HPMax":7,
-    "HPCurrent":7,
-    "Attack":2,
+    "HPMax":6,
+    "HPCurrent":6,
+    "Attack":3,
     "Defense":0,
     "Equipment":[
         null,
@@ -22,7 +22,7 @@
         null
     ],
     "Rarity":"rare",
-    "FireResistance":2,
-    "CanSwim":0,
-    "CanFly":0
+    "FireResistance":1,
+    "CanSwim":1,
+    "CanFly":2
 }

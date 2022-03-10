@@ -1,16 +1,16 @@
 {
-    "Name":"Manticore",
-    "Chars":["M"],
-    "Colors":["dark red"],
-    "ColorDark":"dark red",
+    "Name":"Shahmaran",
+    "Chars":["s"],
+    "Colors":["lighter blue"],
+    "ColorDark":"lighter blue",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
     "BlocksSight":false,
     "AIType":2,
     "AITriggered":false,
-    "HPMax":7,
-    "HPCurrent":7,
+    "HPMax":4,
+    "HPCurrent":4,
     "Attack":2,
     "Defense":0,
     "Equipment":[
@@ -22,7 +22,7 @@
         null
     ],
     "Rarity":"rare",
-    "FireResistance":2,
-    "CanSwim":0,
+    "FireResistance":0,
+    "CanSwim":2,
     "CanFly":0
 }

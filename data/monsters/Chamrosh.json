@@ -1,8 +1,8 @@
 {
     "Name":"Chamrosh",
-    "Chars":["C"],
-    "Colors":["dark yellow"],
-    "ColorDark":"dark yellow",
+    "Chars":["c"],
+    "Colors":["#DEDEDE"],
+    "ColorDark":"#DEDEDE",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,

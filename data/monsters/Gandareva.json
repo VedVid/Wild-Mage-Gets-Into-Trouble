@@ -1,8 +1,8 @@
 {
-    "Name":"Manticore",
-    "Chars":["M"],
-    "Colors":["dark red"],
-    "ColorDark":"dark red",
+    "Name":"Gandareva",
+    "Chars":["G"],
+    "Colors":["lighter blue"],
+    "ColorDark":"lighter blue",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
@@ -22,7 +22,7 @@
         null
     ],
     "Rarity":"rare",
-    "FireResistance":2,
-    "CanSwim":0,
+    "FireResistance":1,
+    "CanSwim":2,
     "CanFly":0
 }

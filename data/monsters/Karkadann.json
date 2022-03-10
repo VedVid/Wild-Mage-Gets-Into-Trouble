@@ -1,6 +1,6 @@
 {
-    "Name":"Manticore",
-    "Chars":["M"],
+    "Name":"Karkadann",
+    "Chars":["k"],
     "Colors":["dark red"],
     "ColorDark":"dark red",
     "Layer":5,
@@ -9,8 +9,8 @@
     "BlocksSight":false,
     "AIType":2,
     "AITriggered":false,
-    "HPMax":7,
-    "HPCurrent":7,
+    "HPMax":4,
+    "HPCurrent":4,
     "Attack":2,
     "Defense":0,
     "Equipment":[
@@ -23,6 +23,6 @@
     ],
     "Rarity":"rare",
     "FireResistance":2,
-    "CanSwim":0,
+    "CanSwim":1,
     "CanFly":0
 }
