@@ -365,11 +365,10 @@ func SpawnMonsters(c *Creatures, b Board) {
 		"Gandareva.json", "Gandareva.json", "Gandareva.json",
 		"Abomination.json",
 		"Azhdaha.json"}
-	monsterType := rand.Intn(len(allMonsters))
+	monsterType := allMonsters[rand.Intn(len(allMonsters))]
 	if monsterType == "Azhdaha.json" {
-		monsterType := rand.Intn(len(allMonsters))
+		monsterType = allMonsters[rand.Intn(len(allMonsters))]
 	}
-	if monster
 	monster, _ := NewCreature(0, 0, monsterType)
 	if monster.Name == "Abomination" {
 		chances := rand.Intn(100)
