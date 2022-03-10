@@ -428,18 +428,7 @@ func UpdateFrames(b Board, o Objects, c Creatures) {
 }
 
 func PrintOverlay(situation string) {
-	blt.Layer(BoardLayer)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
-	blt.Layer(DeadLayer)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
-	blt.Layer(ObjectsLayer)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
-	blt.Layer(CreaturesLayer)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
-	blt.Layer(PlayerLayer)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
-	blt.Layer(9)
-	blt.ClearArea(0, 0, WindowSizeX, WindowSizeY)
+	blt.Clear()
 	blt.Refresh()
 	blt.Layer(9)
 	if situation == "start" {
@@ -465,7 +454,7 @@ func PrintOverlay(situation string) {
 		msg := ""
 		for {
 			blt.Print(5, 5, "You survived " + strconv.Itoa(GlobalData.TurnsSpent) + " turns.")
-			blt.Print(5, 6, "You killed " + strconv.Itoa(GlobalData.MonstersKilled) + "monsters.")
+			blt.Print(5, 6, "You killed " + strconv.Itoa(GlobalData.MonstersKilled) + " monsters.")
 			blt.Print(5, 7, "Your score is " + strconv.Itoa(GlobalData.Score) + ".")
 			blt.Print(9, MapSizeY+4, msg)
 			blt.Refresh()
