@@ -328,6 +328,16 @@ func (c *Creature) Die(o *Objects) {
 	   Die() has *Creature as receiver.
 	   Receiver properties changes to fit better to corpse. */
 	GlobalData.MonstersKilled++
+	GlobalData.Score++
+	if c.Name == "Karkadann" || c.Name == "Chamrosh" || c.Name == "Shahmaran" {
+		GlobalData.Score += 5
+	} else if c.Name == "Manticore" || c.Name == "Roc" || c.Name == "Gandareva" {
+		GlobalData.Score += 15
+	} else if c.Name == "Abomination" {
+		GlobalData.Score += 20
+	} else if c.Name == "Azhdaha" {
+		GlobalData.Score += 40
+	}
 	c.Layer = DeadLayer
 	c.Name = "corpse of " + c.Name
 	c.Colors = []string{"dark red"}

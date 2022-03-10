@@ -46,4 +46,5 @@ type GameData struct {
 	MonstersKilled int
 	CurrentSchool  int
 	CurrentSize    int
+	Score          int
 }

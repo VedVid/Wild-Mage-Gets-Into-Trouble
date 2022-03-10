@@ -71,6 +71,7 @@ func main() {
 				turnSpent := Controls(key, (*actors)[0], cells, actors, objs)
 				if turnSpent == true {
 					GlobalData.TurnsSpent++
+					GlobalData.Score++
 					CheckMagic(*cells, *actors, objs)
 					CreaturesTakeTurn(*cells, *actors, *objs)
 					SpawnMonsters(actors, *cells)
