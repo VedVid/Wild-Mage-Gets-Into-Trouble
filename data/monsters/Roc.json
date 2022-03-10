@@ -1,8 +1,8 @@
 {
     "Name":"Roc",
     "Chars":["R"],
-    "Colors":["#DEDEDE gray"],
-    "ColorDark":"#DEDEDE gray",
+    "Colors":["#DEDEDE"],
+    "ColorDark":"#DEDEDE",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
