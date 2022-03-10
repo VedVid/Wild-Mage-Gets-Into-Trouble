@@ -1,8 +1,8 @@
 {
     "Name":"Azdaha",
     "Chars":["Ξ"],
-    "Colors":["black"],
-    "ColorDark":"black",
+    "Colors":["#DEDEDE", "lighter blue", "dark red"],
+    "ColorDark":"dark yellow",
     "Layer":5,
     "AlwaysVisible":false,
     "Blocked":true,
