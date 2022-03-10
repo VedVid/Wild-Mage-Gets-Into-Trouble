@@ -1,0 +1,28 @@
+{
+    "Name":"Abomination",
+    "Chars":["Ψ"],
+    "Colors":["black"],
+    "ColorDark":"black",
+    "Layer":5,
+    "AlwaysVisible":false,
+    "Blocked":true,
+    "BlocksSight":false,
+    "AIType":2,
+    "AITriggered":false,
+    "HPMax":4,
+    "HPCurrent":4,
+    "Attack":2,
+    "Defense":0,
+    "Equipment":[
+        null,
+        null,
+        null
+    ],
+    "Inventory":[
+        null
+    ],
+    "Rarity":"rare",
+    "FireResistance":0,
+    "CanSwim":0,
+    "CanFly":0
+}

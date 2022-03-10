@@ -362,8 +362,34 @@ func SpawnMonsters(c *Creatures, b Board) {
 		"Shahmaran.json", "Shahmaran.json", "Shahmaran.json", "Shahmaran.json", "Shahmaran.json",
 		"Manticore.json", "Manticore.json", "Manticore.json",
 		"Roc.json", "Roc.json", "Roc.json",
-		"Gandareva.json", "Gandareva.json", "Gandareva.json"}
+		"Gandareva.json", "Gandareva.json", "Gandareva.json",
+		"Abomination.json"}
 	monster, _ := NewCreature(0, 0, allMonsters[rand.Intn(len(allMonsters))])
+	if monster.Name == "Abomination" {
+		chances := rand.Intn(100)
+		if chances <= 33 {
+			monster.Colors = []string{"lightest blue"}
+			monster.ColorDark = "lightest blue"
+			monster.CanSwim = 2
+			chances2 := rand.Intn(100)
+			if chances2 <= 50 {
+				monster.FireResistance = 1
+			}
+		} else if chances <= 66 {
+			monster.Colors = []string{"#FAFAFA"}
+			monster.ColorDark = "#FAFAFA"
+			monster.CanFly = 2
+			monster.CanSwim = 2
+		} else {
+			monster.Colors = []string{"dark red"}
+			monster.ColorDark = "dark red"
+			monster.FireResistance = 2
+			chances2 := rand.Intn(100)
+			if chances2 <= 50 {
+				monster.CanSwim = 1
+			}
+		}
+	}
 	player := (*c)[0]
 	place := ""
 	edges := []string{"n", "w", "e", "s"}

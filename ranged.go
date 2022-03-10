@@ -74,9 +74,8 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 			msg = monster.Name
 			if monster.FireResistance == FullAbility {
 				msg = msg + " [[Fire immunity]]"
-			} else if monster.FireResistantce == PartialAbility {
+			} else if monster.FireResistance == PartialAbility {
 				msg = msg + " [[Fire resistance]]"
-			}
 			} else if monster.FireResistance == NoAbility {
 				msg = msg + " [[Fire vulnerability]]"
 			}
