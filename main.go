@@ -87,7 +87,7 @@ func main() {
 func NewGame(b *Board, c *Creatures, o *Objects) {
 	/* Function NewGame initializes game state - creates player, monsters, and game map.
 	   This implementation is generic-placeholder, for testing purposes. */
-	GlobalData = GameData{0, 0, 0, 0}
+	GlobalData = GameData{0, 0, 0, 0, 0}
 	player, err := NewPlayer(1, 1)
 	if err != nil {
 		fmt.Println(err)
