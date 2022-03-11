@@ -30,6 +30,7 @@ import (
 	blt "bearlibterminal"
 	"errors"
 	"fmt"
+	"strconv"
 	"unicode/utf8"
 )
 
@@ -125,9 +126,8 @@ func PrintMessages(x, y int, header string) {
 	for i, v := range txt {
 		offset := 0
 		for j, s := range v {
-			fmt.Println(s)
-			blt.Print(x+j, y+i, "[font=ui]"+string(s))
-			offset += ActualFontSize/2
+			blt.Print(x+j, y+i, "[font=ui][offset="+strconv.Itoa(offset)+",0]"+string(s))
+			offset -= ActualFontSize/2
 		}
 	}
 }

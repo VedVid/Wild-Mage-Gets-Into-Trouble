@@ -73,19 +73,19 @@ func (c *Creature) Look(b Board, o Objects, cs Creatures) {
 		if monster != nil {
 			msg = monster.Name
 			if monster.FireResistance == FullAbility {
-				msg = msg + " [[Fire immunity]]"
+				msg = msg + " <Fire immunity>"
 			} else if monster.FireResistance == PartialAbility {
-				msg = msg + " [[Fire resistance]]"
+				msg = msg + " <Fire resistance>"
 			} else if monster.FireResistance == NoAbility {
-				msg = msg + " [[Fire vulnerability]]"
+				msg = msg + " <Fire vulnerability>"
 			}
 			if monster.CanFly == FullAbility {
-				msg = msg + " [[Flying]]"
+				msg = msg + " <Flying>"
 			}
 			if monster.CanSwim == FullAbility && monster.CanFly != FullAbility {
-				msg = msg + " [[Can swim]]"
+				msg = msg + " <Can swim>"
 			} else if monster.CanSwim == PartialAbility {
-				msg = msg + " [[Water resistance]]"
+				msg = msg + " <Water resistance>"
 			}
 		} else {
 			if monsterDead != nil {
@@ -209,15 +209,15 @@ func (c *Creature) Target(b Board, o *Objects, cs Creatures, t *Creature) bool {
 		if monsterHit != nil {
 			msg := monsterHit.Name
 			if monsterHit.FireResistance == FullAbility {
-				msg = msg + " [[Fire res]]"
+				msg = msg + " <Fire resistance>"
 			} else if monsterHit.FireResistance == NoAbility {
-				msg = msg + " [[Fire vuln]]"
+				msg = msg + " <Fire vulnerability>"
 			}
 			if monsterHit.CanFly == FullAbility {
-				msg = msg + " [[Flying]]"
+				msg = msg + " <Flying>"
 			}
 			if monsterHit.CanSwim == FullAbility && monsterHit.CanFly != FullAbility {
-				msg = msg + " [[Can swim]]"
+				msg = msg + " <Can swim>"
 			}
 			PrintLookingMessage(msg, i)
 		}
@@ -327,15 +327,15 @@ func (c *Creature) Target2(b Board, o *Objects, cs Creatures, t *Creature) bool 
 		if monsterHit != nil {
 			msg := monsterHit.Name
 			if monsterHit.FireResistance == FullAbility {
-				msg = msg + " [[Fire res]]"
+				msg = msg + " <Fire resistance>"
 			} else if monsterHit.FireResistance == NoAbility {
-				msg = msg + " [[Fire vuln]]"
+				msg = msg + " <Fire vulnerability>"
 			}
 			if monsterHit.CanFly == FullAbility {
-				msg = msg + " [[Flying]]"
+				msg = msg + " <Flying>"
 			}
 			if monsterHit.CanSwim == FullAbility && monsterHit.CanFly != FullAbility {
-				msg = msg + " [[Can swim]]"
+				msg = msg + " <Can swim>"
 			}
 			PrintLookingMessage(msg, i)
 		}
