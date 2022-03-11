@@ -123,7 +123,7 @@ func PrintMessages(x, y int, header string) {
 		txt = append(txt, v)
 	}
 	for i, v := range txt {
-		blt.Print(x, y+i, v)
+		blt.Print(x, y+i, "[font=ui]"+v)
 	}
 }
 

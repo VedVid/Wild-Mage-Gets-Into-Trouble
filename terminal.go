@@ -50,6 +50,7 @@ const (
 	GameTitle   = "Wild Mage Gets Into Trouble"
 	GameVersion = "7DRL 2022"
 	FontName    = "Deferral-Square.ttf"
+	FontUI      = "PTMono-Regular.ttf"
 	FontSize    = 18
 )
 
@@ -69,6 +70,10 @@ func InitializeBLT() {
 	sizeX, sizeY := strconv.Itoa(WindowSizeX), strconv.Itoa(WindowSizeY)
 	sizeFont := strconv.Itoa(ActualFontSize)
 	window := "window: size=" + sizeX + "x" + sizeY
+	gameFont := "game font: " + FontName + ", size=" + sizeFont
+	blt.Set(gameFont)
+	uiFont := "ui font: " + FontUI + ", size=" + sizeFont
+	blt.Set(uiFont)
 	blt.Set(window + ", title=' " + GameTitle + " " + GameVersion +
 		"'; font: " + FontName + ", size=" + sizeFont)
 	blt.Set("input.filter={keyboard, mouse+}")
