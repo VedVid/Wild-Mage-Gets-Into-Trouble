@@ -118,11 +118,13 @@ func PrintMessages(x, y int, header string) {
 	if header == "" {
 		y--
 	}
-	txt := header
+	txt := []string{header}
 	for _, v := range MsgBuf {
-		txt = txt + "\n" + v
+		txt = append(txt, v)
 	}
-	blt.Print(x, y, txt)
+	for i, v := range txt {
+		blt.Print(x, y+i, v)
+	}
 }
 
 func AddMessage(message string) {
